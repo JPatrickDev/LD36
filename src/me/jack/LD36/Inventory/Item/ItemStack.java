@@ -23,9 +23,9 @@ public class ItemStack {
         return item;
     }
 
-    public boolean remove(){
+    public boolean remove(int removing){
         if(stackSize > 0){
-            stackSize--;
+            stackSize-=removing;
             return true;
         }
         return false;

@@ -39,16 +39,16 @@ public class CraftingGUI {
         items[3] = new String[]{"..."};
         items[4] = new String[]{"..."};
 
-        itemObjects[0] = new Item[]{new ItemWoodAxe(), new ItemWoodPick(),new ItemStoneAxe(),new ItemStonePick()};
+        itemObjects[0] = new Item[]{new ItemWoodAxe(), new ItemWoodPick(), new ItemStoneAxe(), new ItemStonePick()};
 
         crafting[0] = new CraftingRequirements[]{
                 new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick())}),
 
                 new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick())}),
 
-                new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()),new ItemStack(10,new ItemStone())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()), new ItemStack(10, new ItemStone())}),
 
-                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(15,new ItemStone())})
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(15, new ItemStone())})
         };
 
 
@@ -110,19 +110,19 @@ public class CraftingGUI {
         g.drawString("Description:", x, y + 80);
         g.drawString(currentItem.getDescription(), x, y + 100);
 
-        g.drawRect(x,y+140,60,32);
-        System.out.println(x + ":" + (y+140));
-        g.drawString("Craft",x,y+140);
+        g.drawRect(x, y + 140, 60, 32);
+        g.drawString("Craft", x, y + 140);
         g.setColor(Color.white);
     }
-    static Rectangle craftButton = new Rectangle(314,250,60,32);
+
+    static Rectangle craftButton = new Rectangle(314, 250, 60, 32);
 
     public static void updateGUI() {
 
     }
 
 
-    public static void mouseClicked(int button, int x, int y,Level level) {
+    public static void mouseClicked(int button, int x, int y, Level level) {
         if (button == 0) {
             if (catRect.contains(x, y)) {
                 System.out.println("Clicked inside cat");
@@ -136,13 +136,22 @@ public class CraftingGUI {
                 int pos = rY / 30;
                 itemIndex = pos;
 
-            }else if(craftButton.contains(x,y)){
+            } else if (craftButton.contains(x, y)) {
                 Inventory inv = level.getPlayer().getInventory();
                 CraftingRequirements requirements = crafting[categoryIndex][itemIndex];
-                for(ItemStack stack : requirements.getStack()){
-                    if(inv.contains(stack)){
-
+                boolean canAfford = true;
+                for (ItemStack stack : requirements.getStack()) {
+                    if (!inv.contains(stack)) {
+                        canAfford = false;
                     }
+                }
+
+                if (canAfford) {
+                    for (ItemStack stack : requirements.getStack()) {
+                        inv.remove(stack);
+                    }
+                    Item currentItem = itemObjects[categoryIndex][itemIndex];
+                    inv.addItem(currentItem, 1);
                 }
             }
         }
