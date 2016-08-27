@@ -1,0 +1,28 @@
+Theme: Ancient Technology
+
+Survival game?*************************************
+    - Don't starve type thing
+    - Ancient tech
+        - Crafting system
+            - Have to discover "recipes"
+                - Dropped by mobs?
+                - Discovered in caves?
+    - Tools?
+        - Mining, Farming
+        - Bow/Arrow
+        - Maybe include magic or something?
+    - Cave system?
+        - Generate ways in to the cave system in the overworld
+            - Both cave world and overworld are persistent
+    - Day/Night cycle?
+        - Lighting system?
+    - Can craft "Shelters" which you can place on the ground and enter
+        - Can store things in your shelter
+        - Can use it to skip the night
+    - End game goal?
+        - Constructing something?
+            - A boat to escape?
+            - Keys or something to open a portal
+                - Portal takes you to a boss fight?
+
+****************************************************
