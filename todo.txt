@@ -1,0 +1,24 @@
+- Entity system
+- Controllable player
+    - Collision detection with water/other solid tiles
+
+- Forest generation
+    - Bushes as well?
+
+- More tiles
+    - Stone?
+
+- Player health
+    - Hunger?
+
+- Item drops from trees/bushes
+
+- Mineable stuff on the surface
+
+- Cave system
+
+- Mobs
+    - Some friendly
+    - Some aggresive
+- Combat with mobs
+    - Different weapons
