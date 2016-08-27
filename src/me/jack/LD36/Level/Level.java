@@ -19,6 +19,7 @@ public class Level {
 
     private int w, h;
     private int[] tiles;
+    private int[] topLayer;
 
 
     private Camera camera;
@@ -33,20 +34,21 @@ public class Level {
         this.w = w;
         this.h = h;
         this.tiles = new int[w * h];
+        this.topLayer = new int[w * h];
         camera = new Camera(0, 0, 800, 600, 32);
 
     }
 
 
-    public void postCreate(){
+    public void postCreate() {
         boolean found = false;
         Random r = new Random();
-        int sX = -1,sY = -1;
-        while(!found){
+        int sX = -1, sY = -1;
+        while (!found) {
             int x = r.nextInt(w);
             int y = r.nextInt(h);
-            int i = tiles[x+y*w];
-            if(i == 1){
+            int i = tiles[x + y * w];
+            if (i == 1) {
                 found = true;
                 sX = x;
                 sY = y;
@@ -57,7 +59,7 @@ public class Level {
     }
 
 
-    int x = 0, y = 0;
+
 
     public void render(Graphics g) {
         g.translate(-camera.getX(), -camera.getY());
@@ -70,12 +72,19 @@ public class Level {
             }
         }
 
-        g.fillRect(x, y, 5, 5);
 
         for (Entity e : entities) {
             e.render(g);
         }
         player.render(g);
+        for (int x = 0; x != w; x++) {
+            for (int y = 0; y != h; y++) {
+                int tile = topLayer[x + y * w];
+                Tile t = Tile.tileLookup.get(tile);
+                if(t == null)continue;
+                g.drawImage(t.getImage(), x * 16, y * 16);
+            }
+        }
         g.resetTransform();
 
 
@@ -86,7 +95,7 @@ public class Level {
         if (x < 0 || x > this.w * 16) {
             return false;
         }
-        if (y < 0 || y > this.h * 16){
+        if (y < 0 || y > this.h * 16) {
             return false;
         }
 
@@ -123,13 +132,26 @@ public class Level {
         return tiles[x + y * w];
     }
 
+    public int getTileAtTop(int x,int y){
+        return topLayer[x+y*w];
+    }
     public void setTile(int x, int y, int p) {
         Tile t = Tile.tileLookup.get(p);
-        if (t.isSolid()) {
-            hitboxes.add(new Rectangle(x * 16, y * 16, 16, 16));
+        if (t != null) {
+            if (t.isSolid()) {
+                hitboxes.add(new Rectangle(x * 16, y * 16, 16, 16));
+            }
         }
         tiles[x + y * w] = p;
+    }
 
-
+    public void setTileTop(int x, int y, int p) {
+        Tile t = Tile.tileLookup.get(p);
+        if (t != null) {
+            if (t.isSolid()) {
+                hitboxes.add(new Rectangle(x * 16, y * 16, 16, 16));
+            }
+        }
+        topLayer[x + y * w] = p;
     }
 }
