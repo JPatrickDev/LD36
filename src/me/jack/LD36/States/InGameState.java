@@ -2,6 +2,7 @@ package me.jack.LD36.States;
 
 import me.jack.LD36.Entity.Entity;
 import me.jack.LD36.Entity.EntityPlayer;
+import me.jack.LD36.GUI.CraftingGUI;
 import me.jack.LD36.GUI.HUD;
 import me.jack.LD36.Inventory.Item.Item;
 import me.jack.LD36.Inventory.Item.ItemStick;
@@ -39,12 +40,13 @@ public class InGameState extends BasicGameState{
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         level.render(graphics);
         HUD.render(graphics,this);
+        CraftingGUI.renderGUI(graphics);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        level.update();
-
+      //  level.update();
+        CraftingGUI.updateGUI();
         if(level.getPlayer().getHealth() <=0){
             stateBasedGame.enterState(1);
         }
@@ -53,6 +55,7 @@ public class InGameState extends BasicGameState{
     @Override
     public void mousePressed(int button, int x, int y) {
         super.mousePressed(button, x, y);
+        CraftingGUI.mouseClicked(button,x,y);
         level.getPlayer().action(level);
     }
 

@@ -5,6 +5,6 @@ package me.jack.LD36.Inventory.Item;
  */
 public class ItemStick extends Item {
     public ItemStick() {
-        super(0, 0, 1);
+        super(0, 0, 1,"Stick","A stick");
     }
 }

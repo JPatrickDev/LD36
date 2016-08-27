@@ -26,8 +26,8 @@
 
 - Mobs
     - Some friendly
-    - Some aggressive
-- Combat with mobs
+    - Some aggressive/
+- Combat with mobs/
     - Different weapons
 
 

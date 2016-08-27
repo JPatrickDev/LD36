@@ -46,4 +46,12 @@ public class Inventory {
     public ItemStack[] getItems() {
         return items;
     }
+
+    public boolean contains(ItemStack stack) {
+        for(int ii = 0;ii!= MAX_SIZE;ii++){
+            if(items[ii] != null){
+
+            }
+        }
+    }
 }
