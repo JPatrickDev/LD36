@@ -10,16 +10,15 @@ import org.newdawn.slick.geom.Rectangle;
 /**
  * Created by Jack on 27/08/2016.
  */
-public class EntityPlayer extends Entity {
+public class EntityPlayer extends Mob {
 
     Inventory inventory = new Inventory();
 
     private int facing = 0;
 
-    private int health = 100;
-
     public EntityPlayer(int x, int y) {
         super(x, y, 16, 16);
+        setHealth(100);
     }
 
     @Override
@@ -83,7 +82,4 @@ public class EntityPlayer extends Entity {
         }
     }
 
-    public int getHealth() {
-        return health;
-    }
 }

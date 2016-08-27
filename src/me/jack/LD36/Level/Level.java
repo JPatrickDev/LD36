@@ -3,12 +3,15 @@ package me.jack.LD36.Level;
 import me.jack.LD36.Entity.Entity;
 import me.jack.LD36.Entity.EntityItemDrop;
 import me.jack.LD36.Entity.EntityPlayer;
+import me.jack.LD36.Entity.EntityTestEnemy;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Level.Tile.Tile;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.util.pathfinding.PathFindingContext;
+import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import uk.co.jdpatrick.JEngine.JEngine;
 import uk.co.jdpatrick.JEngine.Level.Camera;
 
@@ -18,7 +21,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Created by Jack on 27/08/2016.
  */
-public class Level {
+public class Level implements TileBasedMap {
 
     private int w, h;
     private int[] tiles;
@@ -38,7 +41,7 @@ public class Level {
         this.h = h;
         this.tiles = new int[w * h];
         this.topLayer = new int[w * h];
-        camera = new Camera(0, 0, 800, 600, 32);
+        camera = new Camera(0, 0, 800, 528, 32);
 
     }
 
@@ -110,13 +113,31 @@ public class Level {
         }
         return true;
     }
-
+    Random r = new Random();
     public void update() {
         for (Entity e : entities) {
             e.update(this);
         }
         player.update(this);
         camera.center(player.getX(), player.getY(), w, h);
+
+        if(r.nextInt(10) == 0){
+            boolean found = false;
+            Random r = new Random();
+            int sX = -1, sY = -1;
+            while (!found) {
+                int x = r.nextInt(w);
+                int y = r.nextInt(h);
+                int i = tiles[x + y * w];
+                if (i == 1 && topLayer[x + y * w] == 0) {
+                    found = true;
+                    sX = x;
+                    sY = y;
+                    break;
+                }
+            }
+            entities.add(new EntityTestEnemy(sX * 32,sY * 32));
+        }
     }
 
     public int getW() {
@@ -132,7 +153,11 @@ public class Level {
     }
 
     public int getTileAt(int x, int y) {
-        return tiles[x + y * w];
+        try {
+            return tiles[x + y * w];
+        }catch (Exception e){
+            return -1;
+        }
     }
 
     public int getTileAtTop(int x, int y) {
@@ -189,5 +214,38 @@ public class Level {
 
     public void removeEntity(Entity entity) {
         entities.remove(entity);
+    }
+
+    @Override
+    public int getWidthInTiles() {
+        return getW();
+    }
+
+    @Override
+    public int getHeightInTiles() {
+        return getH();
+    }
+
+    @Override
+    public void pathFinderVisited(int i, int i1) {
+
+    }
+
+    @Override
+    public boolean blocked(PathFindingContext pathFindingContext, int i, int i1) {
+        try {
+            return Tile.tileLookup.get(tiles[i + i1 * w]).isSolid();
+        }catch (Exception e){
+            return true;
+        }
+    }
+
+    @Override
+    public float getCost(PathFindingContext pathFindingContext, int i, int i1) {
+        try {
+            return Tile.tileLookup.get(tiles[i + i1 * w]).getCost();
+        }catch (Exception e){
+            return 0;
+        }
     }
 }

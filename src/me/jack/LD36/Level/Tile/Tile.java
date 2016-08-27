@@ -14,6 +14,7 @@ public class Tile {
     private int id;
     private Image image;
     private boolean solid;
+    private int cost;
 
 
     public static HashMap<Integer,Tile> tileLookup = new HashMap<>();
@@ -21,15 +22,15 @@ public class Tile {
     public static SpriteSheet tiles;
 
     public static void init(){
-        new Tile(0,0,false);
-        new Tile(1,0,true);
-        new Tile(2,0,false);
-        new Tile(3,0,true);
-        new Tile(0,1,false);
+        new Tile(0,0,false,0);
+        new Tile(1,0,true,100);
+        new Tile(2,0,false,10);
+        new Tile(3,0,true,100);
+        new Tile(0,1,false,25);
     }
 
 
-    public Tile(int x,int y,boolean solid) {
+    public Tile(int x,int y,boolean solid,int cost) {
         if(tiles == null){
             try {
                 tiles = new SpriteSheet(new Image("res/tiles.png"),16,16);
@@ -44,6 +45,7 @@ public class Tile {
         idCounter++;
         this.solid = solid;
         tileLookup.put(id,this);
+        this.cost = cost;
     }
 
     public int getId() {
@@ -56,5 +58,9 @@ public class Tile {
 
     public boolean isSolid() {
         return solid;
+    }
+
+    public float getCost() {
+        return cost;
     }
 }
