@@ -2,11 +2,11 @@
 - Controllable player/
     - Collision detection with water/other solid tiles/
 
-- Forest generation
+- Forest generation/
     - Bushes as well?
 
 - More tiles
-    - Stone?
+    - Stone?/
 
 - Player health
     - Hunger?
@@ -19,6 +19,6 @@
 
 - Mobs
     - Some friendly
-    - Some aggresive
+    - Some aggressive
 - Combat with mobs
     - Different weapons

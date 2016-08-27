@@ -59,7 +59,7 @@ public class LevelGenerator {
     }
 
 
-    public static float[][] generatePerlinNoise(float[][] noise, int oC,float persistence) {
+    public static float[][] generatePerlinNoise(float[][] noise, int oC, float persistence) {
         int w = noise.length;
         int h = noise[0].length;
 
@@ -107,8 +107,10 @@ public class LevelGenerator {
                 float p = noise[x][y];
                 if (p > 0.5 && p < 0.52) {
                     noise[x][y] = 3;
-                } else if (p > 0.52) {
+                } else if (p > 0.52 && p < 0.75) {
                     noise[x][y] = 1;
+                } else if (p > 0.75) {
+                    noise[x][y] = 5;
                 } else {
                     noise[x][y] = 2;
                 }
@@ -123,12 +125,12 @@ public class LevelGenerator {
         while (true) {
             int w = 250;
 
-          //  float[][] whiteNoise = generateWhiteNoise(w, w, r);
+            //  float[][] whiteNoise = generateWhiteNoise(w, w, r);
 
 //            float[][] perlin = generatePerlinNoise(whiteNoise, 6);
-  //          perlin = group(perlin);
+            //          perlin = group(perlin);
 
-            Level level = generateLevel(w,w);
+            Level level = generateLevel(w, w);
 
             BufferedImage image = new BufferedImage(w, w, BufferedImage.TYPE_INT_RGB);
 
@@ -136,18 +138,20 @@ public class LevelGenerator {
 
             for (int x = 0; x != level.getW(); x++) {
                 for (int y = 0; y != level.getH(); y++) {
-                    int i = level.getTileAt(x,y);
-                    int ii = level.getTileAtTop(x,y);
+                    int i = level.getTileAt(x, y);
+                    int ii = level.getTileAtTop(x, y);
                     Color c = null;
-                    if(i == 1){
+                    if (i == 1) {
                         c = Color.green;
-                    }else if(i == 2){
+                    } else if (i == 2) {
                         c = Color.blue;
-                    }else{
+                    } else if (i == 5) {
+                        c = Color.lightGray;
+                    } else {
                         c = Color.yellow;
                     }
 
-                    if(ii == 4){
+                    if (ii == 4) {
                         c = Color.darkGray;
                     }
                     pixels[x + y * w] = c.hashCode();
@@ -160,9 +164,9 @@ public class LevelGenerator {
 
     }
 
-    public static float[][] generateTrees(int w,int h){
-        float[][] whiteNoise = generateWhiteNoise(w,h,r);
-        float[][] perlin = generatePerlinNoise(whiteNoise,5,0.2f);
+    public static float[][] generateTrees(int w, int h) {
+        float[][] whiteNoise = generateWhiteNoise(w, h, r);
+        float[][] perlin = generatePerlinNoise(whiteNoise, 5, 0.2f);
         for (int x = 0; x != perlin.length; x++) {
             for (int y = 0; y != perlin[0].length; y++) {
                 float p = perlin[x][y];
@@ -172,25 +176,29 @@ public class LevelGenerator {
         }
         return perlin;
     }
+
     static Random r = new Random();
+
     public static Level generateLevel(int w, int h) {
         Level level = new Level(w, h);
         float[][] whiteNoise = generateWhiteNoise(w, w, r);
 
-        float[][] perlin = generatePerlinNoise(whiteNoise, 6,0.5f);
+        float[][] perlin = generatePerlinNoise(whiteNoise, 6, 0.5f);
         perlin = group(perlin);
 
-        float[][] trees = generateTrees(w,h);
+        float[][] trees = generateTrees(w, h);
 
         for (int x = 0; x != perlin.length; x++) {
             for (int y = 0; y != perlin[0].length; y++) {
                 float p = perlin[x][y];
-                level.setTile(x,y,(int)p);
-                if(p == 1){
-                    if(trees[x][y] == 1){
-                       level.setTileTop(x,y,4);
+
+                if (p == 1 || p == 5) {
+                    if (trees[x][y] == 1) {
+                        level.setTileTop(x, y, 4);
+                        p = 1;
                     }
                 }
+                level.setTile(x, y, (int) p);
             }
         }
         level.postCreate();

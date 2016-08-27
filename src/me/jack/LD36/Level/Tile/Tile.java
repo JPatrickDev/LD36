@@ -25,6 +25,7 @@ public class Tile {
         new Tile(1,0,true);
         new Tile(2,0,false);
         new Tile(3,0,true);
+        new Tile(0,1,false);
     }
 
 
