@@ -37,13 +37,16 @@ public class EntityTestEnemy extends Mob {
 
     int ticks = 0;
 
+    boolean rushing = false;
     @Override
     public void update(Level level) {
         ticks++;
+        int mSpeed = ticks & 1;
+        mSpeed*=2;
         if (randWalk == 0) {
             int xDist = level.getPlayer().getX() - getX();
             int yDist = level.getPlayer().getY() - getY();
-            if (xDist * xDist + yDist * yDist < 2500) {
+            if (xDist * xDist + yDist * yDist < 8000) {
                 xa = 0;
                 ya = 0;
                 if (xDist < 0) xa = -1;
@@ -51,19 +54,41 @@ public class EntityTestEnemy extends Mob {
                 if (yDist < 0) ya = -1;
                 if (yDist > 0) ya = 1;
             }
+              if (xDist * xDist + yDist * yDist < 2500) {
+                System.out.println("Rush");
+                  rushing = true;
+                if(level.getPlayer().getX() > getX()){
+                    move(mSpeed,0,level);
+                }
+                if(level.getPlayer().getX() < getX()){
+                    move(-mSpeed,0,level);
+                }
+
+                if(level.getPlayer().getY() > getY()){
+                    move(0,mSpeed,level);
+                }
+                if(level.getPlayer().getY() < getY()){
+                    move(0,-mSpeed,level);
+                }
+            }else{
+                  rushing = false;
+              }
         }
 
-        int mSpeed = ticks & 1;
 
-        if (!level.canMove(getX() + (xa * mSpeed), getY() + (ya * mSpeed), getW(), getH()) || r.nextInt(50) == 0) {
+
+        if (!move(xa * mSpeed,ya*mSpeed,level) && !rushing|| r.nextInt(200) == 0) {
             randWalk = 10;
             xa = (r.nextInt(3) - 1) * r.nextInt(4);
             ya = (r.nextInt(3) - 1) * r.nextInt(4);
-        } else {
-            x += (xa * mSpeed);
-            y += ya * mSpeed;
         }
-
         if (randWalk > 0) randWalk--;
+    }
+
+    @Override
+    public void touched(Entity e, Level level) {
+        if(e instanceof EntityPlayer){
+            level.getPlayer().setHealth(level.getPlayer().getHealth()-1);
+        }
     }
 }

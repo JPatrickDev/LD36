@@ -31,23 +31,19 @@ public class EntityPlayer extends Mob {
     @Override
     public void update(Level level) {
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            if (level.canMove(getX(), getY() - 4, getW(), getH()))
-                y -= 4;
+            move(0,-4,level);
             facing = 0;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-            if (level.canMove(getX() + 4, getY(), getW(), getH()))
-                x += 4;
+            move(4,0,level);
             facing = 1;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            if (level.canMove(getX(), getY() + 4, getW(), getH()))
-                y += 4;
+            move(0,4,level);
             facing = 2;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-            if (level.canMove(getX() - 4, getY(), getW(), getH()))
-                x -= 4;
+            move(-4,0,level);
             facing = 3;
         }
 
@@ -62,6 +58,15 @@ public class EntityPlayer extends Mob {
             System.out.println("Player facing left");
         }
         */
+    }
+
+    @Override
+    public void touched(Entity e,Level level) {
+        if(e instanceof EntityItemDrop){
+            EntityItemDrop drop = (EntityItemDrop) e;
+            level.removeEntity(drop);
+            level.getPlayer().getInventory().addItem(drop.getStack().getItem(),drop.getStack().getStackSize());
+        }
     }
 
     public Inventory getInventory() {

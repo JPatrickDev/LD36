@@ -12,6 +12,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
+import org.w3c.dom.css.Rect;
 import uk.co.jdpatrick.JEngine.JEngine;
 import uk.co.jdpatrick.JEngine.Level.Camera;
 
@@ -97,7 +98,7 @@ public class Level implements TileBasedMap {
     }
 
 
-    public boolean canMove(int x, int y, int w, int h) {
+    public boolean canMove(int x, int y, int w, int h,Entity caller) {
         if (x < 0 || x > this.w * 32) {
             return false;
         }
@@ -110,6 +111,23 @@ public class Level implements TileBasedMap {
             if (rect.intersects(r)) {
                 return false;
             }
+        }
+
+        if((caller instanceof EntityTestEnemy)){
+            Rectangle player = new Rectangle(getPlayer().getX(),getPlayer().getY(),getPlayer().getW(),getPlayer().getH());
+            if(rect.intersects(player)){
+                caller.touched(getPlayer(),this);
+                return false;
+            }
+        }
+        for(Entity e : entities){
+            if(e == caller)continue;
+            Rectangle eR = new Rectangle(e.getX(),e.getY(),e.getW(),e.getH());
+            if(eR.intersects(rect)){
+                caller.touched(e,this);
+                return false;
+            }
+
         }
         return true;
     }

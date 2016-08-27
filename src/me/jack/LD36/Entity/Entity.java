@@ -38,4 +38,6 @@ public abstract class Entity {
     public int getH() {
         return h;
     }
+
+    public abstract void touched(Entity e,Level level);
 }

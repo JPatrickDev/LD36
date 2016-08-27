@@ -53,6 +53,7 @@ public class HUD {
             x += 32;
         }
 
+        if(state.getPlayer().getHealth() < 0)return;
         int fullHearts = (int) Math.floor(state.getPlayer().getHealth() / 10);
         x = 200;
         y = 528;

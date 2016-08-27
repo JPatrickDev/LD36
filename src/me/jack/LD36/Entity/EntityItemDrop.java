@@ -38,8 +38,16 @@ public class EntityItemDrop extends Entity {
         Rectangle me = new Rectangle(x-4,y-4,w * 2,h * 2);
         Rectangle player = new Rectangle(level.getPlayer().getX(),level.getPlayer().getY(),level.getPlayer().getW(),level.getPlayer().getH());
         if(me.intersects(player)){
-            level.removeEntity(this);
-            level.getPlayer().getInventory().addItem(stack.getItem(),stack.getStackSize());
+
         }
+    }
+
+    @Override
+    public void touched(Entity e,Level level) {
+
+    }
+
+    public ItemStack getStack() {
+        return stack;
     }
 }

@@ -45,6 +45,9 @@ public class InGameState extends BasicGameState{
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         level.update();
 
+        if(level.getPlayer().getHealth() <=0){
+            stateBasedGame.enterState(1);
+        }
     }
 
     @Override
