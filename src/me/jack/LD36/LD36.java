@@ -1,5 +1,6 @@
 package me.jack.LD36;
 
+import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -15,7 +16,7 @@ public class LD36 extends StateBasedGame{
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-
+        addState(new InGameState());
     }
 
 }

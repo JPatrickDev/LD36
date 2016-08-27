@@ -102,36 +102,65 @@ public class LevelGenerator {
     }
 
 
+    public static float[][] group(float[][] noise) {
+        for (int x = 0; x != noise.length; x++) {
+            for (int y = 0; y != noise[0].length; y++) {
+                float p = noise[x][y];
+                if (p > 0.5 && p < 0.52) {
+                    noise[x][y] = 3;
+                } else if (p > 0.52) {
+                    noise[x][y] = 1;
+                } else {
+                    noise[x][y] = 2;
+                }
+            }
+        }
+        return noise;
+    }
 
 
     public static void main(String[] args) {
-        Random r = new Random();
+
         while (true) {
+            int w = 250;
 
-            float[][] whiteNoise = generateWhiteNoise(50, 50, r);
+            float[][] whiteNoise = generateWhiteNoise(w, w, r);
 
-            float[][] perlin = generatePerlinNoise(whiteNoise, 4);
+            float[][] perlin = generatePerlinNoise(whiteNoise, 6);
+            perlin = group(perlin);
 
-            BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
+            BufferedImage image = new BufferedImage(w, w, BufferedImage.TYPE_INT_RGB);
 
-            int[] pixels = new int[50 * 50];
+            int[] pixels = new int[w * w];
 
             for (int x = 0; x != perlin.length; x++) {
                 for (int y = 0; y != perlin[0].length; y++) {
                     float p = perlin[x][y];
-
                     Color c = getColor(Color.black, Color.DARK_GRAY, p);
-                    pixels[x + y * 50] = c.hashCode();
+                    pixels[x + y * w] = c.hashCode();
                 }
             }
 
-            image.setRGB(0, 0, 50, 50, pixels, 0, 50);
-
-            JOptionPane.showMessageDialog(null, null, "Test", JOptionPane.YES_NO_OPTION, new ImageIcon(image.getScaledInstance(50 * 4, 50 * 4, 0)));
+            image.setRGB(0, 0, w, w, pixels, 0, w);
+            JOptionPane.showMessageDialog(null, null, "Test", JOptionPane.YES_NO_OPTION, new ImageIcon(image.getScaledInstance(w * 2, w * 2, 0)));
         }
 
     }
+    static Random r = new Random();
+    public static Level generateLevel(int w, int h) {
+        Level level = new Level(w, h);
+        float[][] whiteNoise = generateWhiteNoise(w, w, r);
 
+        float[][] perlin = generatePerlinNoise(whiteNoise, 6);
+        perlin = group(perlin);
+        for (int x = 0; x != perlin.length; x++) {
+            for (int y = 0; y != perlin[0].length; y++) {
+                float p = perlin[x][y];
+                level.setTile(x,y,(int)p);
+            }
+        }
+        return level;
+    }
 
     public static Color getColor(Color s, Color e, float t) {
         float u = 1 - t;
