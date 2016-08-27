@@ -48,14 +48,14 @@ public class Level {
             int x = r.nextInt(w);
             int y = r.nextInt(h);
             int i = tiles[x + y * w];
-            if (i == 1) {
+            if (i == 1 && topLayer[x+y*w] == 0) {
                 found = true;
                 sX = x;
                 sY = y;
                 break;
             }
         }
-        player = new EntityPlayer(sX * 16, sY * 16);
+        player = new EntityPlayer(sX * 32, sY * 32);
     }
 
 
@@ -68,7 +68,7 @@ public class Level {
             for (int y = 0; y != h; y++) {
                 int tile = tiles[x + y * w];
                 Tile t = Tile.tileLookup.get(tile);
-                g.drawImage(t.getImage(), x * 16, y * 16);
+                g.drawImage(t.getImage(), x * 32, y * 32);
             }
         }
 
@@ -82,7 +82,7 @@ public class Level {
                 int tile = topLayer[x + y * w];
                 Tile t = Tile.tileLookup.get(tile);
                 if(t == null)continue;
-                g.drawImage(t.getImage(), x * 16, y * 16);
+                g.drawImage(t.getImage(), x * 32, y * 32);
             }
         }
         g.resetTransform();
@@ -92,10 +92,10 @@ public class Level {
 
 
     public boolean canMove(int x, int y, int w, int h) {
-        if (x < 0 || x > this.w * 16) {
+        if (x < 0 || x > this.w * 32) {
             return false;
         }
-        if (y < 0 || y > this.h * 16) {
+        if (y < 0 || y > this.h * 32) {
             return false;
         }
 
@@ -139,7 +139,7 @@ public class Level {
         Tile t = Tile.tileLookup.get(p);
         if (t != null) {
             if (t.isSolid()) {
-                hitboxes.add(new Rectangle(x * 16, y * 16, 16, 16));
+                hitboxes.add(new Rectangle(x * 32, y * 32, 32, 32));
             }
         }
         tiles[x + y * w] = p;
@@ -149,9 +149,13 @@ public class Level {
         Tile t = Tile.tileLookup.get(p);
         if (t != null) {
             if (t.isSolid()) {
-                hitboxes.add(new Rectangle(x * 16, y * 16, 16, 16));
+                hitboxes.add(new Rectangle(x * 32, y * 32, 32, 32));
             }
         }
         topLayer[x + y * w] = p;
+    }
+
+    public EntityPlayer getPlayer() {
+        return player;
     }
 }

@@ -11,6 +11,13 @@
 - Player health
     - Hunger?
 
+- Player inventory/
+
+- HUD/UI
+    - Show health
+    - Hunger
+    - Inventory hotbar?
+
 - Item drops from trees/bushes
 
 - Mineable stuff on the surface

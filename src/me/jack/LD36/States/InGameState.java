@@ -1,5 +1,10 @@
 package me.jack.LD36.States;
 
+import me.jack.LD36.Entity.Entity;
+import me.jack.LD36.Entity.EntityPlayer;
+import me.jack.LD36.GUI.HUD;
+import me.jack.LD36.Inventory.Item.Item;
+import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Level.Level;
 import me.jack.LD36.Level.LevelGenerator;
 import me.jack.LD36.Level.Tile.Tile;
@@ -25,17 +30,24 @@ public class InGameState extends BasicGameState{
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         Tile.init();
+        Item.init();
         level = LevelGenerator.generateLevel(100,100);
+        level.getPlayer().getInventory().addItem(new ItemStick(),5);
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         level.render(graphics);
+        HUD.render(graphics,this);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         level.update();
 
+    }
+
+    public EntityPlayer getPlayer() {
+        return level.getPlayer();
     }
 }

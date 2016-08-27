@@ -38,6 +38,8 @@ public class Tile {
             }
         }
         image = tiles.getSprite(x,y);
+        image.setFilter(Image.FILTER_NEAREST);
+        image = image.getScaledCopy(2f);
         id = idCounter;
         idCounter++;
         this.solid = solid;

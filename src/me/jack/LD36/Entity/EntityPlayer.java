@@ -1,5 +1,6 @@
 package me.jack.LD36.Entity;
 
+import me.jack.LD36.Inventory.Inventory;
 import me.jack.LD36.Level.Level;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
@@ -10,8 +11,10 @@ import org.newdawn.slick.Graphics;
  */
 public class EntityPlayer extends Entity {
 
+    Inventory inventory = new Inventory();
+
     public EntityPlayer(int x, int y) {
-        super(x, y, 8, 8);
+        super(x, y, 16, 16);
     }
 
     @Override
@@ -39,5 +42,9 @@ public class EntityPlayer extends Entity {
             if (level.canMove(getX() - 4, getY(), getW(), getH()))
                 x -= 4;
         }
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }
