@@ -18,7 +18,7 @@
     - Hunger
     - Inventory hotbar?
 
-- Item drops from trees/bushes
+- Item drops from trees/bushes/
 
 - Mineable stuff on the surface
 
@@ -29,3 +29,15 @@
     - Some aggressive
 - Combat with mobs
     - Different weapons
+
+
+Crafting system
+- GUI based, split into categories
+    - Tools
+    - Weapons
+    - Shelter
+    - Food
+    - Misc??
+
+KNOWN BUGS:
+ - Player can sometimes walk on water in some cases/

@@ -51,7 +51,7 @@ public class Level {
             int x = r.nextInt(w);
             int y = r.nextInt(h);
             int i = tiles[x + y * w];
-            if (i == 1 && topLayer[x+y*w] == 0) {
+            if (i == 1 && topLayer[x + y * w] == 0) {
                 found = true;
                 sX = x;
                 sY = y;
@@ -60,8 +60,6 @@ public class Level {
         }
         player = new EntityPlayer(sX * 32, sY * 32);
     }
-
-
 
 
     public void render(Graphics g) {
@@ -84,10 +82,12 @@ public class Level {
             for (int y = 0; y != h; y++) {
                 int tile = topLayer[x + y * w];
                 Tile t = Tile.tileLookup.get(tile);
-                if(t == null)continue;
+                if (t == null) continue;
                 g.drawImage(t.getImage(), x * 32, y * 32);
             }
         }
+
+
         g.resetTransform();
 
 
@@ -135,9 +135,10 @@ public class Level {
         return tiles[x + y * w];
     }
 
-    public int getTileAtTop(int x,int y){
-        return topLayer[x+y*w];
+    public int getTileAtTop(int x, int y) {
+        return topLayer[x + y * w];
     }
+
     public void setTile(int x, int y, int p) {
         Tile t = Tile.tileLookup.get(p);
         if (t != null) {
@@ -167,18 +168,20 @@ public class Level {
     }
 
 
-    public void removeTopTile(int x,int y){
-        System.out.println("Removing");
-        System.out.println(getTileAtTop(x,y));
-        if(getTileAtTop(x,y) == 4){
-            ItemStack stack = new ItemStack(2,new ItemStick());
-            EntityItemDrop drop = new EntityItemDrop((x*32)+16,(y*32)+16,stack);
-            entities.add(drop);
+    public void removeTopTile(int x, int y) {
+        if (getTileAtTop(x, y) == 0) return;
+        if (getTileAtTop(x, y) == 4) {
+
+            for (int i = 0; i != 4; i++) {
+                ItemStack stack = new ItemStack(2, new ItemStick());
+                EntityItemDrop drop = new EntityItemDrop((x * 32) + 16, (y * 32) + 16, stack);
+                entities.add(drop);
+            }
             System.out.println("Stack dropped");
         }
-        setTileTop(x,y,0);
-        for(Rectangle r : getHitboxes()){
-            if(r.getX() == x*32 && r.getY() == (y)*32){
+        setTileTop(x, y, 0);
+        for (Rectangle r : getHitboxes()) {
+            if (r.getX() == x * 32 && r.getY() == (y) * 32) {
                 getHitboxes().remove(r);
             }
         }

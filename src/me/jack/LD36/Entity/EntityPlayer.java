@@ -16,6 +16,8 @@ public class EntityPlayer extends Entity {
 
     private int facing = 0;
 
+    private int health = 100;
+
     public EntityPlayer(int x, int y) {
         super(x, y, 16, 16);
     }
@@ -79,5 +81,9 @@ public class EntityPlayer extends Entity {
         } else if (facing == 3) {
             level.removeTopTile(tX - 1, tY);
         }
+    }
+
+    public int getHealth() {
+        return health;
     }
 }
