@@ -47,6 +47,12 @@ public class InGameState extends BasicGameState{
 
     }
 
+    @Override
+    public void mousePressed(int button, int x, int y) {
+        super.mousePressed(button, x, y);
+        level.getPlayer().action(level);
+    }
+
     public EntityPlayer getPlayer() {
         return level.getPlayer();
     }

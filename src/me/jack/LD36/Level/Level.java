@@ -1,11 +1,14 @@
 package me.jack.LD36.Level;
 
+import me.jack.LD36.Entity.Entity;
+import me.jack.LD36.Entity.EntityItemDrop;
 import me.jack.LD36.Entity.EntityPlayer;
+import me.jack.LD36.Inventory.Item.ItemStack;
+import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Level.Tile.Tile;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
-import uk.co.jdpatrick.JEngine.Entity.Entity;
 import uk.co.jdpatrick.JEngine.JEngine;
 import uk.co.jdpatrick.JEngine.Level.Camera;
 
@@ -157,5 +160,31 @@ public class Level {
 
     public EntityPlayer getPlayer() {
         return player;
+    }
+
+    public CopyOnWriteArrayList<Rectangle> getHitboxes() {
+        return hitboxes;
+    }
+
+
+    public void removeTopTile(int x,int y){
+        System.out.println("Removing");
+        System.out.println(getTileAtTop(x,y));
+        if(getTileAtTop(x,y) == 4){
+            ItemStack stack = new ItemStack(2,new ItemStick());
+            EntityItemDrop drop = new EntityItemDrop((x*32)+16,(y*32)+16,stack);
+            entities.add(drop);
+            System.out.println("Stack dropped");
+        }
+        setTileTop(x,y,0);
+        for(Rectangle r : getHitboxes()){
+            if(r.getX() == x*32 && r.getY() == (y)*32){
+                getHitboxes().remove(r);
+            }
+        }
+    }
+
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
     }
 }

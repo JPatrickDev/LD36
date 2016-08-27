@@ -24,10 +24,11 @@ public class Inventory {
                 int added = stack.add(count);
                 if(added == -1){
                     System.out.println("All added");
+                    return true;
                 }else{
                     System.out.println("Could not add " + added);
+                    count = added;
                 }
-                return true;
             }
         }
 
