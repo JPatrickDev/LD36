@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e009eb3-1243-4b14-8e97-59b914eb64b3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Entity/Entity.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Entity/Entity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityItemDrop.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityItemDrop.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityTestEnemy.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityTestEnemy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Entity/Mob.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Entity/Mob.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/LD36.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/LD36.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" />
     </list>
     <ignored path="LD36.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,24 +29,24 @@
       <file leaf-file-name="Level.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.793103">
-              <caret line="109" column="38" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="38" />
+            <state vertical-scroll-proportion="-15.068966">
+              <caret line="276" column="30" selection-start-line="276" selection-start-column="30" selection-end-line="276" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1009#1017#0" expanded="true" />
-                <element signature="e#1100#1111#0" expanded="true" />
-                <element signature="e#4831#4832#0" expanded="true" />
-                <element signature="e#4873#4874#0" expanded="true" />
-                <element signature="e#5466#5467#0" expanded="true" />
-                <element signature="e#5495#5496#0" expanded="true" />
-                <element signature="e#5555#5556#0" expanded="true" />
-                <element signature="e#5586#5587#0" expanded="true" />
-                <element signature="e#6288#6289#0" expanded="true" />
-                <element signature="e#6327#6328#0" expanded="true" />
-                <element signature="e#6377#6378#0" expanded="true" />
-                <element signature="e#6406#6407#0" expanded="true" />
-                <element signature="e#6457#6458#0" expanded="true" />
-                <element signature="e#6486#6487#0" expanded="true" />
+                <element signature="e#914#922#0" expanded="true" />
+                <element signature="e#1005#1016#0" expanded="true" />
+                <element signature="e#4762#4763#0" expanded="true" />
+                <element signature="e#4804#4805#0" expanded="true" />
+                <element signature="e#5397#5398#0" expanded="true" />
+                <element signature="e#5426#5427#0" expanded="true" />
+                <element signature="e#5486#5487#0" expanded="true" />
+                <element signature="e#5517#5518#0" expanded="true" />
+                <element signature="e#6219#6220#0" expanded="true" />
+                <element signature="e#6258#6259#0" expanded="true" />
+                <element signature="e#6308#6309#0" expanded="true" />
+                <element signature="e#6337#6338#0" expanded="true" />
+                <element signature="e#6388#6389#0" expanded="true" />
+                <element signature="e#6417#6418#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,12 +90,10 @@
       <file leaf-file-name="EntityTestEnemy.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityTestEnemy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27105665">
-              <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="55" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.20826952">
+              <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#440#441#0" expanded="true" />
-                <element signature="e#475#476#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,7 +115,7 @@
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+              <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
               <folding>
                 <element signature="e#1898#1899#0" expanded="true" />
                 <element signature="e#1930#1931#0" expanded="true" />
@@ -163,7 +155,7 @@
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/Mob.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="82" selection-start-line="25" selection-start-column="82" selection-end-line="25" selection-end-column="82" />
+              <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#284#285#0" expanded="true" />
@@ -215,11 +207,11 @@
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Entity/Entity.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityItemDrop.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" />
-        <option value="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" />
-        <option value="$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/States/GameOverState.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/LD36.java" />
+        <option value="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" />
+        <option value="$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityTestEnemy.java" />
       </list>
     </option>
@@ -778,7 +770,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28012684" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -803,7 +795,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5147992" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28012684" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -866,20 +858,20 @@
           <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1009#1017#0" expanded="true" />
-            <element signature="e#1100#1111#0" expanded="true" />
-            <element signature="e#4831#4832#0" expanded="true" />
-            <element signature="e#4873#4874#0" expanded="true" />
-            <element signature="e#5466#5467#0" expanded="true" />
-            <element signature="e#5495#5496#0" expanded="true" />
-            <element signature="e#5555#5556#0" expanded="true" />
-            <element signature="e#5586#5587#0" expanded="true" />
-            <element signature="e#6288#6289#0" expanded="true" />
-            <element signature="e#6327#6328#0" expanded="true" />
-            <element signature="e#6377#6378#0" expanded="true" />
-            <element signature="e#6406#6407#0" expanded="true" />
-            <element signature="e#6457#6458#0" expanded="true" />
-            <element signature="e#6486#6487#0" expanded="true" />
+            <element signature="e#914#922#0" expanded="true" />
+            <element signature="e#1005#1016#0" expanded="true" />
+            <element signature="e#4762#4763#0" expanded="true" />
+            <element signature="e#4804#4805#0" expanded="true" />
+            <element signature="e#5397#5398#0" expanded="true" />
+            <element signature="e#5426#5427#0" expanded="true" />
+            <element signature="e#5486#5487#0" expanded="true" />
+            <element signature="e#5517#5518#0" expanded="true" />
+            <element signature="e#6219#6220#0" expanded="true" />
+            <element signature="e#6258#6259#0" expanded="true" />
+            <element signature="e#6308#6309#0" expanded="true" />
+            <element signature="e#6337#6338#0" expanded="true" />
+            <element signature="e#6388#6389#0" expanded="true" />
+            <element signature="e#6417#6418#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1064,22 +1056,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/Mob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="82" selection-start-line="25" selection-start-column="82" selection-end-line="25" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#284#285#0" expanded="true" />
-            <element signature="e#317#318#0" expanded="true" />
-            <element signature="e#347#348#0" expanded="true" />
-            <element signature="e#376#377#0" expanded="true" />
-            <element signature="e#417#418#0" expanded="true" />
-            <element signature="e#453#454#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityItemDrop.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1103,17 +1079,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
-          <folding>
-            <element signature="e#1898#1899#0" expanded="true" />
-            <element signature="e#1930#1931#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/Entity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1129,30 +1094,6 @@
           <folding>
             <element signature="e#371#372#0" expanded="true" />
             <element signature="e#395#396#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.793103">
-          <caret line="109" column="38" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1009#1017#0" expanded="true" />
-            <element signature="e#1100#1111#0" expanded="true" />
-            <element signature="e#4831#4832#0" expanded="true" />
-            <element signature="e#4873#4874#0" expanded="true" />
-            <element signature="e#5466#5467#0" expanded="true" />
-            <element signature="e#5495#5496#0" expanded="true" />
-            <element signature="e#5555#5556#0" expanded="true" />
-            <element signature="e#5586#5587#0" expanded="true" />
-            <element signature="e#6288#6289#0" expanded="true" />
-            <element signature="e#6327#6328#0" expanded="true" />
-            <element signature="e#6377#6378#0" expanded="true" />
-            <element signature="e#6406#6407#0" expanded="true" />
-            <element signature="e#6457#6458#0" expanded="true" />
-            <element signature="e#6486#6487#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1177,14 +1118,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityTestEnemy.java">
+    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27105665">
-          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="55" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
+          <folding>
+            <element signature="e#1898#1899#0" expanded="true" />
+            <element signature="e#1930#1931#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.068966">
+          <caret line="276" column="30" selection-start-line="276" selection-start-column="30" selection-end-line="276" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#440#441#0" expanded="true" />
-            <element signature="e#475#476#0" expanded="true" />
+            <element signature="e#914#922#0" expanded="true" />
+            <element signature="e#1005#1016#0" expanded="true" />
+            <element signature="e#4762#4763#0" expanded="true" />
+            <element signature="e#4804#4805#0" expanded="true" />
+            <element signature="e#5397#5398#0" expanded="true" />
+            <element signature="e#5426#5427#0" expanded="true" />
+            <element signature="e#5486#5487#0" expanded="true" />
+            <element signature="e#5517#5518#0" expanded="true" />
+            <element signature="e#6219#6220#0" expanded="true" />
+            <element signature="e#6258#6259#0" expanded="true" />
+            <element signature="e#6308#6309#0" expanded="true" />
+            <element signature="e#6337#6338#0" expanded="true" />
+            <element signature="e#6388#6389#0" expanded="true" />
+            <element signature="e#6417#6418#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/Mob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#284#285#0" expanded="true" />
+            <element signature="e#317#318#0" expanded="true" />
+            <element signature="e#347#348#0" expanded="true" />
+            <element signature="e#376#377#0" expanded="true" />
+            <element signature="e#417#418#0" expanded="true" />
+            <element signature="e#453#454#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityTestEnemy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20826952">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

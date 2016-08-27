@@ -1,14 +1,12 @@
 package me.jack.LD36.Level;
 
-import me.jack.LD36.Entity.Entity;
-import me.jack.LD36.Entity.EntityItemDrop;
-import me.jack.LD36.Entity.EntityPlayer;
-import me.jack.LD36.Entity.EntityTestEnemy;
+import me.jack.LD36.Entity.*;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Level.Tile.Tile;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
@@ -98,7 +96,7 @@ public class Level implements TileBasedMap {
     }
 
 
-    public boolean canMove(int x, int y, int w, int h,Entity caller) {
+    public boolean canMove(int x, int y, int w, int h, Entity caller) {
         if (x < 0 || x > this.w * 32) {
             return false;
         }
@@ -113,25 +111,27 @@ public class Level implements TileBasedMap {
             }
         }
 
-        if((caller instanceof EntityTestEnemy)){
-            Rectangle player = new Rectangle(getPlayer().getX(),getPlayer().getY(),getPlayer().getW(),getPlayer().getH());
-            if(rect.intersects(player)){
-                caller.touched(getPlayer(),this);
+        if ((caller instanceof EntityTestEnemy)) {
+            Rectangle player = new Rectangle(getPlayer().getX(), getPlayer().getY(), getPlayer().getW(), getPlayer().getH());
+            if (rect.intersects(player)) {
+                caller.touched(getPlayer(), this);
                 return false;
             }
         }
-        for(Entity e : entities){
-            if(e == caller)continue;
-            Rectangle eR = new Rectangle(e.getX(),e.getY(),e.getW(),e.getH());
-            if(eR.intersects(rect)){
-                caller.touched(e,this);
+        for (Entity e : entities) {
+            if (e == caller) continue;
+            Rectangle eR = new Rectangle(e.getX(), e.getY(), e.getW(), e.getH());
+            if (eR.intersects(rect)) {
+                caller.touched(e, this);
                 return false;
             }
 
         }
         return true;
     }
+
     Random r = new Random();
+
     public void update() {
         for (Entity e : entities) {
             e.update(this);
@@ -139,7 +139,7 @@ public class Level implements TileBasedMap {
         player.update(this);
         camera.center(player.getX(), player.getY(), w, h);
 
-        if(r.nextInt(10) == 0){
+        if (r.nextInt(10) == 0) {
             boolean found = false;
             Random r = new Random();
             int sX = -1, sY = -1;
@@ -154,7 +154,7 @@ public class Level implements TileBasedMap {
                     break;
                 }
             }
-            entities.add(new EntityTestEnemy(sX * 32,sY * 32));
+            entities.add(new EntityTestEnemy(sX * 32, sY * 32));
         }
     }
 
@@ -173,7 +173,7 @@ public class Level implements TileBasedMap {
     public int getTileAt(int x, int y) {
         try {
             return tiles[x + y * w];
-        }catch (Exception e){
+        } catch (Exception e) {
             return -1;
         }
     }
@@ -253,7 +253,7 @@ public class Level implements TileBasedMap {
     public boolean blocked(PathFindingContext pathFindingContext, int i, int i1) {
         try {
             return Tile.tileLookup.get(tiles[i + i1 * w]).isSolid();
-        }catch (Exception e){
+        } catch (Exception e) {
             return true;
         }
     }
@@ -262,8 +262,21 @@ public class Level implements TileBasedMap {
     public float getCost(PathFindingContext pathFindingContext, int i, int i1) {
         try {
             return Tile.tileLookup.get(tiles[i + i1 * w]).getCost();
-        }catch (Exception e){
+        } catch (Exception e) {
             return 0;
+        }
+    }
+
+    public void hurt(int x, int y, int radius, int facing, int dmg) {
+        Circle c = new Circle(x, y, radius);
+        for (Entity e : entities) {
+            if (e instanceof EntityTestEnemy) {
+                Rectangle r = new Rectangle(e.getX(), e.getY(), e.getW(), e.getH());
+                if (r.intersects(c)) {
+                    Mob mob = (Mob) e;
+                    mob.setHealth(mob.getHealth() - dmg);
+                }
+            }
         }
     }
 }

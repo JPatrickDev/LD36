@@ -78,6 +78,7 @@ public class EntityPlayer extends Mob {
         int tY = getY() / 32;
         if (facing == 0) {
             level.removeTopTile(tX, tY - 1);
+
         } else if (facing == 1) {
             level.removeTopTile(tX + 1, tY);
         } else if (facing == 2) {
@@ -85,6 +86,7 @@ public class EntityPlayer extends Mob {
         } else if (facing == 3) {
             level.removeTopTile(tX - 1, tY);
         }
+        level.hurt(getX(),getY(),48,facing,5);
     }
 
 }
