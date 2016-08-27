@@ -9,7 +9,6 @@ import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
 import uk.co.jdpatrick.JEngine.AI.AIEntity;
 import uk.co.jdpatrick.JEngine.AI.AIPathfinder;
-import uk.co.jdpatrick.JEngine.AI.Movement.SmoothMovement;
 import uk.co.jdpatrick.JEngine.AI.Movement.TileBased;
 import uk.co.jdpatrick.JEngine.Entity.Entity;
 import uk.co.jdpatrick.JEngine.JEngineGame;
@@ -126,7 +125,7 @@ public class Test extends JEngineGame {
         }
 
         public void update() {
-            for (Entity e : (ArrayList<Entity>) entities)e.update();
+      //      for (Entity e : (ArrayList<Entity>) entities)e.update(this);
         }
     }
 
@@ -172,7 +171,7 @@ public class Test extends JEngineGame {
 
         int i = 0;
         @Override
-        public void update() {
+        public void update(me.jack.LD36.Level.Level level) {
          //   if(i == 5) {
                 pathfinder.update();
            //     i = 0;

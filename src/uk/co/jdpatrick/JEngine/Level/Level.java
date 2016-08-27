@@ -69,7 +69,7 @@ public abstract class Level {
      */
     public void update() {
         for (Entity e : entities) {
-            e.update();
+           // e.update(this);
         }
     }
 

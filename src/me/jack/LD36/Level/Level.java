@@ -1,10 +1,16 @@
 package me.jack.LD36.Level;
 
+import me.jack.LD36.Entity.EntityPlayer;
 import me.jack.LD36.Level.Tile.Tile;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
+import uk.co.jdpatrick.JEngine.Entity.Entity;
 import uk.co.jdpatrick.JEngine.JEngine;
 import uk.co.jdpatrick.JEngine.Level.Camera;
+
+import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by Jack on 27/08/2016.
@@ -17,42 +23,89 @@ public class Level {
 
     private Camera camera;
 
+
+    private CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
+    private CopyOnWriteArrayList<Rectangle> hitboxes = new CopyOnWriteArrayList<Rectangle>();
+
+    EntityPlayer player;
+
     public Level(int w, int h) {
         this.w = w;
         this.h = h;
         this.tiles = new int[w * h];
         camera = new Camera(0, 0, 800, 600, 32);
+
     }
 
 
-    int x =0,y=0;
+    public void postCreate(){
+        boolean found = false;
+        Random r = new Random();
+        int sX = -1,sY = -1;
+        while(!found){
+            int x = r.nextInt(w);
+            int y = r.nextInt(h);
+            int i = tiles[x+y*w];
+            if(i == 1){
+                found = true;
+                sX = x;
+                sY = y;
+                break;
+            }
+        }
+        player = new EntityPlayer(sX * 16, sY * 16);
+    }
+
+
+    int x = 0, y = 0;
+
     public void render(Graphics g) {
         g.translate(-camera.getX(), -camera.getY());
 
         for (int x = 0; x != w; x++) {
             for (int y = 0; y != h; y++) {
-                int tile = tiles[x+y*w];
+                int tile = tiles[x + y * w];
                 Tile t = Tile.tileLookup.get(tile);
-                g.drawImage(t.getImage(),x*16,y*16);
+                g.drawImage(t.getImage(), x * 16, y * 16);
             }
         }
 
-        g.fillRect(x,y,5,5);
+        g.fillRect(x, y, 5, 5);
+
+        for (Entity e : entities) {
+            e.render(g);
+        }
+        player.render(g);
         g.resetTransform();
 
 
-        if(Keyboard.isKeyDown(Keyboard.KEY_W)){
-            y-=4;
-        } if(Keyboard.isKeyDown(Keyboard.KEY_D)){
-            x+=4;
-        } if(Keyboard.isKeyDown(Keyboard.KEY_S)){
-            y+=4;
-        } if(Keyboard.isKeyDown(Keyboard.KEY_A)){
-            x-=4;
-        }
-        camera.center(x,y,w,h);
     }
 
+
+    public boolean canMove(int x, int y, int w, int h) {
+        if (x < 0 || x > this.w * 16) {
+            return false;
+        }
+        if (y < 0 || y > this.h * 16){
+            return false;
+        }
+
+        Rectangle rect = new Rectangle(x, y, w, h);
+        for (Rectangle r : hitboxes) {
+            if (rect.intersects(r)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void update() {
+        for (Entity e : entities) {
+            e.update(this);
+        }
+        player.update(this);
+        camera.center(player.getX(), player.getY(), w, h);
+    }
 
     public int getW() {
         return w;
@@ -71,6 +124,12 @@ public class Level {
     }
 
     public void setTile(int x, int y, int p) {
-        tiles[x+y*w] = p;
+        Tile t = Tile.tileLookup.get(p);
+        if (t.isSolid()) {
+            hitboxes.add(new Rectangle(x * 16, y * 16, 16, 16));
+        }
+        tiles[x + y * w] = p;
+
+
     }
 }

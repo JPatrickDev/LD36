@@ -1,5 +1,6 @@
 package uk.co.jdpatrick.JEngine.Entity;
 
+import me.jack.LD36.Level.Level;
 import org.newdawn.slick.Graphics;
 
 /**
@@ -38,8 +39,9 @@ public abstract class Entity {
 
     /**
      * Update the entity(Location, handle input, etc)
+     * @param level
      */
-    public abstract void update();
+    public abstract void update(Level level);
 
 
     /**

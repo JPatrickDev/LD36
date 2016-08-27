@@ -1,6 +1,6 @@
-- Entity system
-- Controllable player
-    - Collision detection with water/other solid tiles
+- Entity system/
+- Controllable player/
+    - Collision detection with water/other solid tiles/
 
 - Forest generation
     - Bushes as well?

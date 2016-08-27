@@ -159,6 +159,7 @@ public class LevelGenerator {
                 level.setTile(x,y,(int)p);
             }
         }
+        level.postCreate();
         return level;
     }
 
