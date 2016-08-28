@@ -1,9 +1,6 @@
 package me.jack.LD36.Level;
 
-import me.jack.LD36.Entity.Entity;
-import me.jack.LD36.Entity.EntityPig;
-import me.jack.LD36.Entity.EntityPlayer;
-import me.jack.LD36.Entity.EntityWolf;
+import me.jack.LD36.Entity.*;
 import me.jack.LD36.Level.Tile.Portal;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.Color;
@@ -45,9 +42,16 @@ public class LevelOverworld extends Level {
             int y = r.nextInt(h);
             if (getTileAt(x, y) == 1 && getTileAtTop(x, y) == 0) {
                 int t = r.nextInt(10);
-                for (int ii = 0; ii != t; ii++) {
-                    entities.add(new EntityPig(x*32,y*32));
+                if (r.nextInt(2) == 0) {
+                    for (int ii = 0; ii != t; ii++) {
+                        entities.add(new EntityCow(x*32,y*32));
+                    }
+                }else{
+                    for (int ii = 0; ii != t; ii++) {
+                        entities.add(new EntityPig(x*32,y*32));
+                    }
                 }
+
             }
         }
     }

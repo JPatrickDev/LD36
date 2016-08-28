@@ -5,6 +5,6 @@ package me.jack.LD36.Inventory.Item;
  */
 public class ItemRawPork extends Item{
     public ItemRawPork () {
-        super(0,1,8,"Raw Pork","A piece of raw pork..");
+        super(0,1,8,"Raw Pork","A piece of raw pork.");
     }
 }

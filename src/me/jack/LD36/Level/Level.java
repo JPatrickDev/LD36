@@ -109,6 +109,7 @@ public abstract class Level {
         for (Entity e : entities) {
             if (e == caller) continue;
             if (e instanceof EntityPig && caller instanceof EntityPig) continue;
+            if (e instanceof EntityCow && caller instanceof EntityCow) continue;
             Rectangle eR = new Rectangle(e.getX(), e.getY(), e.getW(), e.getH());
             if (eR.intersects(rect)) {
                 caller.touched(e, this);
@@ -243,7 +244,7 @@ public abstract class Level {
     public void hurt(int x, int y, int radius, int facing, int dmg) {
         Circle c = new Circle(x, y, radius);
         for (Entity e : entities) {
-            if (e instanceof EntityWolf || e instanceof EntityPig) {
+            if (e instanceof EntityWolf || e instanceof EntityPig || e instanceof EntityCow) {
                 Rectangle r = new Rectangle(e.getX(), e.getY(), e.getW(), e.getH());
                 if (r.intersects(c)) {
                     Mob mob = (Mob) e;
