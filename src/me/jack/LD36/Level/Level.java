@@ -1,10 +1,7 @@
 package me.jack.LD36.Level;
 
 import me.jack.LD36.Entity.*;
-import me.jack.LD36.Inventory.Item.ItemBerry;
-import me.jack.LD36.Inventory.Item.ItemStack;
-import me.jack.LD36.Inventory.Item.ItemStick;
-import me.jack.LD36.Inventory.Item.ItemStone;
+import me.jack.LD36.Inventory.Item.*;
 import me.jack.LD36.Level.Tile.Tile;
 import me.jack.LD36.States.InGameState;
 import org.lwjgl.input.Keyboard;
@@ -183,6 +180,8 @@ public abstract class Level {
                     topLayerHealth[x + y * w] = 100;
                 }else if(p == 7){
                     topLayerHealth[x + y * w] = 5;
+                }else if(p == 11){
+                    topLayerHealth[x+y*w] = 200;
                 }
 
             } else {
@@ -222,6 +221,12 @@ public abstract class Level {
             if(getTileAtTop(x,y) == 7){
                 for (int i = 0; i != 10; i++) {
                     ItemStack stack = new ItemStack(1, new ItemBerry());
+                    drop(stack, x * 32, y * 32);
+                }
+            }
+            if(getTileAtTop(x,y) == 11){
+                for (int i = 0; i != 5; i++) {
+                    ItemStack stack = new ItemStack(1, new ItemIron());
                     drop(stack, x * 32, y * 32);
                 }
             }

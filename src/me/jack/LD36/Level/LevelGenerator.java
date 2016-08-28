@@ -229,6 +229,10 @@ public class LevelGenerator {
                     if (ii == 7) {
                         c = new Color(255, 0, 0);
                     }
+
+                    if(ii == 11){
+                        c = new Color(100,5,100);
+                    }
                     pixels[x + y * w] = c.hashCode();
                 }
             }
@@ -318,17 +322,39 @@ public class LevelGenerator {
         return level;
     }
 
+
+    public static float[][] generateIron(int w, int h) {
+        float[][] whiteNoise = generateWhiteNoise(w, h, r);
+        float[][] perlin = generatePerlinNoise(whiteNoise, 6, 0.9f);
+        for (int x = 0; x != perlin.length; x++) {
+            for (int y = 0; y != perlin[0].length; y++) {
+                float p = perlin[x][y];
+                if (p > 0.65) perlin[x][y] = 1;
+                else perlin[x][y] = 0;
+                if(r.nextInt(2) == 0)
+                    perlin[x][y] = 0;
+                if(r.nextInt(2) == 0)
+                    perlin[x][y] = 0;
+            }
+        }
+        return perlin;
+    }
+
     public static Level generateUnderworld(int w, int h) {
         Level level = new LevelUnderworld(w, h);
         float[][] whiteNoise = generateWhiteNoise(w, w, r);
 
         float[][] perlin = generatePerlinNoise(whiteNoise, 9, 0.9f);
         perlin = groupUnderworld(perlin);
+        float[][] iron = generateIron(w,h);
 
         for (int x = 0; x != perlin.length; x++) {
             for (int y = 0; y != perlin[0].length; y++) {
                 float p = perlin[x][y];
                 level.setTile(x, y, (int) p);
+                if(p == 5 && iron[x][y] == 1){
+                    level.setTileTop(x,y,11);
+                }
             }
         }
           level.postCreate(null);

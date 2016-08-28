@@ -50,7 +50,7 @@ public class InGameState extends BasicGameState {
         overworld.postCreate(this);
         underworld.postCreate(this);
 
-        for (int i = 0; i != 200; i++) {
+        for (int i = 0; i != 100; i++) {
             attemptPlacement();
         }
     }
@@ -81,16 +81,16 @@ public class InGameState extends BasicGameState {
 
         if (oX != -1 && uX != -1) {
             System.out.println("Placed");
-            Portal overworld = new Portal(uX*32, uY*32, 0);
+            Portal overworld = new Portal(uX * 32, uY * 32, 0);
             Rectangle overworldHitbox = new Rectangle(oX * 32, oY * 32, 32, 32);
-            this.overworld.setTile(oX,oY,10);
+            this.overworld.setTile(oX, oY, 10);
             portals.put(overworldHitbox, overworld);
 
 
-            Portal underworld = new Portal(oX*32,oY*32,1);
-            Rectangle underworldHitbox = new Rectangle(uX*32,uY*32,32,32);
-            this.underworld.setTile(uX,uY,10);
-            portals.put(underworldHitbox,underworld);
+            Portal underworld = new Portal(oX * 32, oY * 32, 1);
+            Rectangle underworldHitbox = new Rectangle(uX * 32, uY * 32, 32, 32);
+            this.underworld.setTile(uX, uY, 10);
+            portals.put(underworldHitbox, underworld);
 
         }
     }
@@ -121,7 +121,7 @@ public class InGameState extends BasicGameState {
                 if (overworld.getPlayer().getHealth() <= 0) {
                     stateBasedGame.enterState(1);
                 }
-            }else if(currentWorld == 1){
+            } else if (currentWorld == 1) {
                 underworld.update(i);
                 if (underworld.getPlayer().getHealth() <= 0) {
                     stateBasedGame.enterState(1);
@@ -137,9 +137,9 @@ public class InGameState extends BasicGameState {
     public void mousePressed(int button, int x, int y) {
         super.mousePressed(button, x, y);
         if (showingCrafting) {
-            CraftingGUI.mouseClicked(button, x, y, overworld);
+            CraftingGUI.mouseClicked(button, x, y, getLevel());
         } else {
-            overworld.getPlayer().action(overworld, button);
+            overworld.getPlayer().action(getLevel(), button);
             HUD.mouseClick(button, x, y);
         }
     }
@@ -154,11 +154,13 @@ public class InGameState extends BasicGameState {
     }
 
     public EntityPlayer getPlayer() {
-        return overworld.getPlayer();
+        return player;
     }
 
     public Level getLevel() {
-        return overworld;
+        if (currentWorld == 0)
+            return overworld;
+        return underworld;
     }
 
     public HashMap<Rectangle, Portal> getPortals() {
