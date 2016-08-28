@@ -24,7 +24,7 @@
 
 - Implement tools
     - Equip items by clicking on itemslot?/
-        - Mouse wheel scrolls through inventory
+        - Mouse wheel scrolls through inventory/
 
 - Can drop items by right clicking on the itemslot/
 

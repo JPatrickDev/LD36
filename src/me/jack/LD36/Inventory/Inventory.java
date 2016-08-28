@@ -116,4 +116,8 @@ public class Inventory {
             itemInHand = MAX_SIZE-1;
         }
     }
+
+    public ItemStack getStackInHand() {
+        return items[getItemInHand()];
+    }
 }

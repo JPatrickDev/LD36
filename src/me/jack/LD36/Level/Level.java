@@ -26,7 +26,7 @@ public class Level {
     private int w, h;
     private int[] tiles;
     private int[] topLayer;
-
+    private int[] topLayerHealth;
 
     private Camera camera;
 
@@ -41,6 +41,7 @@ public class Level {
         this.h = h;
         this.tiles = new int[w * h];
         this.topLayer = new int[w * h];
+        this.topLayerHealth = new int[w * h];
         camera = new Camera(0, 0, 800, 528, 32);
 
     }
@@ -70,8 +71,8 @@ public class Level {
 
         for (int x = 0; x != w; x++) {
             for (int y = 0; y != h; y++) {
-                if((x*32) - camera.getX() < -32 || (x*32) - camera.getX() > 800)continue;
-                if((y*32) - camera.getY() < -32  || (y*32) - camera.getY() > 800)continue;
+                if ((x * 32) - camera.getX() < -32 || (x * 32) - camera.getX() > 800) continue;
+                if ((y * 32) - camera.getY() < -32 || (y * 32) - camera.getY() > 800) continue;
                 int tile = tiles[x + y * w];
                 Tile t = Tile.tileLookup.get(tile);
                 g.drawImage(t.getImage(), x * 32, y * 32);
@@ -85,12 +86,13 @@ public class Level {
         player.render(g);
         for (int x = 0; x != w; x++) {
             for (int y = 0; y != h; y++) {
-                if((x*32) - camera.getX() < -32 || (x*32) - camera.getX() > 800)continue;
-                if((y*32) - camera.getY() < -32  || (y*32) - camera.getY() > 800)continue;
+                if ((x * 32) - camera.getX() < -32 || (x * 32) - camera.getX() > 800) continue;
+                if ((y * 32) - camera.getY() < -32 || (y * 32) - camera.getY() > 800) continue;
                 int tile = topLayer[x + y * w];
                 Tile t = Tile.tileLookup.get(tile);
                 if (t == null) continue;
                 g.drawImage(t.getImage(), x * 32, y * 32);
+                g.drawString(topLayerHealth[x + y * w] + "", x * 32, y * 32);
             }
         }
 
@@ -202,6 +204,16 @@ public class Level {
         if (t != null) {
             if (t.isSolid()) {
                 hitboxes.add(new Rectangle(x * 32, y * 32, 32, 32));
+                if(p == 4){
+                    topLayerHealth[x + y * w] = 50;
+                }else if(p == 6){
+                    topLayerHealth[x + y * w] = 100;
+                }else{
+                    topLayerHealth[x + y * w] = 100;
+                }
+
+            } else {
+                topLayerHealth[x + y * w] = 0;
             }
         }
         topLayer[x + y * w] = p;
@@ -216,26 +228,31 @@ public class Level {
     }
 
 
-    public void removeTopTile(int x, int y) {
+    public void damageTopTile(int x, int y, int dmg) {
         if (getTileAtTop(x, y) == 0) return;
-        if (getTileAtTop(x, y) == 4) {
-            for (int i = 0; i != 4; i++) {
-                ItemStack stack = new ItemStack(2, new ItemStick());
-                drop(stack, x * 32, y * 32);
+        int health = topLayerHealth[x + y * w];
+        health -= dmg;
+        topLayerHealth[x + y * w] = health;
+        if (health <= 0) {
+            if (getTileAtTop(x, y) == 4) {
+                for (int i = 0; i != 4; i++) {
+                    ItemStack stack = new ItemStack(2, new ItemStick());
+                    drop(stack, x * 32, y * 32);
+                }
+                System.out.println("Stack dropped");
             }
-            System.out.println("Stack dropped");
-        }
-        if (getTileAtTop(x, y) == 6) {
-            for (int i = 0; i != 4; i++) {
-                ItemStack stack = new ItemStack(2, new ItemStone());
-                drop(stack, x * 32, y * 32);
+            if (getTileAtTop(x, y) == 6) {
+                for (int i = 0; i != 4; i++) {
+                    ItemStack stack = new ItemStack(2, new ItemStone());
+                    drop(stack, x * 32, y * 32);
+                }
+                System.out.println("Stack dropped");
             }
-            System.out.println("Stack dropped");
-        }
-        setTileTop(x, y, 0);
-        for (Rectangle r : getHitboxes()) {
-            if (r.getX() == x * 32 && r.getY() == (y) * 32) {
-                getHitboxes().remove(r);
+            setTileTop(x, y, 0);
+            for (Rectangle r : getHitboxes()) {
+                if (r.getX() == x * 32 && r.getY() == (y) * 32) {
+                    getHitboxes().remove(r);
+                }
             }
         }
     }

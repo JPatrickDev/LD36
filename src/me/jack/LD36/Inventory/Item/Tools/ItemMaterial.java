@@ -5,5 +5,15 @@ package me.jack.LD36.Inventory.Item.Tools;
  */
 public enum ItemMaterial{
 
-    WOOD,STONE;
+    WOOD(1f),STONE(1.5f);
+
+    private float multiplier;
+
+    ItemMaterial(float multiplier) {
+        this.multiplier = multiplier;
+    }
+
+    public float getMultiplier() {
+        return multiplier;
+    }
 }

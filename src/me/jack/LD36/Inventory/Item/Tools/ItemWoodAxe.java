@@ -6,7 +6,7 @@ package me.jack.LD36.Inventory.Item.Tools;
 public class ItemWoodAxe extends Tool {
 
     public ItemWoodAxe() {
-        super(0, 0, 2, ItemMaterial.WOOD,"Wooden Axe","A basic axe.");
+        super(0, 0, 2, ItemMaterial.WOOD,"Wooden Axe","A basic axe.",ToolType.AXE);
     }
 
 }

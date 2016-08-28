@@ -6,7 +6,7 @@ package me.jack.LD36.Inventory.Item.Tools;
 public class ItemStonePick extends Tool {
 
     public ItemStonePick() {
-        super(1, 1, 5, ItemMaterial.STONE,"Stone Pick","An upgraded pick.");
+        super(1, 1, 5, ItemMaterial.STONE,"Stone Pick","An upgraded pick.",ToolType.PICK);
     }
 
 
