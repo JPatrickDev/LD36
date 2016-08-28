@@ -22,6 +22,25 @@
 
 - Mineable stuff on the surface/
 
+- Implement tools
+    - Equip items by clicking on itemslot?
+        - Mouse wheel scrolls through inventory
+
+- Can drop items by right clicking on the itemslot
+
+
+- Improved art for everything
+    - Polished GUI
+
+- Sound
+    - GUI sounds
+    - Mob sounds
+
+
+- Scoring system?
+    - Some sort of end game?
+
+
 - Cave system
     - Different world
         - Stone instead of grass
@@ -39,6 +58,11 @@
 - Improve spawning system
 
 - Day/night cycle
+
+- Proper game over screen
+- Main menu
+- Instructions
+
 
 Crafting system/
 - GUI based, split into categories/
