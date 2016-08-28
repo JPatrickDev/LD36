@@ -1,6 +1,7 @@
 package me.jack.LD36.GUI;
 
 import me.jack.LD36.Inventory.Inventory;
+import me.jack.LD36.Inventory.Item.Item;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.States.InGameState;
@@ -41,7 +42,7 @@ public class HUD {
     static boolean drop = false;
     static int dropping = -1;
 
-    public static void render(Graphics g, InGameState state) {
+    public static void render(Graphics g, InGameState state, int mX, int mY) {
 
         if (icons == null) {
             try {
@@ -101,11 +102,25 @@ public class HUD {
         x = 204;
         y = 550;
         g.drawString("Crafting", x, y);
-        y+=25;
-        g.drawString("Time: " + state.getLevel().getTime(),x,y);
-        y-=25;
-        x+=72;
-        g.drawString("Hunger: " + state.getPlayer().getHunger(),x,y);
+        y += 25;
+        g.drawString("Time: " + state.getLevel().getTime(), x, y);
+        y -= 25;
+        x += 72;
+        g.drawString("Hunger: " + state.getPlayer().getHunger(), x, y);
+
+        if (mY > 528) {
+            for (Rectangle r : itemSlots.keySet()) {
+                if (r.contains(mX, mY)) {
+                    ItemStack stack = state.getPlayer().getInventory().getItems()[itemSlots.get(r)];
+                    if (stack != null) {
+                        g.setColor(Color.gray);
+                        g.fillRect(mX,mY-16,g.getFont().getWidth(stack.getItem().getName()),g.getFont().getHeight(stack.getItem().getName()));
+                        g.setColor(Color.white);
+                        g.drawString(stack.getItem().getName(), mX, mY-16-2);
+                    }
+                }
+            }
+        }
 
     }
 
@@ -117,9 +132,10 @@ public class HUD {
             changeItemSlot = false;
         }
 
-        if(drop){
+
+        if (drop) {
             ItemStack stack = state.getPlayer().getInventory().getItems()[dropping];
-            state.getLevel().drop(stack,state.getPlayer().getX(),state.getPlayer().getY());
+            state.getLevel().drop(stack, state.getPlayer().getX(), state.getPlayer().getY());
             state.getPlayer().getInventory().removeItemStack(dropping);
             drop = false;
             dropping = -1;
@@ -137,11 +153,11 @@ public class HUD {
 
         for (Rectangle r : itemSlots.keySet()) {
             if (r.contains(x, y)) {
-                if(button == 0) {
+                if (button == 0) {
                     int i = itemSlots.get(r);
                     newSlot = i;
                     changeItemSlot = true;
-                }else if (button == 1){
+                } else if (button == 1) {
                     dropping = itemSlots.get(r);
                     drop = true;
                 }
