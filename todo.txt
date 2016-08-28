@@ -8,7 +8,7 @@
 - More tiles
     - Stone?/
 
-- Player health
+- Player health/
     - Hunger?
 
 - Player inventory/
@@ -31,8 +31,8 @@
     - Different weapons
 
 
-Crafting system
-- GUI based, split into categories
+Crafting system/
+- GUI based, split into categories/
     - Tools
     - Weapons
     - Shelter

@@ -4,6 +4,7 @@ import me.jack.LD36.Inventory.Inventory;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Rectangle;
 
 /**
  * Created by Jack on 27/08/2016.
@@ -62,5 +63,20 @@ public class HUD {
             x+=16;
         }
 
+        x = 200;
+        y = 550;
+        g.drawString("Crafting",x,y);
+
     }
+
+    static Rectangle craftingButton = new Rectangle(200,550,80,20);
+
+    public static void mouseClick(int button, int x, int y){
+        if(button == 0){
+            if(craftingButton.contains(x,y)){
+                InGameState.showingCrafting = true;
+            }
+        }
+    }
+
 }

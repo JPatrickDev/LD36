@@ -18,7 +18,7 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * Created by Jack on 27/08/2016.
  */
-public class InGameState extends BasicGameState{
+public class InGameState extends BasicGameState {
 
     @Override
     public int getID() {
@@ -32,31 +32,41 @@ public class InGameState extends BasicGameState{
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         Tile.init();
         Item.init();
-        level = LevelGenerator.generateLevel(100,100);
-        level.getPlayer().getInventory().addItem(new ItemStick(),5);
+        level = LevelGenerator.generateLevel(100, 100);
+        level.getPlayer().getInventory().addItem(new ItemStick(), 5);
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         level.render(graphics);
-        HUD.render(graphics,this);
-        CraftingGUI.renderGUI(graphics);
+        HUD.render(graphics, this);
+        if (showingCrafting)
+            CraftingGUI.renderGUI(graphics);
     }
+
+    public static boolean showingCrafting = false;
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-      //  level.update();
-        CraftingGUI.updateGUI();
-        if(level.getPlayer().getHealth() <=0){
-            stateBasedGame.enterState(1);
+        if (showingCrafting) {
+            CraftingGUI.updateGUI();
+        } else {
+            level.update();
+            if (level.getPlayer().getHealth() <= 0) {
+                stateBasedGame.enterState(1);
+            }
         }
     }
 
     @Override
     public void mousePressed(int button, int x, int y) {
         super.mousePressed(button, x, y);
-        CraftingGUI.mouseClicked(button,x,y,level);
-        level.getPlayer().action(level);
+        if(showingCrafting) {
+            CraftingGUI.mouseClicked(button, x, y, level);
+        }else {
+            level.getPlayer().action(level);
+            HUD.mouseClick(button,x,y);
+        }
     }
 
     public EntityPlayer getPlayer() {

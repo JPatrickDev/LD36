@@ -7,6 +7,7 @@ import me.jack.LD36.Inventory.Item.Tools.ItemStonePick;
 import me.jack.LD36.Inventory.Item.Tools.ItemWoodAxe;
 import me.jack.LD36.Inventory.Item.Tools.ItemWoodPick;
 import me.jack.LD36.Level.Level;
+import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
@@ -17,7 +18,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class CraftingGUI {
 
 
-    private static int width = 600, height = 500;
+    private static int width = 600, height = 300;
 
     private static String[] categories = new String[]{"Tools", "Weapons", "Shelter", "Food", "Misc"};
 
@@ -58,9 +59,13 @@ public class CraftingGUI {
     }
 
 
+    static Rectangle close = new Rectangle(653,50,80,25);
     public static void renderGUI(Graphics g) {
         g.fillRect(100, 50, width, height);
         g.setColor(Color.black);
+
+        g.drawString("Close", 653, 50);
+
         g.drawString("Crafting", (400) - g.getFont().getWidth("Crafting") / 2, 50);
         int x = 110;
         int y = 100;
@@ -73,7 +78,7 @@ public class CraftingGUI {
             g.drawString(s, x + 32 - g.getFont().getWidth(s) / 2, y + 15 - g.getFont().getHeight(s) / 2);
             y += 32;
         }
-        g.drawLine(x + 74, 50, x + 74, 550);
+        g.drawLine(x + 74, 50, x + 74, 350);
 
 
         x = 184;
@@ -88,7 +93,7 @@ public class CraftingGUI {
             g.drawString(s, x + 60 - g.getFont().getWidth(s) / 2, y);
             y += 30;
         }
-        g.drawLine(x + 120, 50, x + 120, 550);
+        g.drawLine(x + 120, 50, x + 120, 350);
 
         y = 110;
         x = 314;
@@ -112,6 +117,8 @@ public class CraftingGUI {
 
         g.drawRect(x, y + 140, 60, 32);
         g.drawString("Craft", x, y + 140);
+
+
         g.setColor(Color.white);
     }
 
@@ -153,6 +160,8 @@ public class CraftingGUI {
                     Item currentItem = itemObjects[categoryIndex][itemIndex];
                     inv.addItem(currentItem, 1);
                 }
+            }else if(close.contains(x,y)){
+                InGameState.showingCrafting = false;
             }
         }
     }
