@@ -18,6 +18,8 @@ public class EntityPlayer extends Mob {
 
     private int facing = 0;
 
+    private float hunger = 200;
+
     public EntityPlayer(int x, int y) {
         super(x, y, 16, 16);
         setHealth(100);
@@ -48,18 +50,6 @@ public class EntityPlayer extends Mob {
             move(-4, 0, level);
             facing = 3;
         }
-
-/*
-        if (facing == 0) {
-            System.out.println("Player facing up");
-        } else if (facing == 1) {
-            System.out.println("Player facing right");
-        } else if (facing == 2) {
-            System.out.println("Player facing down");
-        } else if (facing == 3) {
-            System.out.println("Player facing left");
-        }
-        */
     }
 
     @Override

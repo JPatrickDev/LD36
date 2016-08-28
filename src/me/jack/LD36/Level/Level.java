@@ -6,6 +6,7 @@ import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Inventory.Item.ItemStone;
 import me.jack.LD36.Level.Tile.Tile;
 import org.lwjgl.input.Keyboard;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
@@ -35,6 +36,8 @@ public class Level {
     private CopyOnWriteArrayList<Rectangle> hitboxes = new CopyOnWriteArrayList<Rectangle>();
 
     EntityPlayer player;
+
+    int time = 0;
 
     public Level(int w, int h) {
         this.w = w;
@@ -99,7 +102,8 @@ public class Level {
 
         g.resetTransform();
 
-
+        g.setColor(light);
+        g.fillRect(0,0,800,528);
     }
 
 
@@ -139,14 +143,23 @@ public class Level {
 
     Random r = new Random();
 
-    public void update() {
+    Color light = new Color(0,0,0,200);
+    int alpha = 0;
+    public void update(long delta) {
+        time+=delta;
+        if(time > 120 * 1000){
+            time = 0;
+            System.out.println("Day over");
+        }
+
+        light = new Color(0,0,0,getLightLevel(time));
         for (Entity e : entities) {
             e.update(this);
         }
         player.update(this);
         camera.center(player.getX(), player.getY(), w, h);
 
-        if (r.nextInt(10) == 0) {
+    /*    if (r.nextInt(10) == 0) {
             boolean found = false;
             Random r = new Random();
             int sX = -1, sY = -1;
@@ -162,7 +175,7 @@ public class Level {
                 }
             }
             entities.add(new EntityTestEnemy(sX * 32, sY * 32));
-        }
+        }*/
     }
 
     public int getW() {
@@ -175,6 +188,10 @@ public class Level {
 
     public int[] getTiles() {
         return tiles;
+    }
+
+    public int getTime() {
+        return time;
     }
 
     public int getTileAt(int x, int y) {
@@ -278,5 +295,32 @@ public class Level {
     public void drop(ItemStack stack, int x, int y) {
         EntityItemDrop drop = new EntityItemDrop(x + 16, (y + 16), stack);
         entities.add(drop);
+    }
+
+
+    float level = 200;
+    public int getLightLevel(int time){
+        if(time >= 30*1000 && time <= 90*1000){
+            level = 0;
+            return 0;
+        }else{
+            if(time >= 25 *1000 &&  time < 30 * 1000){
+                level -= 0.75f;
+                if(level < 0)
+                    level = 0;
+                return (int) level;
+
+            }
+            if(time > 90 * 1000 && time <= 95 * 1000){
+                System.out.println(level);
+                level+=0.75f;
+                if(level > 200) {
+                    level = 200;
+                    return 200;
+                }
+                return (int) level;
+            }
+        }
+        return 200;
     }
 }

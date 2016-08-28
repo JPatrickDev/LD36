@@ -22,7 +22,7 @@
 
 - Mineable stuff on the surface/
 
-- Implement tools
+- Implement tools/
     - Equip items by clicking on itemslot?/
         - Mouse wheel scrolls through inventory/
 
@@ -57,7 +57,7 @@
 
 - Improve spawning system
 
-- Day/night cycle
+- Day/night cycle/
 
 - Proper game over screen
 - Main menu
@@ -79,3 +79,4 @@ Crafting system/
 
 KNOWN BUGS:
  - Player can sometimes walk on water in some cases/
+ - Facing the edge of the map and "mining" crashes the game

@@ -51,7 +51,7 @@ public class InGameState extends BasicGameState {
         if (showingCrafting) {
             CraftingGUI.updateGUI();
         } else {
-            level.update();
+            level.update(i);
             HUD.update(this);
             if (level.getPlayer().getHealth() <= 0) {
                 stateBasedGame.enterState(1);
