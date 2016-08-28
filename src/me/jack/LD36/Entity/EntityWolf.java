@@ -3,6 +3,8 @@ package me.jack.LD36.Entity;
 import me.jack.LD36.Level.Level;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Mover;
 import org.newdawn.slick.util.pathfinding.Path;
@@ -14,16 +16,24 @@ import java.util.Random;
  */
 public class EntityWolf extends Mob {
 
+
+    static Image wolf = null;
+
     public EntityWolf(int x, int y) {
         super(x, y, 16, 16);
         setHealth(20);
+        if(wolf == null)
+            try {
+                wolf = new Image("res/wolf.png");
+            } catch (SlickException e) {
+                e.printStackTrace();
+            }
+
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.pink);
-        g.fillRect(x, y, w, h);
-        g.setColor(Color.white);
+        g.drawImage(wolf,x,y);
     }
 
 

@@ -7,6 +7,8 @@ import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Level.Level;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 import java.util.Random;
 
@@ -15,8 +17,17 @@ import java.util.Random;
  */
 public class EntityCow extends Mob {
 
+    static Image cow;
+
     public EntityCow(int x, int y) {
         super(x, y, 16, 16);
+        if(cow == null){
+            try {
+                cow = new Image("res/cow.png");
+            } catch (SlickException e) {
+                e.printStackTrace();
+            }
+        }
         setHealth(20);
 
         xVel = r.nextInt(40) - 20;
@@ -29,9 +40,7 @@ public class EntityCow extends Mob {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(c);
-        g.fillRect(x, y, w, h);
-        g.setColor(Color.white);
+       g.drawImage(cow,x,y);
     }
 
 

@@ -5,6 +5,6 @@ package me.jack.LD36.Inventory.Item;
  */
 public class ItemCoal extends Item {
     public ItemCoal() {
-        super(0, 2, 14, "Coal", "A piece of coal.");
+        super(0, 2, 15, "Coal", "A piece of coal.");
     }
 }

@@ -1,18 +1,19 @@
 package me.jack.LD36.Entity;
 
 import me.jack.LD36.Inventory.Inventory;
-import me.jack.LD36.Inventory.Item.Item;
-import me.jack.LD36.Inventory.Item.ItemBerry;
-import me.jack.LD36.Inventory.Item.ItemRawPork;
-import me.jack.LD36.Inventory.Item.ItemStack;
+import me.jack.LD36.Inventory.Item.*;
 import me.jack.LD36.Inventory.Item.Shelters.Shelter;
 import me.jack.LD36.Inventory.Item.Tools.Tool;
 import me.jack.LD36.Inventory.Item.Tools.ToolType;
 import me.jack.LD36.Inventory.Item.Tools.Weapon;
 import me.jack.LD36.Level.Level;
+import me.jack.LD36.Level.LevelOverworld;
+import me.jack.LD36.Level.LevelUnderworld;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -29,16 +30,23 @@ public class EntityPlayer extends Mob {
 
     private float hunger = 200;
 
+    Image player = null;
+
     public EntityPlayer(int x, int y) {
         super(x, y, 16, 16);
         setHealth(100);
+        try {
+            player = new Image("res/player.png");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+
+        getInventory().addStack(new ItemStack(5, new ItemCoal()));
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.red);
-        g.fillRect(x, y, w, h);
-        g.setColor(Color.white);
+        g.drawImage(player, getX(), getY());
     }
 
     Random r = new Random();
@@ -84,9 +92,9 @@ public class EntityPlayer extends Mob {
             }
         }
 
-        for(int i = 0;i!= getInventory().MAX_SIZE;i++){
-            if(getInventory().getItems()[i] != null){
-                if(getInventory().getItems()[i].getStackSize() <= 0 ){
+        for (int i = 0; i != getInventory().MAX_SIZE; i++) {
+            if (getInventory().getItems()[i] != null) {
+                if (getInventory().getItems()[i].getStackSize() <= 0) {
                     getInventory().getItems()[i] = null;
                 }
             }
@@ -118,6 +126,30 @@ public class EntityPlayer extends Mob {
             }
             if (getInventory().getStackInHand().getItem() instanceof ItemRawPork) {
                 hunger += 20;
+                getInventory().getStackInHand().remove(1);
+                if (getInventory().getStackInHand().getStackSize() == 0) {
+                    getInventory().removeItemStack(getInventory().getItemInHand());
+                }
+            }
+
+            if (getInventory().getStackInHand().getItem() instanceof ItemRawBeef) {
+                hunger += 20;
+                getInventory().getStackInHand().remove(1);
+                if (getInventory().getStackInHand().getStackSize() == 0) {
+                    getInventory().removeItemStack(getInventory().getItemInHand());
+                }
+            }
+
+            if (getInventory().getStackInHand().getItem() instanceof ItemCookedBeef) {
+                hunger += 50;
+                getInventory().getStackInHand().remove(1);
+                if (getInventory().getStackInHand().getStackSize() == 0) {
+                    getInventory().removeItemStack(getInventory().getItemInHand());
+                }
+            }
+
+            if (getInventory().getStackInHand().getItem() instanceof ItemCookedPork) {
+                hunger += 50;
                 getInventory().getStackInHand().remove(1);
                 if (getInventory().getStackInHand().getStackSize() == 0) {
                     getInventory().removeItemStack(getInventory().getItemInHand());
@@ -161,32 +193,34 @@ public class EntityPlayer extends Mob {
                     damage *= tool.getMaterial().getMultiplier();
                 }
             } else if (inHand.getItem() instanceof Shelter) {
-                if (facing == 0) {
-                    if (level.getTileAtTop(tX, tY - 1) == 0 && level.getTileAt(tX, tY - 1) != 2) {
-                        level.setTileTop(tX, tY - 1, 12);
-                        inHand.remove(1);
-                        level.shelters.put(new Point(tX,tY-1), (Shelter) inHand.getItem());
+                if (level instanceof LevelOverworld) {
+                    if (facing == 0) {
+                        if (level.getTileAtTop(tX, tY - 1) == 0 && level.getTileAt(tX, tY - 1) != 2) {
+                            level.setTileTop(tX, tY - 1, 12);
+                            inHand.remove(1);
+                            level.shelters.put(new Point(tX, tY - 1), (Shelter) inHand.getItem());
+                        }
+                    } else if (facing == 1) {
+                        if (level.getTileAtTop(tX + 1, tY) == 0 && level.getTileAt(tX + 1, tY) != 2) {
+                            level.setTileTop(tX + 1, tY, 12);
+                            inHand.remove(1);
+                            level.shelters.put(new Point(tX + 1, tY), (Shelter) inHand.getItem());
+                        }
+                    } else if (facing == 2) {
+                        if (level.getTileAtTop(tX, tY + 1) == 0 && level.getTileAt(tX, tY + 1) != 2) {
+                            level.setTileTop(tX, tY + 1, 12);
+                            inHand.remove(1);
+                            level.shelters.put(new Point(tX, tY + 1), (Shelter) inHand.getItem());
+                        }
+                    } else if (facing == 3) {
+                        if (level.getTileAtTop(tX - 1, tY) == 0 && level.getTileAt(tX - 1, tY) != 2) {
+                            level.setTileTop(tX - 1, tY, 12);
+                            inHand.remove(1);
+                            level.shelters.put(new Point(tX - 1, tY), (Shelter) inHand.getItem());
+                        }
                     }
-                } else if (facing == 1) {
-                    if (level.getTileAtTop(tX + 1, tY) == 0 && level.getTileAt(tX + 1, tY) != 2) {
-                        level.setTileTop(tX + 1, tY, 12);
-                        inHand.remove(1);
-                        level.shelters.put(new Point(tX+1,tY), (Shelter) inHand.getItem());
-                    }
-                } else if (facing == 2) {
-                    if (level.getTileAtTop(tX, tY + 1) == 0 && level.getTileAt(tX, tY + 1) != 2) {
-                        level.setTileTop(tX, tY + 1, 12);
-                        inHand.remove(1);
-                        level.shelters.put(new Point(tX,tY+1), (Shelter) inHand.getItem());
-                    }
-                } else if (facing == 3) {
-                    if (level.getTileAtTop(tX - 1, tY) == 0 && level.getTileAt(tX - 1, tY) != 2) {
-                        level.setTileTop(tX - 1, tY, 12);
-                        inHand.remove(1);
-                        level.shelters.put(new Point(tX-1,tY), (Shelter) inHand.getItem());
-                    }
+                    return;
                 }
-                return;
             }
         }
         if (facing == 0) {

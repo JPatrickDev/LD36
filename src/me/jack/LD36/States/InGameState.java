@@ -55,8 +55,6 @@ public class InGameState extends BasicGameState {
         overworld.postCreate(this);
         underworld.postCreate(this);
 
-        getPlayer().getInventory().addItem(new ItemCoal(), 50);
-        getPlayer().getInventory().addItem(new ItemIronOre(), 50);
         for (int i = 0; i != 100; i++) {
             attemptPlacement();
         }

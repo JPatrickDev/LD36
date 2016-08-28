@@ -1,15 +1,12 @@
 package me.jack.LD36.Inventory.Item.Shelters;
 
 import me.jack.LD36.Inventory.Inventory;
-import me.jack.LD36.Inventory.Item.Item;
-import me.jack.LD36.Inventory.Item.ItemIronBar;
-import me.jack.LD36.Inventory.Item.ItemIronOre;
-import me.jack.LD36.Inventory.Item.ItemStack;
+import me.jack.LD36.Inventory.Item.*;
 
 /**
  * Created by Jack on 28/08/2016.
  */
-public class Shelter extends Item{
+public class Shelter extends Item {
 
     boolean furnace;
     public int size;
@@ -21,7 +18,8 @@ public class Shelter extends Item{
     public ItemStack output;
 
     public int timer = 0;
-    public Shelter(int x, int y, int id, String name, String description,boolean furnace, int size) {
+
+    public Shelter(int x, int y, int id, String name, String description, boolean furnace, int size) {
         super(x, y, id, name, description);
         this.furnace = furnace;
         this.size = size;
@@ -38,30 +36,61 @@ public class Shelter extends Item{
     }
 
 
-    public void tick(){
-        if(input != null){
-            if(input.getStackSize() == 0){
+    public void tick() {
+        if (input != null) {
+            if (input.getStackSize() == 0) {
                 input = null;
                 return;
             }
-            if(fuel != null){
-                if(fuel.getStackSize() == 0){
+            if (fuel != null) {
+                if (fuel.getStackSize() == 0) {
                     fuel = null;
                     return;
                 }
-                if(fuel.getStackSize()!= 0 && input.getStackSize() != 0){
+                if (fuel.getStackSize() != 0 && input.getStackSize() != 0) {
                     timer++;
-                    if(timer >= 84){
-                        if(input.getItem() instanceof ItemIronOre){
-                            if(output != null){
-                                if(output.getItem() instanceof ItemIronBar){
+                    if (timer >= 84) {
+                        if (input.getItem() instanceof ItemIronOre) {
+                            if (output != null) {
+                                if (output.getItem() instanceof ItemIronBar) {
                                     output.add(1);
                                     fuel.remove(1);
                                     input.remove(1);
                                     timer = 0;
                                 }
-                            }else{
-                                output = new ItemStack(1,new ItemIronBar());
+                            } else {
+                                output = new ItemStack(1, new ItemIronBar());
+                                fuel.remove(1);
+                                input.remove(1);
+                                timer = 0;
+                            }
+                        }
+                        if (input.getItem() instanceof ItemRawPork) {
+                            if (output != null) {
+                                if (output.getItem() instanceof ItemCookedPork) {
+                                    output.add(1);
+                                    fuel.remove(1);
+                                    input.remove(1);
+                                    timer = 0;
+                                }
+                            } else {
+                                output = new ItemStack(1, new ItemCookedPork());
+                                fuel.remove(1);
+                                input.remove(1);
+                                timer = 0;
+                            }
+                        }
+
+                        if (input.getItem() instanceof ItemRawBeef) {
+                            if (output != null) {
+                                if (output.getItem() instanceof ItemCookedBeef) {
+                                    output.add(1);
+                                    fuel.remove(1);
+                                    input.remove(1);
+                                    timer = 0;
+                                }
+                            } else {
+                                output = new ItemStack(1, new ItemCookedBeef());
                                 fuel.remove(1);
                                 input.remove(1);
                                 timer = 0;
@@ -69,10 +98,10 @@ public class Shelter extends Item{
                         }
                     }
                 }
-            }else{
+            } else {
                 timer = 0;
             }
-        }else{
+        } else {
             timer = 0;
         }
     }

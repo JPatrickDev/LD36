@@ -1,9 +1,6 @@
 package me.jack.LD36.GUI;
 
-import me.jack.LD36.Inventory.Item.ItemCoal;
-import me.jack.LD36.Inventory.Item.ItemIronOre;
-import me.jack.LD36.Inventory.Item.ItemStack;
-import me.jack.LD36.Inventory.Item.ItemStick;
+import me.jack.LD36.Inventory.Item.*;
 import me.jack.LD36.Inventory.Item.Shelters.Shelter;
 import me.jack.LD36.Level.Level;
 import me.jack.LD36.States.InGameState;
@@ -121,9 +118,9 @@ public class ShelterGUI {
             if (currentShelter.output != null) {
                 ItemStack stack = currentShelter.output;
                 Image icon = stack.getItem().getIcon();
-                g.drawImage(icon,290 + 42 - 16, 206 + 32);
+                g.drawImage(icon, 290 + 42 - 16, 206 + 32);
                 g.setColor(Color.white);
-                g.drawString(stack.getStackSize() + "",290 + 42 - 16, 206 + 32);
+                g.drawString(stack.getStackSize() + "", 290 + 42 - 16, 206 + 32);
             }
         }
 
@@ -168,16 +165,19 @@ public class ShelterGUI {
             return;
         }
 
-        if(fuelBox.contains(x,y)){
-            level.getPlayer().getInventory().addStack(currentShelter.fuel);
+        if (fuelBox.contains(x, y)) {
+            if (currentShelter.fuel != null)
+                level.getPlayer().getInventory().addStack(currentShelter.fuel);
             currentShelter.fuel = null;
         }
-        if(inputBox.contains(x,y)){
-            level.getPlayer().getInventory().addStack(currentShelter.input);
+        if (inputBox.contains(x, y)) {
+            if (currentShelter.input != null)
+                level.getPlayer().getInventory().addStack(currentShelter.input);
             currentShelter.input = null;
         }
-        if(outputBox.contains(x,y)){
-            level.getPlayer().getInventory().addStack(currentShelter.output);
+        if (outputBox.contains(x, y)) {
+            if (currentShelter.output != null)
+                level.getPlayer().getInventory().addStack(currentShelter.output);
             currentShelter.output = null;
         }
 
@@ -205,6 +205,24 @@ public class ShelterGUI {
                     currentShelter.inv.remove(stack);
                 }
 
+                if(stack.getItem() instanceof ItemRawPork){
+                    if (currentShelter.input != null) {
+                        currentShelter.input.add(stack.getStackSize());
+                    } else {
+                        currentShelter.input = new ItemStack(stack.getStackSize(), stack.getItem());
+                    }
+                    currentShelter.inv.remove(stack);
+                }
+
+
+                if(stack.getItem() instanceof ItemRawBeef){
+                    if (currentShelter.input != null) {
+                        currentShelter.input.add(stack.getStackSize());
+                    } else {
+                        currentShelter.input = new ItemStack(stack.getStackSize(), stack.getItem());
+                    }
+                    currentShelter.inv.remove(stack);
+                }
 
             }
         }
