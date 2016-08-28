@@ -65,7 +65,7 @@ public class InGameState extends BasicGameState {
         if (showingCrafting) {
             CraftingGUI.mouseClicked(button, x, y, level);
         } else {
-            level.getPlayer().action(level);
+            level.getPlayer().action(level,button);
             HUD.mouseClick(button, x, y);
         }
     }

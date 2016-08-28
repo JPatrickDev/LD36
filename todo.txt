@@ -15,8 +15,8 @@
 
 - HUD/UI
     - Show health/
-    - Hunger
-    - Inventory hotbar?
+    - Hunger/
+    - Inventory hotbar?/
 
 - Item drops from trees/bushes/
 

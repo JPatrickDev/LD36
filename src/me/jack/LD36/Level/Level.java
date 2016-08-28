@@ -1,6 +1,7 @@
 package me.jack.LD36.Level;
 
 import me.jack.LD36.Entity.*;
+import me.jack.LD36.Inventory.Item.ItemBerry;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Inventory.Item.ItemStone;
@@ -103,7 +104,9 @@ public class Level {
         g.resetTransform();
 
         g.setColor(light);
-        g.fillRect(0,0,800,528);
+       // g.fillRect(0,0,800,528);
+
+        g.setColor(Color.white);
     }
 
 
@@ -225,8 +228,8 @@ public class Level {
                     topLayerHealth[x + y * w] = 50;
                 }else if(p == 6){
                     topLayerHealth[x + y * w] = 100;
-                }else{
-                    topLayerHealth[x + y * w] = 100;
+                }else if(p == 7){
+                    topLayerHealth[x + y * w] = 5;
                 }
 
             } else {
@@ -256,14 +259,18 @@ public class Level {
                     ItemStack stack = new ItemStack(2, new ItemStick());
                     drop(stack, x * 32, y * 32);
                 }
-                System.out.println("Stack dropped");
             }
             if (getTileAtTop(x, y) == 6) {
                 for (int i = 0; i != 4; i++) {
                     ItemStack stack = new ItemStack(2, new ItemStone());
                     drop(stack, x * 32, y * 32);
                 }
-                System.out.println("Stack dropped");
+            }
+            if(getTileAtTop(x,y) == 7){
+                for (int i = 0; i != 10; i++) {
+                    ItemStack stack = new ItemStack(1, new ItemBerry());
+                    drop(stack, x * 32, y * 32);
+                }
             }
             setTileTop(x, y, 0);
             for (Rectangle r : getHitboxes()) {

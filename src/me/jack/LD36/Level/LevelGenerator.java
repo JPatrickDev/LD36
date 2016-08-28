@@ -157,6 +157,9 @@ public class LevelGenerator {
                     if(ii == 6){
                         c = Color.CYAN;
                     }
+                    if(ii == 7){
+                        c = Color.pink;
+                    }
                     pixels[x + y * w] = c.hashCode();
                 }
             }
@@ -193,6 +196,19 @@ public class LevelGenerator {
         return perlin;
     }
 
+    public static float[][] generateBushes(int w, int h){
+        float[][] whiteNoise = generateWhiteNoise(w, h, r);
+        float[][] perlin = generatePerlinNoise(whiteNoise, 5, 0.2f);
+        for (int x = 0; x != perlin.length; x++) {
+            for (int y = 0; y != perlin[0].length; y++) {
+                float p = perlin[x][y];
+                if (p > 0.65) perlin[x][y] = 1;
+                else perlin[x][y] = 0;
+            }
+        }
+        return perlin;
+    }
+
     static Random r = new Random();
 
     public static Level generateLevel(int w, int h) {
@@ -204,6 +220,7 @@ public class LevelGenerator {
 
         float[][] trees = generateTrees(w, h);
         float[][] rocks = generateRocks(w,h);
+        float[][] bushes = generateBushes(w,h);
 
         for (int x = 0; x != perlin.length; x++) {
             for (int y = 0; y != perlin[0].length; y++) {
@@ -216,6 +233,13 @@ public class LevelGenerator {
                     }
                     if(rocks[x][y] == 1 && p == 5){
                         level.setTileTop(x,y,6);
+                    }
+                }
+                if(p == 1){
+                    if(bushes[x][y] == 1){
+                        if(level.getTileAtTop(x,y) == 0){
+                            level.setTileTop(x,y,7);
+                        }
                     }
                 }
                 level.setTile(x, y, (int) p);

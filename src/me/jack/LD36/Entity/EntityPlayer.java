@@ -1,6 +1,7 @@
 package me.jack.LD36.Entity;
 
 import me.jack.LD36.Inventory.Inventory;
+import me.jack.LD36.Inventory.Item.ItemBerry;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.Tools.Tool;
 import me.jack.LD36.Inventory.Item.Tools.ToolType;
@@ -65,6 +66,9 @@ public class EntityPlayer extends Mob {
         if(hunger == 0 && r.nextInt(30) == 0){
             setHealth(getHealth()-5);
         }
+
+        if(hunger > 200)
+            hunger = 200;
     }
 
     @Override
@@ -80,7 +84,15 @@ public class EntityPlayer extends Mob {
         return inventory;
     }
 
-    public void action(Level level) {
+    public void action(Level level, int button) {
+        if(button != 0){
+            if(getInventory().getStackInHand().getItem() instanceof ItemBerry){
+                hunger+=5;
+                getInventory().getStackInHand().remove(1);
+            }
+
+            return;
+        }
         hunger -=1;
         int tX = getX() / 32;
         int tY = getY() / 32;
