@@ -3,6 +3,7 @@ package me.jack.LD36.Level;
 import me.jack.LD36.Entity.*;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.ItemStick;
+import me.jack.LD36.Inventory.Item.ItemStone;
 import me.jack.LD36.Level.Tile.Tile;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
@@ -214,9 +215,16 @@ public class Level implements TileBasedMap {
     public void removeTopTile(int x, int y) {
         if (getTileAtTop(x, y) == 0) return;
         if (getTileAtTop(x, y) == 4) {
-
             for (int i = 0; i != 4; i++) {
                 ItemStack stack = new ItemStack(2, new ItemStick());
+                EntityItemDrop drop = new EntityItemDrop((x * 32) + 16, (y * 32) + 16, stack);
+                entities.add(drop);
+            }
+            System.out.println("Stack dropped");
+        }
+        if(getTileAtTop(x,y) == 6){
+            for (int i = 0; i != 4; i++) {
+                ItemStack stack = new ItemStack(2, new ItemStone());
                 EntityItemDrop drop = new EntityItemDrop((x * 32) + 16, (y * 32) + 16, stack);
                 entities.add(drop);
             }

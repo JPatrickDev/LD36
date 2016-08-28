@@ -20,24 +20,38 @@
 
 - Item drops from trees/bushes/
 
-- Mineable stuff on the surface
+- Mineable stuff on the surface/
 
 - Cave system
+    - Different world
+        - Stone instead of grass
+        - Lava instead of water
+        - Multiple entrances in the overworld
+
 
 - Mobs
     - Some friendly
+        - Can be killed for food
     - Some aggressive/
 - Combat with mobs/
     - Different weapons
 
+- Improve spawning system
+
+- Day/night cycle
 
 Crafting system/
 - GUI based, split into categories/
-    - Tools
+    - Tools/
     - Weapons
+        - Swords
+        - Bow/Arrow
     - Shelter
+        - Basic tent
+            - Dies after a few days
     - Food
     - Misc??
+
 
 KNOWN BUGS:
  - Player can sometimes walk on water in some cases/
