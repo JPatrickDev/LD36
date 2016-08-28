@@ -4,15 +4,10 @@ import me.jack.LD36.Entity.*;
 import me.jack.LD36.Inventory.Item.*;
 import me.jack.LD36.Level.Tile.Tile;
 import me.jack.LD36.States.InGameState;
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.util.pathfinding.PathFindingContext;
-import org.newdawn.slick.util.pathfinding.TileBasedMap;
-import org.w3c.dom.css.Rect;
-import uk.co.jdpatrick.JEngine.JEngine;
 import uk.co.jdpatrick.JEngine.Level.Camera;
 
 import java.util.Random;
@@ -104,7 +99,7 @@ public abstract class Level {
             }
         }
 
-        if ((caller instanceof EntityTestEnemy)) {
+        if ((caller instanceof EntityWolf)) {
             Rectangle player = new Rectangle(getPlayer().getX(), getPlayer().getY(), getPlayer().getW(), getPlayer().getH());
             if (rect.intersects(player)) {
                 caller.touched(getPlayer(), this);
@@ -113,6 +108,7 @@ public abstract class Level {
         }
         for (Entity e : entities) {
             if (e == caller) continue;
+            if (e instanceof EntityPig && caller instanceof EntityPig) continue;
             Rectangle eR = new Rectangle(e.getX(), e.getY(), e.getW(), e.getH());
             if (eR.intersects(rect)) {
                 caller.touched(e, this);
@@ -125,8 +121,9 @@ public abstract class Level {
 
     Random r = new Random();
 
-    public Color light = new Color(0,0,0,200);
+    public Color light = new Color(0, 0, 0, 200);
     int alpha = 0;
+
     public abstract void update(long delta);
 
 
@@ -173,14 +170,14 @@ public abstract class Level {
         if (t != null) {
             if (t.isSolid()) {
                 hitboxes.add(new Rectangle(x * 32, y * 32, 32, 32));
-                if(p == 4){
+                if (p == 4) {
                     topLayerHealth[x + y * w] = 50;
-                }else if(p == 6){
+                } else if (p == 6) {
                     topLayerHealth[x + y * w] = 100;
-                }else if(p == 7){
+                } else if (p == 7) {
                     topLayerHealth[x + y * w] = 5;
-                }else if(p == 11){
-                    topLayerHealth[x+y*w] = 200;
+                } else if (p == 11) {
+                    topLayerHealth[x + y * w] = 200;
                 }
 
             } else {
@@ -217,13 +214,13 @@ public abstract class Level {
                     drop(stack, x * 32, y * 32);
                 }
             }
-            if(getTileAtTop(x,y) == 7){
+            if (getTileAtTop(x, y) == 7) {
                 for (int i = 0; i != 10; i++) {
                     ItemStack stack = new ItemStack(1, new ItemBerry());
                     drop(stack, x * 32, y * 32);
                 }
             }
-            if(getTileAtTop(x,y) == 11){
+            if (getTileAtTop(x, y) == 11) {
                 for (int i = 0; i != 5; i++) {
                     ItemStack stack = new ItemStack(1, new ItemIron());
                     drop(stack, x * 32, y * 32);
@@ -246,7 +243,7 @@ public abstract class Level {
     public void hurt(int x, int y, int radius, int facing, int dmg) {
         Circle c = new Circle(x, y, radius);
         for (Entity e : entities) {
-            if (e instanceof EntityTestEnemy) {
+            if (e instanceof EntityWolf || e instanceof EntityPig) {
                 Rectangle r = new Rectangle(e.getX(), e.getY(), e.getW(), e.getH());
                 if (r.intersects(c)) {
                     Mob mob = (Mob) e;
@@ -260,7 +257,6 @@ public abstract class Level {
         EntityItemDrop drop = new EntityItemDrop(x + 16, (y + 16), stack);
         entities.add(drop);
     }
-
 
 
 }

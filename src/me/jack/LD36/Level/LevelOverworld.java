@@ -1,8 +1,9 @@
 package me.jack.LD36.Level;
 
 import me.jack.LD36.Entity.Entity;
+import me.jack.LD36.Entity.EntityPig;
 import me.jack.LD36.Entity.EntityPlayer;
-import me.jack.LD36.Entity.EntityTestEnemy;
+import me.jack.LD36.Entity.EntityWolf;
 import me.jack.LD36.Level.Tile.Portal;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.Color;
@@ -21,7 +22,7 @@ public class LevelOverworld extends Level {
 
     @Override
     public void postCreate(InGameState state) {
-        if(state == null)return;
+        if (state == null) return;
         boolean found = false;
         Random r = new Random();
         int sX = -1, sY = -1;
@@ -38,6 +39,17 @@ public class LevelOverworld extends Level {
         }
         state.player = new EntityPlayer(sX * 32, sY * 32);
         this.parent = state;
+
+        for (int i = 0; i != 100; i++) {
+            int x = r.nextInt(w);
+            int y = r.nextInt(h);
+            if (getTileAt(x, y) == 1 && getTileAtTop(x, y) == 0) {
+                int t = r.nextInt(10);
+                for (int ii = 0; ii != t; ii++) {
+                    entities.add(new EntityPig(x*32,y*32));
+                }
+            }
+        }
     }
 
 
@@ -46,7 +58,7 @@ public class LevelOverworld extends Level {
         super.render(g);
 
         g.setColor(light);
-        g.fillRect(0,0,800,528);
+        g.fillRect(0, 0, 800, 528);
 
         g.setColor(Color.white);
     }
@@ -81,39 +93,40 @@ public class LevelOverworld extends Level {
                     break;
                 }
             }
-            entities.add(new EntityTestEnemy(sX * 32, sY * 32));
+            entities.add(new EntityWolf(sX * 32, sY * 32));
         }
 
-        Rectangle player = new Rectangle(getPlayer().getX(),getPlayer().getY(),getPlayer().getW(),getPlayer().getH());
-        for(Rectangle r : parent.getPortals().keySet()){
-            if(r.intersects(player)){
+        Rectangle player = new Rectangle(getPlayer().getX(), getPlayer().getY(), getPlayer().getW(), getPlayer().getH());
+        for (Rectangle r : parent.getPortals().keySet()) {
+            if (r.intersects(player)) {
                 Portal p = parent.getPortals().get(r);
-                if(p.getWorld() == 0 && !getPlayer().tpCooldown){
-                    getPlayer().setPos(p.gettX(),p.gettY());
+                if (p.getWorld() == 0 && !getPlayer().tpCooldown) {
+                    getPlayer().setPos(p.gettX(), p.gettY());
                     parent.currentWorld = 1;
-                    getPlayer().cooldown(new Rectangle(p.gettX(),p.gettY(),32,32));
+                    getPlayer().cooldown(new Rectangle(p.gettX(), p.gettY(), 32, 32));
                 }
             }
         }
     }
 
     float level = 200;
-    public int getLightLevel(int time){
-        if(time >= 30*1000 && time <= 90*1000){
+
+    public int getLightLevel(int time) {
+        if (time >= 30 * 1000 && time <= 90 * 1000) {
             level = 0;
             return 0;
-        }else{
-            if(time >= 25 *1000 &&  time < 30 * 1000){
+        } else {
+            if (time >= 25 * 1000 && time < 30 * 1000) {
                 level -= 0.75f;
-                if(level < 0)
+                if (level < 0)
                     level = 0;
                 return (int) level;
 
             }
-            if(time > 90 * 1000 && time <= 95 * 1000){
+            if (time > 90 * 1000 && time <= 95 * 1000) {
                 System.out.println(level);
-                level+=0.75f;
-                if(level > 200) {
+                level += 0.75f;
+                if (level > 200) {
                     level = 200;
                     return 200;
                 }

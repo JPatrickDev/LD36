@@ -3,6 +3,7 @@ package me.jack.LD36.Entity;
 import me.jack.LD36.Inventory.Inventory;
 import me.jack.LD36.Inventory.Item.Item;
 import me.jack.LD36.Inventory.Item.ItemBerry;
+import me.jack.LD36.Inventory.Item.ItemRawPork;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.Tools.Tool;
 import me.jack.LD36.Inventory.Item.Tools.ToolType;
@@ -100,6 +101,13 @@ public class EntityPlayer extends Mob {
             if (getInventory().getStackInHand() == null) return;
             if (getInventory().getStackInHand().getItem() instanceof ItemBerry) {
                 hunger += 5;
+                getInventory().getStackInHand().remove(1);
+                if (getInventory().getStackInHand().getStackSize() == 0) {
+                    getInventory().removeItemStack(getInventory().getItemInHand());
+                }
+            }
+            if (getInventory().getStackInHand().getItem() instanceof ItemRawPork) {
+                hunger += 20;
                 getInventory().getStackInHand().remove(1);
                 if (getInventory().getStackInHand().getStackSize() == 0) {
                     getInventory().removeItemStack(getInventory().getItemInHand());

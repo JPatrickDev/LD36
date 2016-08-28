@@ -12,9 +12,9 @@ import java.util.Random;
 /**
  * Created by Jack on 27/08/2016.
  */
-public class EntityTestEnemy extends Mob {
+public class EntityWolf extends Mob {
 
-    public EntityTestEnemy(int x, int y) {
+    public EntityWolf(int x, int y) {
         super(x, y, 16, 16);
         setHealth(20);
     }

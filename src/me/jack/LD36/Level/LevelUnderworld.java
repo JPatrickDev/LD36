@@ -1,12 +1,9 @@
 package me.jack.LD36.Level;
 
 import me.jack.LD36.Entity.Entity;
-import me.jack.LD36.Entity.EntityTestEnemy;
 import me.jack.LD36.Level.Tile.Portal;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.geom.Rectangle;
-
-import java.util.Random;
 
 /**
  * Created by Jack on 28/08/2016.
