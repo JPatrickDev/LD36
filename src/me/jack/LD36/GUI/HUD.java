@@ -103,6 +103,9 @@ public class HUD {
         g.drawString("Crafting", x, y);
         y+=25;
         g.drawString("Time: " + state.getLevel().getTime(),x,y);
+        y-=25;
+        x+=72;
+        g.drawString("Hunger: " + state.getPlayer().getHunger(),x,y);
 
     }
 

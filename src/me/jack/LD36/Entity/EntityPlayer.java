@@ -9,6 +9,8 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import java.util.Random;
+
 /**
  * Created by Jack on 27/08/2016.
  */
@@ -32,23 +34,36 @@ public class EntityPlayer extends Mob {
         g.setColor(Color.white);
     }
 
+    Random r = new Random();
     @Override
     public void update(Level level) {
+        float hungerRate = 0.01f;
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             move(0, -4, level);
             facing = 0;
+            hungerRate = 0.1f;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
             move(4, 0, level);
             facing = 1;
+            hungerRate = 0.1f;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
             move(0, 4, level);
             facing = 2;
+            hungerRate = 0.1f;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
             move(-4, 0, level);
             facing = 3;
+            hungerRate = 0.1f;
+        }
+        hunger -= hungerRate;
+        if(hunger < 0)
+            hunger = 0;
+
+        if(hunger == 0 && r.nextInt(30) == 0){
+            setHealth(getHealth()-5);
         }
     }
 
@@ -66,6 +81,7 @@ public class EntityPlayer extends Mob {
     }
 
     public void action(Level level) {
+        hunger -=1;
         int tX = getX() / 32;
         int tY = getY() / 32;
 
@@ -88,15 +104,15 @@ public class EntityPlayer extends Mob {
                     tile = level.getTileAtTop(tX - 1, tY);
                 }
                 boolean found = false;
-                for(int i : type.getEffectiveAgainst()){
-                    if(tile == i){
+                for (int i : type.getEffectiveAgainst()) {
+                    if (tile == i) {
                         damage = 50;
                         found = true;
                     }
                 }
-                if(!found){
+                if (!found) {
                     damage = 15;
-                }else{
+                } else {
                     damage *= tool.getMaterial().getMultiplier();
                 }
             }
@@ -113,4 +129,7 @@ public class EntityPlayer extends Mob {
         level.hurt(getX(), getY(), 48, facing, 5);
     }
 
+    public float getHunger() {
+        return hunger;
+    }
 }
