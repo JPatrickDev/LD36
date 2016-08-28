@@ -9,7 +9,7 @@
     - Stone?/
 
 - Player health/
-    - Hunger?
+    - Hunger?/
 
 - Player inventory/
 

@@ -86,9 +86,13 @@ public class EntityPlayer extends Mob {
 
     public void action(Level level, int button) {
         if(button != 0){
+            if(getInventory().getStackInHand() == null)return;
             if(getInventory().getStackInHand().getItem() instanceof ItemBerry){
                 hunger+=5;
                 getInventory().getStackInHand().remove(1);
+                if(getInventory().getStackInHand().getStackSize() == 0){
+                    getInventory().removeItemStack(getInventory().getItemInHand());
+                }
             }
 
             return;

@@ -158,7 +158,7 @@ public class LevelGenerator {
                         c = Color.CYAN;
                     }
                     if(ii == 7){
-                        c = Color.pink;
+                        c = new Color(255,0,0);
                     }
                     pixels[x + y * w] = c.hashCode();
                 }
@@ -198,11 +198,11 @@ public class LevelGenerator {
 
     public static float[][] generateBushes(int w, int h){
         float[][] whiteNoise = generateWhiteNoise(w, h, r);
-        float[][] perlin = generatePerlinNoise(whiteNoise, 5, 0.2f);
+        float[][] perlin = generatePerlinNoise(whiteNoise, 3, 0.5f);
         for (int x = 0; x != perlin.length; x++) {
             for (int y = 0; y != perlin[0].length; y++) {
                 float p = perlin[x][y];
-                if (p > 0.65) perlin[x][y] = 1;
+                if (p > 0.7) perlin[x][y] = 1;
                 else perlin[x][y] = 0;
             }
         }
