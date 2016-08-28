@@ -334,7 +334,7 @@ public class LevelGenerator {
                 if(r.nextInt(2) == 0)
                     perlin[x][y] = 0;
                 if(r.nextInt(2) == 0)
-                    perlin[x][y] = 0;
+                    perlin[x][y] = 6;
             }
         }
         return perlin;
@@ -354,6 +354,9 @@ public class LevelGenerator {
                 level.setTile(x, y, (int) p);
                 if(p == 5 && iron[x][y] == 1){
                     level.setTileTop(x,y,11);
+                }
+                if(p == 5 && iron[x][y] == 6){
+                    level.setTileTop(x,y,6);
                 }
             }
         }

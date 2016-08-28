@@ -41,11 +41,11 @@
     - Some sort of end game?
 
 
-- Cave system
-    - Different world
-        - Stone instead of grass
-        - Lava instead of water
-        - Multiple entrances in the overworld
+- Cave system/
+    - Different world/
+        - Stone instead of grass/
+        - Lava instead of water/
+        - Multiple entrances in the overworld/
 
 
 - Mobs
@@ -68,7 +68,7 @@ Crafting system/
 - GUI based, split into categories/
     - Tools/
     - Weapons
-        - Swords
+        - Swords/
         - Bow/Arrow
     - Shelter
         - Basic tent

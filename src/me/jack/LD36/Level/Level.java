@@ -80,7 +80,6 @@ public abstract class Level {
                 Tile t = Tile.tileLookup.get(tile);
                 if (t == null) continue;
                 g.drawImage(t.getImage(), x * 32, y * 32);
-                g.drawString(topLayerHealth[x + y * w] + "", x * 32, y * 32);
             }
         }
 
