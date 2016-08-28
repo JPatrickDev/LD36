@@ -33,8 +33,9 @@ public class Tile {
         new Tile(0,2,false,100);
         new Tile(1,2,false,0);
         new Tile(2,2,true,0);
-        new Tile(3,2,true,0);
+        new Tile(3,2,false,0);
         new Tile(0,3,true,0);
+        new Tile(1,3,false,0);
     }
 
 

@@ -82,7 +82,8 @@ Crafting system/
         - Swords/
         - Bow/Arrow
     - Shelter
-        - Basic tent
+        - Basic tent/
+        - Advanced tent
 
 
 KNOWN BUGS:

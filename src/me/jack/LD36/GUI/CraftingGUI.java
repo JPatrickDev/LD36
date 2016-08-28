@@ -2,6 +2,7 @@ package me.jack.LD36.GUI;
 
 import me.jack.LD36.Inventory.Inventory;
 import me.jack.LD36.Inventory.Item.*;
+import me.jack.LD36.Inventory.Item.Shelters.ItemAdvancedTent;
 import me.jack.LD36.Inventory.Item.Shelters.ItemTent;
 import me.jack.LD36.Inventory.Item.Tools.*;
 import me.jack.LD36.Level.Level;
@@ -32,37 +33,39 @@ public class CraftingGUI {
     static int itemIndex = 0;
 
     static {
-        items[0] = new String[]{"Wood Axe", "Wood Pick", "Stone Axe", "Stone Pick","Iron Axe","Iron Pick"};
-        items[1] = new String[]{"Wood Sword","Stone Sword","Iron Pick"};
-        items[2] = new String[]{"Basic Tent"};
+        items[0] = new String[]{"Wood Axe", "Wood Pick", "Stone Axe", "Stone Pick", "Iron Axe", "Iron Pick"};
+        items[1] = new String[]{"Wood Sword", "Stone Sword", "Iron Pick"};
+        items[2] = new String[]{"Basic Tent", "Advance Tent"};
 
-        itemObjects[0] = new Item[]{new ItemWoodAxe(), new ItemWoodPick(), new ItemStoneAxe(), new ItemStonePick(),new ItemIronAxe(),new ItemIronPick()};
-        itemObjects[1] = new Item[]{new ItemWoodSword(),new ItemStoneSword(),new ItemIronSword()};
-        itemObjects[2] = new Item[]{new ItemTent()};
+        itemObjects[0] = new Item[]{new ItemWoodAxe(), new ItemWoodPick(), new ItemStoneAxe(), new ItemStonePick(), new ItemIronAxe(), new ItemIronPick()};
+        itemObjects[1] = new Item[]{new ItemWoodSword(), new ItemStoneSword(), new ItemIronSword()};
+        itemObjects[2] = new Item[]{new ItemTent(), new ItemAdvancedTent()};
 
         crafting[0] = new CraftingRequirements[]{
                 new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick())}),
 
                 new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick())}),
 
-                new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()), new ItemStack(10, new ItemStone())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()), new ItemStack(2, new ItemStone())}),
 
-                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(15, new ItemStone())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(4, new ItemStone())}),
 
-                new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()), new ItemStack(15, new ItemIronBar())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()), new ItemStack(2, new ItemIronBar())}),
 
-                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(20, new ItemIronBar())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(4, new ItemIronBar())}),
         };
 
         crafting[1] = new CraftingRequirements[]{
-                new CraftingRequirements(new ItemStack[]{new ItemStack(20, new ItemStick())}),
-                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(20, new ItemStone())}),
-                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(30, new ItemIronBar())})
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(8, new ItemStick()), new ItemStack(10, new ItemStone())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(10, new ItemIronBar())})
         };
 
         crafting[2] = new CraftingRequirements[]{
 
-                new CraftingRequirements(new ItemStack[]{new ItemStack(100, new ItemStick()),new ItemStack(15, new ItemLeather())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(30, new ItemStick()), new ItemStack(10, new ItemLeather())}),
+
+                new CraftingRequirements(new ItemStack[]{new ItemStack(100, new ItemStick()), new ItemStack(15, new ItemLeather()), new ItemStack(10, new ItemStone())})
         };
 
         catRect = new Rectangle(110, 100, 74, categories.length * 32);
@@ -71,7 +74,8 @@ public class CraftingGUI {
     }
 
 
-    static Rectangle close = new Rectangle(653,50,80,25);
+    static Rectangle close = new Rectangle(653, 50, 80, 25);
+
     public static void renderGUI(Graphics g) {
         g.fillRect(100, 50, width, height);
         g.setColor(Color.black);
@@ -120,9 +124,9 @@ public class CraftingGUI {
 
         CraftingRequirements requirements = crafting[categoryIndex][itemIndex];
         for (ItemStack stack : requirements.getStack()) {
-            requirementsString += stack.getStackSize() + " " + stack.getItem().getName() + "(s),";
+            requirementsString += stack.getStackSize() + " " + stack.getItem().getName() + "/s,";
         }
-        g.drawString("Crafting: " + requirementsString, x, y + 40);
+        g.drawString("Crafting:" + requirementsString, x-6, y + 40);
 
         g.drawString("Description:", x, y + 80);
         g.drawString(currentItem.getDescription(), x, y + 100);
@@ -173,7 +177,7 @@ public class CraftingGUI {
                     Item currentItem = itemObjects[categoryIndex][itemIndex];
                     inv.addItem(currentItem, 1);
                 }
-            }else if(close.contains(x,y)){
+            } else if (close.contains(x, y)) {
                 InGameState.showingCrafting = false;
             }
         }
