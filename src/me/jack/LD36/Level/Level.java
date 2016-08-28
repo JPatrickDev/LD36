@@ -185,6 +185,8 @@ public abstract class Level {
                     topLayerHealth[x + y * w] = 5;
                 } else if (p == 11) {
                     topLayerHealth[x + y * w] = 200;
+                }else if(p == 14){
+                    topLayerHealth[x+y*w] = 150;
                 }
 
             } else {
@@ -239,6 +241,13 @@ public abstract class Level {
             if (getTileAtTop(x, y) == 11) {
                 for (int i = 0; i != 5; i++) {
                     ItemStack stack = new ItemStack(1, new ItemIronOre());
+                    drop(stack, x * 32, y * 32);
+                }
+            }
+
+            if (getTileAtTop(x, y) == 13) {
+                for (int i = 0; i != 5; i++) {
+                    ItemStack stack = new ItemStack(2, new ItemCoal());
                     drop(stack, x * 32, y * 32);
                 }
             }

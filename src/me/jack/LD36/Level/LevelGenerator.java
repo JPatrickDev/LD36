@@ -233,6 +233,10 @@ public class LevelGenerator {
                     if(ii == 11){
                         c = new Color(100,5,100);
                     }
+
+                    if(ii == 13){
+                        c = new Color(5,35,100);
+                    }
                     pixels[x + y * w] = c.hashCode();
                 }
             }
@@ -332,9 +336,12 @@ public class LevelGenerator {
                 if (p > 0.65) perlin[x][y] = 1;
                 else perlin[x][y] = 0;
                 if(r.nextInt(2) == 0)
-                    perlin[x][y] = 0;
-                if(r.nextInt(2) == 0)
+                    perlin[x][y] = 13;
+                if(r.nextInt(2) == 0) {
+                    if(r.nextInt(2) == 0)
+                        perlin[x][y] = 13;
                     perlin[x][y] = 6;
+                }
             }
         }
         return perlin;
@@ -357,6 +364,10 @@ public class LevelGenerator {
                 }
                 if(p == 5 && iron[x][y] == 6){
                     level.setTileTop(x,y,6);
+                }
+
+                if(p == 5 && iron[x][y] == 13){
+                    level.setTileTop(x,y,13);
                 }
             }
         }

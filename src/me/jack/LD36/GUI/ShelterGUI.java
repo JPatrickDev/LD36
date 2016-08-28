@@ -131,7 +131,8 @@ public class ShelterGUI {
         }
         if(sleepButton.contains(x,y)){
             if(level.getTime() > 80*1000 || level.getTime() < 20 * 1000){
-                level.setTime(22 * 1000);
+                level.setTime(25 * 1000);
+                level.getPlayer().setHealth(100);
             }
         }
     }
