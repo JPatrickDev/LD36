@@ -16,6 +16,7 @@ public class Inventory {
 
     private ItemStack[] items = new ItemStack[MAX_SIZE];
 
+    private int itemInHand = 0;
 
     public boolean addItem(Item i, int count) {
         for (ItemStack stack : items) {
@@ -87,5 +88,18 @@ public class Inventory {
                 }
             }
         }
+    }
+
+
+    public int getItemInHand() {
+        return itemInHand;
+    }
+
+    public void setItemInHand(int itemInHand) {
+        this.itemInHand = itemInHand;
+    }
+
+    public void removeItemStack(int dropping) {
+        items[dropping] = null;
     }
 }

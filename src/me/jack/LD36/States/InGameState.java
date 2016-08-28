@@ -52,8 +52,9 @@ public class InGameState extends BasicGameState {
             CraftingGUI.updateGUI();
         } else {
             level.update();
+            HUD.update(this);
             if (level.getPlayer().getHealth() <= 0) {
-                stateBasedGame.enterState(1);
+         //       stateBasedGame.enterState(1);
             }
         }
     }
@@ -71,5 +72,9 @@ public class InGameState extends BasicGameState {
 
     public EntityPlayer getPlayer() {
         return level.getPlayer();
+    }
+
+    public Level getLevel() {
+        return level;
     }
 }

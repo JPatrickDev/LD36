@@ -21,7 +21,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Created by Jack on 27/08/2016.
  */
-public class Level implements TileBasedMap {
+public class Level {
 
     private int w, h;
     private int[] tiles;
@@ -70,6 +70,8 @@ public class Level implements TileBasedMap {
 
         for (int x = 0; x != w; x++) {
             for (int y = 0; y != h; y++) {
+                if((x*32) - camera.getX() < -32 || (x*32) - camera.getX() > 800)continue;
+                if((y*32) - camera.getY() < -32  || (y*32) - camera.getY() > 800)continue;
                 int tile = tiles[x + y * w];
                 Tile t = Tile.tileLookup.get(tile);
                 g.drawImage(t.getImage(), x * 32, y * 32);
@@ -83,6 +85,8 @@ public class Level implements TileBasedMap {
         player.render(g);
         for (int x = 0; x != w; x++) {
             for (int y = 0; y != h; y++) {
+                if((x*32) - camera.getX() < -32 || (x*32) - camera.getX() > 800)continue;
+                if((y*32) - camera.getY() < -32  || (y*32) - camera.getY() > 800)continue;
                 int tile = topLayer[x + y * w];
                 Tile t = Tile.tileLookup.get(tile);
                 if (t == null) continue;
@@ -217,16 +221,14 @@ public class Level implements TileBasedMap {
         if (getTileAtTop(x, y) == 4) {
             for (int i = 0; i != 4; i++) {
                 ItemStack stack = new ItemStack(2, new ItemStick());
-                EntityItemDrop drop = new EntityItemDrop((x * 32) + 16, (y * 32) + 16, stack);
-                entities.add(drop);
+                drop(stack, x * 32, y * 32);
             }
             System.out.println("Stack dropped");
         }
-        if(getTileAtTop(x,y) == 6){
+        if (getTileAtTop(x, y) == 6) {
             for (int i = 0; i != 4; i++) {
                 ItemStack stack = new ItemStack(2, new ItemStone());
-                EntityItemDrop drop = new EntityItemDrop((x * 32) + 16, (y * 32) + 16, stack);
-                entities.add(drop);
+                drop(stack, x * 32, y * 32);
             }
             System.out.println("Stack dropped");
         }
@@ -242,38 +244,6 @@ public class Level implements TileBasedMap {
         entities.remove(entity);
     }
 
-    @Override
-    public int getWidthInTiles() {
-        return getW();
-    }
-
-    @Override
-    public int getHeightInTiles() {
-        return getH();
-    }
-
-    @Override
-    public void pathFinderVisited(int i, int i1) {
-
-    }
-
-    @Override
-    public boolean blocked(PathFindingContext pathFindingContext, int i, int i1) {
-        try {
-            return Tile.tileLookup.get(tiles[i + i1 * w]).isSolid();
-        } catch (Exception e) {
-            return true;
-        }
-    }
-
-    @Override
-    public float getCost(PathFindingContext pathFindingContext, int i, int i1) {
-        try {
-            return Tile.tileLookup.get(tiles[i + i1 * w]).getCost();
-        } catch (Exception e) {
-            return 0;
-        }
-    }
 
     public void hurt(int x, int y, int radius, int facing, int dmg) {
         Circle c = new Circle(x, y, radius);
@@ -286,5 +256,10 @@ public class Level implements TileBasedMap {
                 }
             }
         }
+    }
+
+    public void drop(ItemStack stack, int x, int y) {
+        EntityItemDrop drop = new EntityItemDrop(x + 16, (y + 16), stack);
+        entities.add(drop);
     }
 }

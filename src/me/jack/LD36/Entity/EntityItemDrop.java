@@ -25,21 +25,19 @@ public class EntityItemDrop extends Entity {
 
     @Override
     public void render(Graphics g) {
+        if(stack != null)
         g.drawImage(stack.getItem().getSprite(),x,y);
     }
 
     @Override
     public void update(Level level) {
+        if(stack == null){
+            level.removeEntity(this);
+        }
         x += xVel;
         y += yVel;
         xVel /=2;
         yVel/=2;
-
-        Rectangle me = new Rectangle(x-4,y-4,w * 2,h * 2);
-        Rectangle player = new Rectangle(level.getPlayer().getX(),level.getPlayer().getY(),level.getPlayer().getW(),level.getPlayer().getH());
-        if(me.intersects(player)){
-
-        }
     }
 
     @Override
