@@ -66,21 +66,21 @@ public class Inventory {
     //only call once you've checked using contain
     public void remove(ItemStack stack) {
         int toRemove = stack.getStackSize();
+        int remaining = toRemove;
         for (int ii = 0; ii != MAX_SIZE; ii++) {
+            if(remaining == 0)break;
             if (items[ii] != null) {
                 ItemStack invStack = items[ii];
                 if (stack.getItem().getId() == invStack.getItem().getId()) {
-                    int removing = toRemove - invStack.getStackSize();
-                    if(removing <= 0){
+                    int removing = stack.getStackSize();
+                    if(stack.getStackSize()  > invStack.getStackSize()){
                         removing = invStack.getStackSize();
-                    }else{
-                        removing = stack.getStackSize();
                     }
                     invStack.remove(removing);
                     if(invStack.getStackSize() <= 0){
                         items[ii] = null;
                     }
-                    int remaining = toRemove - invStack.getStackSize();
+                    remaining = toRemove - removing;
                     if (remaining < 0)
                         remaining = 0;
                     toRemove = remaining;

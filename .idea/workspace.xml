@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e009eb3-1243-4b14-8e97-59b914eb64b3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/tiles.png" afterPath="$PROJECT_DIR$/res/tiles.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/GUI/CraftingGUI.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/GUI/CraftingGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todo.txt" afterPath="$PROJECT_DIR$/todo.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Inventory.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Inventory.java" />
     </list>
     <ignored path="LD36.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CraftingGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CraftingGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/GUI/CraftingGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20520674">
+            <state vertical-scroll-proportion="0.0">
               <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -50,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Inventory.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Inventory.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Inventory/Inventory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="33" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.20826952">
+              <caret line="51" column="48" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -188,12 +185,12 @@
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Tools/ItemStonePick.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Tools/ItemStoneAxe.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Tools/ItemWoodPick.java" />
-        <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Inventory.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/ItemStack.java" />
         <option value="$PROJECT_DIR$/todo.txt" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/GUI/CraftingGUI.java" />
+        <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Inventory.java" />
       </list>
     </option>
   </component>
@@ -860,7 +857,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="30" />
+      <option name="time" value="33" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1316,14 +1313,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Inventory/Inventory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="33" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/todo.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1372,11 +1361,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/GUI/CraftingGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20520674">
+        <state vertical-scroll-proportion="0.0">
           <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Inventory/Inventory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20826952">
+          <caret line="51" column="48" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
