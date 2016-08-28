@@ -11,6 +11,7 @@ import me.jack.LD36.Level.Level;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
 
 import java.util.Random;
 
@@ -35,9 +36,10 @@ public class EntityPlayer extends Mob {
         g.setColor(Color.red);
         g.fillRect(x, y, w, h);
         g.setColor(Color.white);
-    }
+}
 
     Random r = new Random();
+
     @Override
     public void update(Level level) {
         float hungerRate = 0.01f;
@@ -62,15 +64,22 @@ public class EntityPlayer extends Mob {
             hungerRate = 0.1f;
         }
         hunger -= hungerRate;
-        if(hunger < 0)
+        if (hunger < 0)
             hunger = 0;
 
-        if(hunger == 0 && r.nextInt(30) == 0){
-            setHealth(getHealth()-5);
+        if (hunger == 0 && r.nextInt(30) == 0) {
+            setHealth(getHealth() - 5);
         }
 
-        if(hunger > 200)
+        if (hunger > 200)
             hunger = 200;
+
+        Rectangle me = new Rectangle(getX(),getY(),getW(),getH());
+        if(tpCooldown){
+            if(!me.intersects(cooling)){
+                tpCooldown = false;
+            }
+        }
     }
 
     @Override
@@ -87,19 +96,19 @@ public class EntityPlayer extends Mob {
     }
 
     public void action(Level level, int button) {
-        if(button != 0){
-            if(getInventory().getStackInHand() == null)return;
-            if(getInventory().getStackInHand().getItem() instanceof ItemBerry){
-                hunger+=5;
+        if (button != 0) {
+            if (getInventory().getStackInHand() == null) return;
+            if (getInventory().getStackInHand().getItem() instanceof ItemBerry) {
+                hunger += 5;
                 getInventory().getStackInHand().remove(1);
-                if(getInventory().getStackInHand().getStackSize() == 0){
+                if (getInventory().getStackInHand().getStackSize() == 0) {
                     getInventory().removeItemStack(getInventory().getItemInHand());
                 }
             }
 
             return;
         }
-        hunger -=1;
+        hunger -= 1;
         int tX = getX() / 32;
         int tY = getY() / 32;
 
@@ -146,17 +155,34 @@ public class EntityPlayer extends Mob {
         }
 
         int eDamage = 5;
-        if(inHand != null){
+        if (inHand != null) {
             Item inHandItem = inHand.getItem();
-            if(inHandItem instanceof Weapon){
+            if (inHandItem instanceof Weapon) {
                 Weapon w = (Weapon) inHandItem;
                 eDamage = w.getDamage();
             }
         }
         level.hurt(getX(), getY(), 48, facing, eDamage);
+
+
     }
+
+    public boolean tpCooldown = false;
+
+    public Rectangle cooling = null;
+
+    public void cooldown(Rectangle rect) {
+        tpCooldown = true;
+        cooling = rect;
+    }
+
 
     public float getHunger() {
         return hunger;
+    }
+
+    public void setPos(float x, float y) {
+        this.x = (int) x;
+        this.y = (int) y;
     }
 }

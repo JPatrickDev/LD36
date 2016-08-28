@@ -119,6 +119,69 @@ public class LevelGenerator {
         return noise;
     }
 
+    public static float[][] groupUnderworld(float[][] noise) {
+        for (int x = 0; x != noise.length; x++) {
+            for (int y = 0; y != noise[0].length; y++) {
+                float p = noise[x][y];
+                System.out.println(p);
+                if (p > 0.45) {
+                    noise[x][y] = 5;
+                }
+                else{
+                    noise[x][y] = 8;
+                }
+            }
+        }
+
+        for (int x = 0; x != noise.length; x++) {
+            for (int y = 0; y != noise[0].length; y++) {
+                float p = noise[x][y];
+                if(p == 5 && touchingCorner(x,y,8,noise)){
+                    noise[x][y] = 9;
+                }
+            }
+        }
+
+        for (int x = 0; x != noise.length; x++) {
+            for (int y = 0; y != noise[0].length; y++) {
+                float p = noise[x][y];
+                if(p == 5 && touching(x,y,9,noise) && r.nextInt(2) == 0){
+                    noise[x][y] = 9;
+                }
+            }
+        }
+        return noise;
+    }
+
+    public static boolean touching(int x, int y, int i, float[][] tiles){
+        for(int xx = -1;xx!=2;xx++){
+            for(int yy = -1;yy!= 2;yy++){
+                if(yy == xx)continue;
+                try {
+                    float p = tiles[x + xx][y + yy];
+                    if(p == i){
+                        return true;
+                    }
+                }catch (Exception e){}
+            }
+        }
+        return false;
+    }
+
+
+    public static boolean touchingCorner(int x, int y, int i, float[][] tiles){
+        for(int xx = -1;xx!=2;xx++){
+            for(int yy = -1;yy!= 2;yy++){
+                try {
+                    float p = tiles[x + xx][y + yy];
+                    if(p == i){
+                        return true;
+                    }
+                }catch (Exception e){}
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
 
@@ -130,7 +193,7 @@ public class LevelGenerator {
 //            float[][] perlin = generatePerlinNoise(whiteNoise, 6);
             //          perlin = group(perlin);
 
-            Level level = generateLevel(w, w);
+            Level level = generateUnderworld(w, w);
 
             BufferedImage image = new BufferedImage(w, w, BufferedImage.TYPE_INT_RGB);
 
@@ -147,18 +210,24 @@ public class LevelGenerator {
                         c = Color.blue;
                     } else if (i == 5) {
                         c = Color.lightGray;
-                    } else if(i ==3){
+                    } else if (i == 3) {
                         c = Color.yellow;
+                    } else if (i == 8) {
+                        c = new Color(255, 0, 0);
+                    } else if (i == 9) {
+                        c = Color.black;
+                    } else {
+                        c = Color.pink;
                     }
 
                     if (ii == 4) {
                         c = Color.darkGray;
                     }
-                    if(ii == 6){
+                    if (ii == 6) {
                         c = Color.CYAN;
                     }
-                    if(ii == 7){
-                        c = new Color(255,0,0);
+                    if (ii == 7) {
+                        c = new Color(255, 0, 0);
                     }
                     pixels[x + y * w] = c.hashCode();
                 }
@@ -183,7 +252,7 @@ public class LevelGenerator {
         return perlin;
     }
 
-    public static float[][] generateRocks(int w, int h){
+    public static float[][] generateRocks(int w, int h) {
         float[][] whiteNoise = generateWhiteNoise(w, h, r);
         float[][] perlin = generatePerlinNoise(whiteNoise, 5, 0.2f);
         for (int x = 0; x != perlin.length; x++) {
@@ -196,7 +265,7 @@ public class LevelGenerator {
         return perlin;
     }
 
-    public static float[][] generateBushes(int w, int h){
+    public static float[][] generateBushes(int w, int h) {
         float[][] whiteNoise = generateWhiteNoise(w, h, r);
         float[][] perlin = generatePerlinNoise(whiteNoise, 3, 0.5f);
         for (int x = 0; x != perlin.length; x++) {
@@ -212,15 +281,15 @@ public class LevelGenerator {
     static Random r = new Random();
 
     public static Level generateLevel(int w, int h) {
-        Level level = new Level(w, h);
+        Level level = new LevelOverworld(w, h);
         float[][] whiteNoise = generateWhiteNoise(w, w, r);
 
         float[][] perlin = generatePerlinNoise(whiteNoise, 6, 0.5f);
         perlin = group(perlin);
 
         float[][] trees = generateTrees(w, h);
-        float[][] rocks = generateRocks(w,h);
-        float[][] bushes = generateBushes(w,h);
+        float[][] rocks = generateRocks(w, h);
+        float[][] bushes = generateBushes(w, h);
 
         for (int x = 0; x != perlin.length; x++) {
             for (int y = 0; y != perlin[0].length; y++) {
@@ -231,21 +300,38 @@ public class LevelGenerator {
                         level.setTileTop(x, y, 4);
                         p = 1;
                     }
-                    if(rocks[x][y] == 1 && p == 5){
-                        level.setTileTop(x,y,6);
+                    if (rocks[x][y] == 1 && p == 5) {
+                        level.setTileTop(x, y, 6);
                     }
                 }
-                if(p == 1){
-                    if(bushes[x][y] == 1){
-                        if(level.getTileAtTop(x,y) == 0){
-                            level.setTileTop(x,y,7);
+                if (p == 1) {
+                    if (bushes[x][y] == 1) {
+                        if (level.getTileAtTop(x, y) == 0) {
+                            level.setTileTop(x, y, 7);
                         }
                     }
                 }
                 level.setTile(x, y, (int) p);
             }
         }
-        level.postCreate();
+        level.postCreate(null);
+        return level;
+    }
+
+    public static Level generateUnderworld(int w, int h) {
+        Level level = new LevelUnderworld(w, h);
+        float[][] whiteNoise = generateWhiteNoise(w, w, r);
+
+        float[][] perlin = generatePerlinNoise(whiteNoise, 9, 0.9f);
+        perlin = groupUnderworld(perlin);
+
+        for (int x = 0; x != perlin.length; x++) {
+            for (int y = 0; y != perlin[0].length; y++) {
+                float p = perlin[x][y];
+                level.setTile(x, y, (int) p);
+            }
+        }
+          level.postCreate(null);
         return level;
     }
 

@@ -6,6 +6,7 @@ import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Inventory.Item.ItemStone;
 import me.jack.LD36.Level.Tile.Tile;
+import me.jack.LD36.States.InGameState;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -23,22 +24,24 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Created by Jack on 27/08/2016.
  */
-public class Level {
+public abstract class Level {
 
-    private int w, h;
-    private int[] tiles;
-    private int[] topLayer;
+    protected int w;
+    protected int h;
+    protected int[] tiles;
+    protected int[] topLayer;
     private int[] topLayerHealth;
 
-    private Camera camera;
+    protected Camera camera;
 
 
-    private CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
+    protected CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
     private CopyOnWriteArrayList<Rectangle> hitboxes = new CopyOnWriteArrayList<Rectangle>();
 
-    EntityPlayer player;
-
     int time = 0;
+
+
+    protected InGameState parent;
 
     public Level(int w, int h) {
         this.w = w;
@@ -51,23 +54,7 @@ public class Level {
     }
 
 
-    public void postCreate() {
-        boolean found = false;
-        Random r = new Random();
-        int sX = -1, sY = -1;
-        while (!found) {
-            int x = r.nextInt(w);
-            int y = r.nextInt(h);
-            int i = tiles[x + y * w];
-            if (i == 1 && topLayer[x + y * w] == 0) {
-                found = true;
-                sX = x;
-                sY = y;
-                break;
-            }
-        }
-        player = new EntityPlayer(sX * 32, sY * 32);
-    }
+    public abstract void postCreate(InGameState state);
 
 
     public void render(Graphics g) {
@@ -87,7 +74,7 @@ public class Level {
         for (Entity e : entities) {
             e.render(g);
         }
-        player.render(g);
+        getPlayer().render(g);
         for (int x = 0; x != w; x++) {
             for (int y = 0; y != h; y++) {
                 if ((x * 32) - camera.getX() < -32 || (x * 32) - camera.getX() > 800) continue;
@@ -103,10 +90,6 @@ public class Level {
 
         g.resetTransform();
 
-        g.setColor(light);
-        g.fillRect(0,0,800,528);
-
-        g.setColor(Color.white);
     }
 
 
@@ -148,38 +131,8 @@ public class Level {
 
     public Color light = new Color(0,0,0,200);
     int alpha = 0;
-    public void update(long delta) {
-        time+=delta;
-        if(time > 120 * 1000){
-            time = 0;
-            System.out.println("Day over");
-        }
+    public abstract void update(long delta);
 
-        light = new Color(0,0,0,getLightLevel(time));
-        for (Entity e : entities) {
-            e.update(this);
-        }
-        player.update(this);
-        camera.center(player.getX(), player.getY(), w, h);
-
-        if (r.nextInt(15) == 0 && light.getAlpha() == 200) {
-            boolean found = false;
-            Random r = new Random();
-            int sX = -1, sY = -1;
-            while (!found) {
-                int x = r.nextInt(w);
-                int y = r.nextInt(h);
-                int i = tiles[x + y * w];
-                if (i == 1 && topLayer[x + y * w] == 0) {
-                    found = true;
-                    sX = x;
-                    sY = y;
-                    break;
-                }
-            }
-            entities.add(new EntityTestEnemy(sX * 32, sY * 32));
-        }
-    }
 
     public int getW() {
         return w;
@@ -240,7 +193,7 @@ public class Level {
     }
 
     public EntityPlayer getPlayer() {
-        return player;
+        return parent.player;
     }
 
     public CopyOnWriteArrayList<Rectangle> getHitboxes() {
@@ -305,29 +258,5 @@ public class Level {
     }
 
 
-    float level = 200;
-    public int getLightLevel(int time){
-        if(time >= 30*1000 && time <= 90*1000){
-            level = 0;
-            return 0;
-        }else{
-            if(time >= 25 *1000 &&  time < 30 * 1000){
-                level -= 0.75f;
-                if(level < 0)
-                    level = 0;
-                return (int) level;
 
-            }
-            if(time > 90 * 1000 && time <= 95 * 1000){
-                System.out.println(level);
-                level+=0.75f;
-                if(level > 200) {
-                    level = 200;
-                    return 200;
-                }
-                return (int) level;
-            }
-        }
-        return 200;
-    }
 }
