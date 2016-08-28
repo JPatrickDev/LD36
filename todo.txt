@@ -63,7 +63,16 @@
 - Main menu
 - Instructions
 
+
+- Cooldown for swords?
+
 - Shelters can be used to cook food
+
+
+- Balance everything
+    - Item drops
+    - Crafting requirements
+    - Smelting time
 
 
 Crafting system/

@@ -5,7 +5,7 @@ package me.jack.LD36.Inventory.Item.Tools;
  */
 public enum ItemMaterial{
 
-    WOOD(1f),STONE(1.5f);
+    WOOD(1f),STONE(1.5f),IRON(3f);
 
     private float multiplier;
 

@@ -17,7 +17,7 @@ public class CraftingGUI {
 
     private static int width = 600, height = 300;
 
-    private static String[] categories = new String[]{"Tools", "Weapons", "Shelter", "Food", "Misc"};
+    private static String[] categories = new String[]{"Tools", "Weapons", "Shelter"};
 
     private static String[][] items = new String[categories.length][];
 
@@ -31,14 +31,12 @@ public class CraftingGUI {
     static int itemIndex = 0;
 
     static {
-        items[0] = new String[]{"Wood Axe", "Wood Pick", "Stone Axe", "Stone Pick"};
-        items[1] = new String[]{"Wood Sword","Stone Sword"};
+        items[0] = new String[]{"Wood Axe", "Wood Pick", "Stone Axe", "Stone Pick","Iron Axe","Iron Pick"};
+        items[1] = new String[]{"Wood Sword","Stone Sword","Iron Pick"};
         items[2] = new String[]{"Basic Tent"};
-        items[3] = new String[]{"..."};
-        items[4] = new String[]{"..."};
 
-        itemObjects[0] = new Item[]{new ItemWoodAxe(), new ItemWoodPick(), new ItemStoneAxe(), new ItemStonePick()};
-        itemObjects[1] = new Item[]{new ItemWoodSword(),new ItemStoneSword()};
+        itemObjects[0] = new Item[]{new ItemWoodAxe(), new ItemWoodPick(), new ItemStoneAxe(), new ItemStonePick(),new ItemIronAxe(),new ItemIronPick()};
+        itemObjects[1] = new Item[]{new ItemWoodSword(),new ItemStoneSword(),new ItemIronSword()};
 
         crafting[0] = new CraftingRequirements[]{
                 new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick())}),
@@ -48,11 +46,16 @@ public class CraftingGUI {
                 new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()), new ItemStack(10, new ItemStone())}),
 
                 new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(15, new ItemStone())}),
+
+                new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()), new ItemStack(15, new ItemIronBar())}),
+
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(20, new ItemIronBar())}),
         };
 
         crafting[1] = new CraftingRequirements[]{
                 new CraftingRequirements(new ItemStack[]{new ItemStack(20, new ItemStick())}),
-                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(20, new ItemStone())})
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(20, new ItemStone())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(30, new ItemIronBar())})
         };
 
         catRect = new Rectangle(110, 100, 74, categories.length * 32);
@@ -138,6 +141,7 @@ public class CraftingGUI {
                 int rY = (int) (y - catRect.getY());
                 int pos = rY / 32;
                 categoryIndex = pos;
+                itemIndex = 0;
                 itemRect = new Rectangle(184, 110, 120, items[categoryIndex].length * 30);
             } else if (itemRect.contains(x, y)) {
                 System.out.println("Clicked inside items");
