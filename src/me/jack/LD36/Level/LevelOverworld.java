@@ -2,6 +2,7 @@ package me.jack.LD36.Level;
 
 import me.jack.LD36.Entity.*;
 import me.jack.LD36.Inventory.Item.Shelters.ItemTent;
+import me.jack.LD36.Inventory.Item.Shelters.Shelter;
 import me.jack.LD36.Level.Tile.Portal;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.Color;
@@ -72,6 +73,9 @@ public class LevelOverworld extends Level {
     @Override
     public void update(long delta) {
         time += delta;
+        for(Shelter s : shelters.values()){
+            s.tick();
+        }
         if (time > 120 * 1000) {
             time = 0;
             System.out.println("Day over");

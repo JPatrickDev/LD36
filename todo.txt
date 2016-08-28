@@ -49,8 +49,8 @@
 
 
 - Mobs
-    - Some friendly
-        - Can be killed for food
+    - Some friendly/
+        - Can be killed for food/
     - Some aggressive/
 - Combat with mobs/
     - Different weapons
@@ -83,7 +83,6 @@ Crafting system/
         - Bow/Arrow
     - Shelter
         - Basic tent
-            - Dies after a few days
 
 
 KNOWN BUGS:

@@ -1,5 +1,7 @@
 package me.jack.LD36.GUI;
 
+import me.jack.LD36.Inventory.Item.ItemCoal;
+import me.jack.LD36.Inventory.Item.ItemIronOre;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Inventory.Item.Shelters.Shelter;
@@ -47,8 +49,8 @@ public class ShelterGUI {
     }
 
     public static void updateGUI() {
-
-
+        if (currentShelter != null)
+            currentShelter.tick();
     }
 
     public static void renderGUI(Graphics g) {
@@ -88,7 +90,41 @@ public class ShelterGUI {
         if (!currentShelter.isFurnace()) {
             g.drawString("No Furnance", 182 + 150 - g.getFont().getWidth("No Furnance") / 2, 85 + 127 - g.getFont().getHeight("No Furnance") / 2);
         } else {
+            g.drawString("Furnance", 182 + 150 - g.getFont().getWidth("Furnace") / 2, 90);
 
+            g.drawRect(290, 150, 32, 32);
+            if (currentShelter.input != null) {
+                ItemStack stack = currentShelter.input;
+                Image icon = stack.getItem().getIcon();
+                g.drawImage(icon, 290, 150);
+                g.setColor(Color.white);
+                g.drawString(stack.getStackSize() + "", 290, 150);
+            }
+            g.drawString("Input", 282, 130);
+
+
+            g.drawString("Fuel", 342, 130);
+            g.drawRect(182 + 160, 150, 32, 32);
+            if (currentShelter.fuel != null) {
+                ItemStack stack = currentShelter.fuel;
+                Image icon = stack.getItem().getIcon();
+                g.drawImage(icon, 182 + 160, 150);
+                g.setColor(Color.white);
+                g.drawString(stack.getStackSize() + "", 182 + 160, 150);
+            }
+
+
+            g.fillRect(290, 150 + 40, currentShelter.timer, 16);
+
+            g.drawString("Output", 290 + 42 - 26, 203 + 32 - 16);
+            g.drawRect(290 + 42 - 16, 206 + 32, 32, 32);
+            if (currentShelter.output != null) {
+                ItemStack stack = currentShelter.output;
+                Image icon = stack.getItem().getIcon();
+                g.drawImage(icon,290 + 42 - 16, 206 + 32);
+                g.setColor(Color.white);
+                g.drawString(stack.getStackSize() + "",290 + 42 - 16, 206 + 32);
+            }
         }
 
         g.setColor(Color.gray);
@@ -96,10 +132,16 @@ public class ShelterGUI {
         g.setColor(Color.white);
         g.drawString("Sleep", 182 + 300 + 5, 85);
 
+
     }
 
     static Rectangle closeButton = new Rectangle(585, 50, 115, 24);
-    static Rectangle sleepButton = new Rectangle(182+300+5,85,100,24);
+    static Rectangle sleepButton = new Rectangle(182 + 300 + 5, 85, 100, 24);
+
+    static Rectangle inputBox = new Rectangle(290, 150, 32, 32);
+    static Rectangle outputBox = new Rectangle(290 + 42 - 16, 206 + 32, 32, 32);
+    static Rectangle fuelBox = new Rectangle(182 + 160, 150, 32, 32);
+
     public static void mouseClicked(int button, int x, int y, Level level) {
         if (button != 0) {
             for (Rectangle r : storageSlots.keySet()) {
@@ -123,14 +165,56 @@ public class ShelterGUI {
                     level.getPlayer().getInventory().remove(stack);
                 }
             }
-
             return;
         }
+
+        if(fuelBox.contains(x,y)){
+            level.getPlayer().getInventory().addStack(currentShelter.fuel);
+            currentShelter.fuel = null;
+        }
+        if(inputBox.contains(x,y)){
+            level.getPlayer().getInventory().addStack(currentShelter.input);
+            currentShelter.input = null;
+        }
+        if(outputBox.contains(x,y)){
+            level.getPlayer().getInventory().addStack(currentShelter.output);
+            currentShelter.output = null;
+        }
+
+        for (Rectangle r : storageSlots.keySet()) {
+            if (r.contains(x, y)) {
+                int i = storageSlots.get(r);
+                ItemStack stack = currentShelter.inv.getItems()[i];
+                if (stack == null)
+                    return;
+
+                if (stack.getItem() instanceof ItemCoal) {
+                    if (currentShelter.fuel != null) {
+                        currentShelter.fuel.add(stack.getStackSize());
+                    } else {
+                        currentShelter.fuel = new ItemStack(stack.getStackSize(), stack.getItem());
+                    }
+                    currentShelter.inv.remove(stack);
+                }
+                if (stack.getItem() instanceof ItemIronOre) {
+                    if (currentShelter.input != null) {
+                        currentShelter.input.add(stack.getStackSize());
+                    } else {
+                        currentShelter.input = new ItemStack(stack.getStackSize(), stack.getItem());
+                    }
+                    currentShelter.inv.remove(stack);
+                }
+
+
+            }
+        }
+
+
         if (closeButton.contains(x, y)) {
             InGameState.showingShelter = false;
         }
-        if(sleepButton.contains(x,y)){
-            if(level.getTime() > 80*1000 || level.getTime() < 20 * 1000){
+        if (sleepButton.contains(x, y)) {
+            if (level.getTime() > 80 * 1000 || level.getTime() < 20 * 1000) {
                 level.setTime(25 * 1000);
                 level.getPlayer().setHealth(100);
             }

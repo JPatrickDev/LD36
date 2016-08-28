@@ -7,6 +7,6 @@ import me.jack.LD36.Inventory.Item.Item;
  */
 public class ItemTent extends Shelter {
     public ItemTent() {
-        super(0,0,14,"Tent","A basic tent. Can store 4 item stacks.",false,4);
+        super(0,0,14,"Tent","A basic tent. Can store 4 item stacks.",true,4);
     }
 }

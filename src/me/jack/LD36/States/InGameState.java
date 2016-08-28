@@ -6,6 +6,8 @@ import me.jack.LD36.GUI.CraftingGUI;
 import me.jack.LD36.GUI.HUD;
 import me.jack.LD36.GUI.ShelterGUI;
 import me.jack.LD36.Inventory.Item.Item;
+import me.jack.LD36.Inventory.Item.ItemCoal;
+import me.jack.LD36.Inventory.Item.ItemIronOre;
 import me.jack.LD36.Inventory.Item.ItemStick;
 import me.jack.LD36.Inventory.Item.Shelters.Shelter;
 import me.jack.LD36.Level.Level;
@@ -53,6 +55,8 @@ public class InGameState extends BasicGameState {
         overworld.postCreate(this);
         underworld.postCreate(this);
 
+        getPlayer().getInventory().addItem(new ItemCoal(), 50);
+        getPlayer().getInventory().addItem(new ItemIronOre(), 50);
         for (int i = 0; i != 100; i++) {
             attemptPlacement();
         }
