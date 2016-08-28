@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Inventory {
 
 
-    public static final int MAX_SIZE = 12;
+    public int MAX_SIZE = 12;
 
 
     private ItemStack[] items = new ItemStack[MAX_SIZE];
@@ -119,5 +119,9 @@ public class Inventory {
 
     public ItemStack getStackInHand() {
         return items[getItemInHand()];
+    }
+
+    public void addStack(ItemStack stack) {
+        addItem(stack.getItem(),stack.getStackSize());
     }
 }

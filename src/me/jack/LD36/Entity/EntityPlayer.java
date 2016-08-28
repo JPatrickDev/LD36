@@ -5,6 +5,7 @@ import me.jack.LD36.Inventory.Item.Item;
 import me.jack.LD36.Inventory.Item.ItemBerry;
 import me.jack.LD36.Inventory.Item.ItemRawPork;
 import me.jack.LD36.Inventory.Item.ItemStack;
+import me.jack.LD36.Inventory.Item.Shelters.Shelter;
 import me.jack.LD36.Inventory.Item.Tools.Tool;
 import me.jack.LD36.Inventory.Item.Tools.ToolType;
 import me.jack.LD36.Inventory.Item.Tools.Weapon;
@@ -12,6 +13,7 @@ import me.jack.LD36.Level.Level;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
 import java.util.Random;
@@ -37,7 +39,7 @@ public class EntityPlayer extends Mob {
         g.setColor(Color.red);
         g.fillRect(x, y, w, h);
         g.setColor(Color.white);
-}
+    }
 
     Random r = new Random();
 
@@ -75,10 +77,18 @@ public class EntityPlayer extends Mob {
         if (hunger > 200)
             hunger = 200;
 
-        Rectangle me = new Rectangle(getX(),getY(),getW(),getH());
-        if(tpCooldown){
-            if(!me.intersects(cooling)){
+        Rectangle me = new Rectangle(getX(), getY(), getW(), getH());
+        if (tpCooldown) {
+            if (!me.intersects(cooling)) {
                 tpCooldown = false;
+            }
+        }
+
+        for(int i = 0;i!= getInventory().MAX_SIZE;i++){
+            if(getInventory().getItems()[i] != null){
+                if(getInventory().getItems()[i].getStackSize() <= 0 ){
+                    getInventory().getItems()[i] = null;
+                }
             }
         }
     }
@@ -150,6 +160,33 @@ public class EntityPlayer extends Mob {
                 } else {
                     damage *= tool.getMaterial().getMultiplier();
                 }
+            } else if (inHand.getItem() instanceof Shelter) {
+                if (facing == 0) {
+                    if (level.getTileAtTop(tX, tY - 1) == 0 && level.getTileAt(tX, tY - 1) != 2) {
+                        level.setTileTop(tX, tY - 1, 12);
+                        inHand.remove(1);
+                        level.shelters.put(new Point(tX,tY-1), (Shelter) inHand.getItem());
+                    }
+                } else if (facing == 1) {
+                    if (level.getTileAtTop(tX + 1, tY) == 0 && level.getTileAt(tX + 1, tY) != 2) {
+                        level.setTileTop(tX + 1, tY, 12);
+                        inHand.remove(1);
+                        level.shelters.put(new Point(tX+1,tY), (Shelter) inHand.getItem());
+                    }
+                } else if (facing == 2) {
+                    if (level.getTileAtTop(tX, tY + 1) == 0 && level.getTileAt(tX, tY + 1) != 2) {
+                        level.setTileTop(tX, tY + 1, 12);
+                        inHand.remove(1);
+                        level.shelters.put(new Point(tX,tY+1), (Shelter) inHand.getItem());
+                    }
+                } else if (facing == 3) {
+                    if (level.getTileAtTop(tX - 1, tY) == 0 && level.getTileAt(tX - 1, tY) != 2) {
+                        level.setTileTop(tX - 1, tY, 12);
+                        inHand.remove(1);
+                        level.shelters.put(new Point(tX-1,tY), (Shelter) inHand.getItem());
+                    }
+                }
+                return;
             }
         }
         if (facing == 0) {

@@ -1,15 +1,20 @@
 package me.jack.LD36.Level;
 
 import me.jack.LD36.Entity.*;
+import me.jack.LD36.GUI.ShelterGUI;
 import me.jack.LD36.Inventory.Item.*;
+import me.jack.LD36.Inventory.Item.Shelters.ItemTent;
+import me.jack.LD36.Inventory.Item.Shelters.Shelter;
 import me.jack.LD36.Level.Tile.Tile;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 import uk.co.jdpatrick.JEngine.Level.Camera;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -46,6 +51,7 @@ public abstract class Level {
     }
 
 
+    public HashMap<Point,Shelter> shelters = new HashMap<>();
     public abstract void postCreate(InGameState state);
 
 
@@ -199,6 +205,15 @@ public abstract class Level {
 
     public void damageTopTile(int x, int y, int dmg) {
         if (getTileAtTop(x, y) == 0) return;
+        if(getTileAtTop(x,y) == 12){
+            for(Point p :shelters.keySet()){
+                if(p.getX() == x && p.getY() == y){
+                    ShelterGUI.open(shelters.get(p));
+                }
+            }
+
+            return;
+        }
         int health = topLayerHealth[x + y * w];
         health -= dmg;
         topLayerHealth[x + y * w] = health;
@@ -260,4 +275,7 @@ public abstract class Level {
     }
 
 
+    public void setTime(int time) {
+        this.time = time;
+    }
 }

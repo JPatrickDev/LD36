@@ -18,7 +18,7 @@ public class HUD {
     static SpriteSheet icons = null;
     static Image heart, halfHeart;
 
-    static HashMap<Rectangle, Integer> itemSlots = new HashMap<>();
+    public static HashMap<Rectangle, Integer> itemSlots = new HashMap<>();
 
     static {
         int x = 0, y = 528;

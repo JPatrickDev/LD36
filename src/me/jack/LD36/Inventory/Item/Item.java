@@ -1,5 +1,6 @@
 package me.jack.LD36.Inventory.Item;
 
+import me.jack.LD36.Inventory.Item.Shelters.Shelter;
 import me.jack.LD36.Inventory.Item.Tools.Tool;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -17,6 +18,7 @@ public class Item {
     public static SpriteSheet sprites = null;
     public static SpriteSheet icons = null;
     public static SpriteSheet tools = null;
+    public static SpriteSheet shelters = null;
 
     private String name,description;
 
@@ -32,10 +34,12 @@ public class Item {
             sprite = sprite.getScaledCopy(2f);
             icon = icon.getScaledCopy(2f);
 
+        }else if(this instanceof Shelter) {
+            sprite = shelters.getSprite(x,y);
+            icon = shelters.getSprite(x,y);
         }else{
             this.sprite = sprites.getSprite(x, y);
             this.icon = icons.getSprite(x, y);
-
         }
     }
 
@@ -44,6 +48,7 @@ public class Item {
             sprites = new SpriteSheet("res/itemSprites.png", 8, 8);
             icons = new SpriteSheet("res/itemIcons.png", 16, 16);
             tools = new SpriteSheet("res/tools.png",16,16);
+            shelters = new SpriteSheet("res/shelters.png",16,16);
         } catch (SlickException e) {
             e.printStackTrace();
         }

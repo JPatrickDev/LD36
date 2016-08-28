@@ -1,6 +1,7 @@
 package me.jack.LD36.Level;
 
 import me.jack.LD36.Entity.*;
+import me.jack.LD36.Inventory.Item.Shelters.ItemTent;
 import me.jack.LD36.Level.Tile.Portal;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.Color;
@@ -37,11 +38,11 @@ public class LevelOverworld extends Level {
         state.player = new EntityPlayer(sX * 32, sY * 32);
         this.parent = state;
 
-        for (int i = 0; i != 100; i++) {
+        for (int i = 0; i != 200; i++) {
             int x = r.nextInt(w);
             int y = r.nextInt(h);
             if (getTileAt(x, y) == 1 && getTileAtTop(x, y) == 0) {
-                int t = r.nextInt(10);
+                int t = r.nextInt(20);
                 if (r.nextInt(2) == 0) {
                     for (int ii = 0; ii != t; ii++) {
                         entities.add(new EntityCow(x*32,y*32));
@@ -54,6 +55,7 @@ public class LevelOverworld extends Level {
 
             }
         }
+        state.player.getInventory().addItem(new ItemTent(),1);
     }
 
 
@@ -77,6 +79,8 @@ public class LevelOverworld extends Level {
 
         light = new Color(0, 0, 0, getLightLevel(time));
         for (Entity e : entities) {
+            if (e.getX()- camera.getX() < -32 || e.getX() - camera.getX() > 800) continue;
+            if (e.getY() - camera.getY() < -32 || e.getY() - camera.getY() > 800) continue;
             e.update(this);
         }
         getPlayer().update(this);

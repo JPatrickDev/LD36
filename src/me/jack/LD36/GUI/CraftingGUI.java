@@ -2,6 +2,7 @@ package me.jack.LD36.GUI;
 
 import me.jack.LD36.Inventory.Inventory;
 import me.jack.LD36.Inventory.Item.*;
+import me.jack.LD36.Inventory.Item.Shelters.ItemTent;
 import me.jack.LD36.Inventory.Item.Tools.*;
 import me.jack.LD36.Level.Level;
 import me.jack.LD36.States.InGameState;
@@ -37,6 +38,7 @@ public class CraftingGUI {
 
         itemObjects[0] = new Item[]{new ItemWoodAxe(), new ItemWoodPick(), new ItemStoneAxe(), new ItemStonePick(),new ItemIronAxe(),new ItemIronPick()};
         itemObjects[1] = new Item[]{new ItemWoodSword(),new ItemStoneSword(),new ItemIronSword()};
+        itemObjects[2] = new Item[]{new ItemTent()};
 
         crafting[0] = new CraftingRequirements[]{
                 new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick())}),
@@ -56,6 +58,11 @@ public class CraftingGUI {
                 new CraftingRequirements(new ItemStack[]{new ItemStack(20, new ItemStick())}),
                 new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(20, new ItemStone())}),
                 new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(30, new ItemIronBar())})
+        };
+
+        crafting[2] = new CraftingRequirements[]{
+
+                new CraftingRequirements(new ItemStack[]{new ItemStack(100, new ItemStick()),new ItemStack(15, new ItemLeather())}),
         };
 
         catRect = new Rectangle(110, 100, 74, categories.length * 32);

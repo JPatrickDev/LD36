@@ -4,8 +4,10 @@ import me.jack.LD36.Entity.Entity;
 import me.jack.LD36.Entity.EntityPlayer;
 import me.jack.LD36.GUI.CraftingGUI;
 import me.jack.LD36.GUI.HUD;
+import me.jack.LD36.GUI.ShelterGUI;
 import me.jack.LD36.Inventory.Item.Item;
 import me.jack.LD36.Inventory.Item.ItemStick;
+import me.jack.LD36.Inventory.Item.Shelters.Shelter;
 import me.jack.LD36.Level.Level;
 import me.jack.LD36.Level.LevelGenerator;
 import me.jack.LD36.Level.LevelOverworld;
@@ -106,17 +108,22 @@ public class InGameState extends BasicGameState {
             underworld.render(graphics);
         }
         Input i = gameContainer.getInput();
-        HUD.render(graphics, this,i.getMouseX(),i.getMouseY());
+        HUD.render(graphics, this, i.getMouseX(), i.getMouseY());
         if (showingCrafting)
             CraftingGUI.renderGUI(graphics);
+        else if (showingShelter)
+            ShelterGUI.renderGUI(graphics);
     }
 
     public static boolean showingCrafting = false;
+    public static boolean showingShelter = false;
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         if (showingCrafting) {
             CraftingGUI.updateGUI();
+        } else if (showingShelter) {
+            ShelterGUI.updateGUI();
         } else {
             if (currentWorld == 0) {
                 overworld.update(i);
@@ -140,6 +147,8 @@ public class InGameState extends BasicGameState {
         super.mousePressed(button, x, y);
         if (showingCrafting) {
             CraftingGUI.mouseClicked(button, x, y, getLevel());
+        } else if (showingShelter) {
+            ShelterGUI.mouseClicked(button,x,y,getLevel());
         } else {
             overworld.getPlayer().action(getLevel(), button);
             HUD.mouseClick(button, x, y);
