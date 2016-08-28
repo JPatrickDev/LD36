@@ -54,7 +54,7 @@ public class InGameState extends BasicGameState {
             level.update();
             HUD.update(this);
             if (level.getPlayer().getHealth() <= 0) {
-         //       stateBasedGame.enterState(1);
+                stateBasedGame.enterState(1);
             }
         }
     }
@@ -62,12 +62,21 @@ public class InGameState extends BasicGameState {
     @Override
     public void mousePressed(int button, int x, int y) {
         super.mousePressed(button, x, y);
-        if(showingCrafting) {
+        if (showingCrafting) {
             CraftingGUI.mouseClicked(button, x, y, level);
-        }else {
+        } else {
             level.getPlayer().action(level);
-            HUD.mouseClick(button,x,y);
+            HUD.mouseClick(button, x, y);
         }
+    }
+
+    @Override
+    public void mouseWheelMoved(int newValue) {
+      if(newValue > 0){
+          getPlayer().getInventory().itemInHandForwards();
+      }else{
+          getPlayer().getInventory().itemInHandBackwards();
+      }
     }
 
     public EntityPlayer getPlayer() {

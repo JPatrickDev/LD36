@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Inventory {
 
 
-    public static final int MAX_SIZE = 18;
+    public static final int MAX_SIZE = 12;
 
 
     private ItemStack[] items = new ItemStack[MAX_SIZE];
@@ -101,5 +101,19 @@ public class Inventory {
 
     public void removeItemStack(int dropping) {
         items[dropping] = null;
+    }
+
+    public void itemInHandForwards() {
+        itemInHand++;
+        if(itemInHand >= MAX_SIZE){
+            itemInHand = 0;
+        }
+    }
+
+    public void itemInHandBackwards() {
+        itemInHand--;
+        if(itemInHand < 0){
+            itemInHand = MAX_SIZE-1;
+        }
     }
 }
