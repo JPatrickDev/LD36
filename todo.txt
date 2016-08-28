@@ -55,7 +55,7 @@
 - Combat with mobs/
     - Different weapons
 
-- Improve spawning system
+- Improve spawning system/
 
 - Day/night cycle/
 

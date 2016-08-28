@@ -42,6 +42,12 @@ public class EntityTestEnemy extends Mob {
 
     @Override
     public void update(Level level) {
+        if(level.light.getAlpha() != 200){
+            if(r.nextInt(500) == 0){
+                level.removeEntity(this);
+                return;
+            }
+        }
         if(getHealth() <= 0){
             level.removeEntity(this);
             return;

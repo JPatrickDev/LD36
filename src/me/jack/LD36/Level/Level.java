@@ -104,7 +104,7 @@ public class Level {
         g.resetTransform();
 
         g.setColor(light);
-       // g.fillRect(0,0,800,528);
+        g.fillRect(0,0,800,528);
 
         g.setColor(Color.white);
     }
@@ -146,7 +146,7 @@ public class Level {
 
     Random r = new Random();
 
-    Color light = new Color(0,0,0,200);
+    public Color light = new Color(0,0,0,200);
     int alpha = 0;
     public void update(long delta) {
         time+=delta;
@@ -162,7 +162,7 @@ public class Level {
         player.update(this);
         camera.center(player.getX(), player.getY(), w, h);
 
-    /*    if (r.nextInt(10) == 0) {
+        if (r.nextInt(15) == 0 && light.getAlpha() == 200) {
             boolean found = false;
             Random r = new Random();
             int sX = -1, sY = -1;
@@ -178,7 +178,7 @@ public class Level {
                 }
             }
             entities.add(new EntityTestEnemy(sX * 32, sY * 32));
-        }*/
+        }
     }
 
     public int getW() {
