@@ -2,10 +2,7 @@ package me.jack.LD36.GUI;
 
 import me.jack.LD36.Inventory.Inventory;
 import me.jack.LD36.Inventory.Item.*;
-import me.jack.LD36.Inventory.Item.Tools.ItemStoneAxe;
-import me.jack.LD36.Inventory.Item.Tools.ItemStonePick;
-import me.jack.LD36.Inventory.Item.Tools.ItemWoodAxe;
-import me.jack.LD36.Inventory.Item.Tools.ItemWoodPick;
+import me.jack.LD36.Inventory.Item.Tools.*;
 import me.jack.LD36.Level.Level;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.Color;
@@ -35,12 +32,13 @@ public class CraftingGUI {
 
     static {
         items[0] = new String[]{"Wood Axe", "Wood Pick", "Stone Axe", "Stone Pick"};
-        items[1] = new String[]{"Wood Sword"};
+        items[1] = new String[]{"Wood Sword","Stone Sword"};
         items[2] = new String[]{"Basic Tent"};
         items[3] = new String[]{"..."};
         items[4] = new String[]{"..."};
 
         itemObjects[0] = new Item[]{new ItemWoodAxe(), new ItemWoodPick(), new ItemStoneAxe(), new ItemStonePick()};
+        itemObjects[1] = new Item[]{new ItemWoodSword(),new ItemStoneSword()};
 
         crafting[0] = new CraftingRequirements[]{
                 new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick())}),
@@ -49,9 +47,13 @@ public class CraftingGUI {
 
                 new CraftingRequirements(new ItemStack[]{new ItemStack(5, new ItemStick()), new ItemStack(10, new ItemStone())}),
 
-                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(15, new ItemStone())})
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()), new ItemStack(15, new ItemStone())}),
         };
 
+        crafting[1] = new CraftingRequirements[]{
+                new CraftingRequirements(new ItemStack[]{new ItemStack(20, new ItemStick())}),
+                new CraftingRequirements(new ItemStack[]{new ItemStack(10, new ItemStick()),new ItemStack(20, new ItemStone())})
+        };
 
         catRect = new Rectangle(110, 100, 74, categories.length * 32);
         itemRect = new Rectangle(184, 110, 120, items[categoryIndex].length * 30);

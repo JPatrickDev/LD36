@@ -1,10 +1,12 @@
 package me.jack.LD36.Entity;
 
 import me.jack.LD36.Inventory.Inventory;
+import me.jack.LD36.Inventory.Item.Item;
 import me.jack.LD36.Inventory.Item.ItemBerry;
 import me.jack.LD36.Inventory.Item.ItemStack;
 import me.jack.LD36.Inventory.Item.Tools.Tool;
 import me.jack.LD36.Inventory.Item.Tools.ToolType;
+import me.jack.LD36.Inventory.Item.Tools.Weapon;
 import me.jack.LD36.Level.Level;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
@@ -142,7 +144,16 @@ public class EntityPlayer extends Mob {
         } else if (facing == 3) {
             level.damageTopTile(tX - 1, tY, damage);
         }
-        level.hurt(getX(), getY(), 48, facing, 5);
+
+        int eDamage = 5;
+        if(inHand != null){
+            Item inHandItem = inHand.getItem();
+            if(inHandItem instanceof Weapon){
+                Weapon w = (Weapon) inHandItem;
+                eDamage = w.getDamage();
+            }
+        }
+        level.hurt(getX(), getY(), 48, facing, eDamage);
     }
 
     public float getHunger() {
