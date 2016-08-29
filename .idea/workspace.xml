@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Build" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e009eb3-1243-4b14-8e97-59b914eb64b3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LD36/me/jack/LD36/Entity/EntityPlayer.class" afterPath="$PROJECT_DIR$/out/production/LD36/me/jack/LD36/Entity/EntityPlayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LD36/me/jack/LD36/GUI/CraftingGUI.class" afterPath="$PROJECT_DIR$/out/production/LD36/me/jack/LD36/GUI/CraftingGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LD36/me/jack/LD36/GUI/HUD.class" afterPath="$PROJECT_DIR$/out/production/LD36/me/jack/LD36/GUI/HUD.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LD36/me/jack/LD36/Level/Level.class" afterPath="$PROJECT_DIR$/out/production/LD36/me/jack/LD36/Level/Level.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/icons.png" afterPath="$PROJECT_DIR$/res/icons.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/LD36.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/LD36.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelUnderworld.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelUnderworld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Main.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/States/GameOverState.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/States/GameOverState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todo.txt" afterPath="$PROJECT_DIR$/todo.txt" />
-    </list>
+    <list default="true" id="7e009eb3-1243-4b14-8e97-59b914eb64b3" name="Default" comment="" />
     <ignored path="LD36.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -136,8 +124,8 @@
       <file leaf-file-name="EntityPlayer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25727412">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.15313935">
+              <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="60" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -550,10 +538,14 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/slick.jar!/" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/res" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="ld36" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -890,7 +882,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1439,8 +1431,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25727412">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.15313935">
+          <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="60" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1451,10 +1443,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>Build</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
