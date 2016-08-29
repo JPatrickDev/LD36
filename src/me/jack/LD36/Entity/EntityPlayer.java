@@ -48,8 +48,6 @@ public class EntityPlayer extends Mob {
         } catch (SlickException e) {
             e.printStackTrace();
         }
-
-        getInventory().addStack(new ItemStack(5, new ItemCoal()));
     }
 
     @Override

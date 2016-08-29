@@ -57,7 +57,6 @@ public class LevelOverworld extends Level {
 
             }
         }
-        state.player.getInventory().addItem(new ItemTent(),1);
     }
 
 

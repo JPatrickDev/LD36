@@ -6,7 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e009eb3-1243-4b14-8e97-59b914eb64b3" name="Default" comment="" />
+    <list default="true" id="7e009eb3-1243-4b14-8e97-59b914eb64b3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Survivor.jar" afterPath="$PROJECT_DIR$/Survivor.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Shelters/ItemTent.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Shelters/ItemTent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java" afterPath="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java" />
+    </list>
     <ignored path="LD36.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -100,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+              <caret line="64" column="21" selection-start-line="64" selection-start-column="21" selection-end-line="64" selection-end-column="21" />
               <folding>
                 <element signature="e#5559#5560#0" expanded="true" />
                 <element signature="e#5588#5589#0" expanded="true" />
@@ -124,8 +129,18 @@
       <file leaf-file-name="EntityPlayer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15313935">
-              <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="60" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.54058194">
+              <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemTent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Shelters/ItemTent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="63" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -135,7 +150,7 @@
         <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
+              <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -146,16 +161,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LevelUnderworld.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Level/LevelUnderworld.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="66" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -216,14 +221,12 @@
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPig.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityCow.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/ItemCoal.java" />
-        <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Shelters/ItemTent.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Shelters/ItemAdvancedTent.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/GUI/CraftingGUI.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Level/Tile/Tile.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/GUI/HUD.java" />
         <option value="$PROJECT_DIR$/todo.txt" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelUnderworld.java" />
-        <option value="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Level/Level.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/States/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/States/AboutState.java" />
@@ -232,6 +235,8 @@
         <option value="$PROJECT_DIR$/src/me/jack/LD36/States/GameOverState.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Main.java" />
+        <option value="$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Shelters/ItemTent.java" />
+        <option value="$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java" />
         <option value="$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java" />
       </list>
     </option>
@@ -882,7 +887,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1254,17 +1259,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Shelters/ItemTent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="e#193#194#0" expanded="true" />
-            <element signature="e#277#278#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Item.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1368,14 +1362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="4" selection-start-line="68" selection-start-column="4" selection-end-line="68" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/States/GameOverState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1408,10 +1394,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Inventory/Item/Shelters/ItemTent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="63" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/States/InGameState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+          <caret line="64" column="21" selection-start-line="64" selection-start-column="21" selection-end-line="64" selection-end-column="21" />
           <folding>
             <element signature="e#5559#5560#0" expanded="true" />
             <element signature="e#5588#5589#0" expanded="true" />
@@ -1421,18 +1423,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Level/LevelOverworld.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/me/jack/LD36/Entity/EntityPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15313935">
-          <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="60" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.54058194">
+          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
           <folding />
         </state>
       </provider>
