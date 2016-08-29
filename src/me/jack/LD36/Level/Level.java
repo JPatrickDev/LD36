@@ -35,7 +35,7 @@ public abstract class Level {
     protected CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
     private CopyOnWriteArrayList<Rectangle> hitboxes = new CopyOnWriteArrayList<Rectangle>();
 
-    int time = 0;
+    int time = 25 * 1000;
 
 
     protected InGameState parent;
@@ -51,7 +51,8 @@ public abstract class Level {
     }
 
 
-    public HashMap<Point,Shelter> shelters = new HashMap<>();
+    public HashMap<Point, Shelter> shelters = new HashMap<>();
+
     public abstract void postCreate(InGameState state);
 
 
@@ -91,28 +92,51 @@ public abstract class Level {
 
 
     public boolean canMove(int x, int y, int w, int h, Entity caller) {
-        if (x < 0 || x > this.w * 32) {
+        if (x < 0 || x + 32 > this.w * 32) {
             return false;
         }
-        if (y < 0 || y > this.h * 32) {
+        if (y < 0 || y + 32 > this.h * 32) {
             return false;
         }
 
         Rectangle rect = new Rectangle(x, y, w, h);
         for (Rectangle r : hitboxes) {
             if (rect.intersects(r)) {
+                if (getTileAt((int) (r.getX() / 32), (int) (r.getY() / 32)) == 2) {
+                    if (caller instanceof EntityPlayer) {
+                        ((EntityPlayer) caller).underWater = true;
+                        return true;
+                    }
+                }
                 return false;
             }
         }
 
-        if ((caller instanceof EntityWolf)) {
+        if (caller instanceof EntityPlayer) {
+            int tX = caller.getX() / 32;
+            int tY = caller.getY() / 32;
+            if (getTileAt(tX, tY) != 2) {
+                ((EntityPlayer) caller).underWater = false;
+                ((EntityPlayer) caller).breath = 100;
+
+            }
+        }
+
+        if ((caller instanceof EntityWolf))
+
+        {
             Rectangle player = new Rectangle(getPlayer().getX(), getPlayer().getY(), getPlayer().getW(), getPlayer().getH());
             if (rect.intersects(player)) {
                 caller.touched(getPlayer(), this);
                 return false;
             }
         }
-        for (Entity e : entities) {
+
+        for (
+                Entity e
+                : entities)
+
+        {
             if (e == caller) continue;
             if (e instanceof EntityPig && caller instanceof EntityPig) continue;
             if (e instanceof EntityCow && caller instanceof EntityCow) continue;
@@ -123,6 +147,7 @@ public abstract class Level {
             }
 
         }
+
         return true;
     }
 
@@ -185,8 +210,8 @@ public abstract class Level {
                     topLayerHealth[x + y * w] = 5;
                 } else if (p == 11) {
                     topLayerHealth[x + y * w] = 200;
-                }else if(p == 14){
-                    topLayerHealth[x+y*w] = 150;
+                } else if (p == 14) {
+                    topLayerHealth[x + y * w] = 150;
                 }
 
             } else {
@@ -207,9 +232,9 @@ public abstract class Level {
 
     public void damageTopTile(int x, int y, int dmg) {
         if (getTileAtTop(x, y) == 0) return;
-        if(getTileAtTop(x,y) == 12){
-            for(Point p :shelters.keySet()){
-                if(p.getX() == x && p.getY() == y){
+        if (getTileAtTop(x, y) == 12) {
+            for (Point p : shelters.keySet()) {
+                if (p.getX() == x && p.getY() == y) {
                     ShelterGUI.open(shelters.get(p));
                 }
             }
@@ -265,7 +290,7 @@ public abstract class Level {
     }
 
 
-    public void hurt(int x, int y, int radius, int facing, int dmg) {
+    public void hurt(int x, int y, int radius, int facing, int dmg, InGameState state) {
         Circle c = new Circle(x, y, radius);
         for (Entity e : entities) {
             if (e instanceof EntityWolf || e instanceof EntityPig || e instanceof EntityCow) {
@@ -273,6 +298,9 @@ public abstract class Level {
                 if (r.intersects(c)) {
                     Mob mob = (Mob) e;
                     mob.setHealth(mob.getHealth() - dmg);
+                    if (e instanceof EntityWolf) {
+                        state.score += 5;
+                    }
                 }
             }
         }

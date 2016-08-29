@@ -64,15 +64,14 @@
 - Instructions
 
 
-- Cooldown for swords?
 
 - Shelters can be used to cook food/
 
 
-- Balance everything
-    - Item drops
-    - Crafting requirements
-    - Smelting time
+- Balance everything/
+    - Item drops/
+    - Crafting requirements/
+    - Smelting time/
 
 
 Crafting system/
@@ -80,10 +79,9 @@ Crafting system/
     - Tools/
     - Weapons
         - Swords/
-        - Bow/Arrow
     - Shelter
         - Basic tent/
-        - Advanced tent
+        - Advanced tent/
 
 
 KNOWN BUGS:

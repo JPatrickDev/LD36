@@ -4,6 +4,7 @@ import me.jack.LD36.Entity.Entity;
 import me.jack.LD36.Level.Tile.Portal;
 import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.geom.Rectangle;
+import uk.co.jdpatrick.JEngine.Sound.SoundEngine;
 
 /**
  * Created by Jack on 28/08/2016.
@@ -35,8 +36,9 @@ public class LevelUnderworld extends Level{
             if(r.intersects(player)){
                 Portal p = parent.getPortals().get(r);
                 if(p.getWorld() == 1 && !getPlayer().tpCooldown){
-                    getPlayer().setPos(p.gettX(),p.gettY());
+                    getPlayer().setPos(p.gettX() + 8,p.gettY() + 8);
                     parent.currentWorld = 0;
+                    SoundEngine.getInstance().play("tp");
                     getPlayer().cooldown(new Rectangle(p.gettX(),p.gettY(),32,32));
                 }
             }

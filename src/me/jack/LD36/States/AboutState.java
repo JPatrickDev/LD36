@@ -2,38 +2,41 @@ package me.jack.LD36.States;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Created by Jack on 27/08/2016.
+ * Created by Jack on 29/08/2016.
  */
-public class GameOverState extends BasicGameState{
+public class AboutState extends BasicGameState {
     @Override
     public int getID() {
-        return 1;
+        return 3;
     }
+
+    public Image bg = null;
+
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-
+        bg = new Image("res/about.png");
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-            graphics.drawString("You died!",340,300);
-            graphics.drawString("Score: " + InGameState.score,345,320);
-            graphics.drawString("Press any key to return to the menu",250,340);
+        graphics.drawImage(bg, 0, 0);
     }
 
     boolean back = false;
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        if(back){
-            back = false;
-            stateBasedGame.enterState(2);
-        }
+            if(back){
+                back = false;
+                stateBasedGame.enterState(2);
+            }
     }
 
     @Override

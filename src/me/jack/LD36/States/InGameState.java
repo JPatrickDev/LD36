@@ -16,13 +16,11 @@ import me.jack.LD36.Level.LevelOverworld;
 import me.jack.LD36.Level.LevelUnderworld;
 import me.jack.LD36.Level.Tile.Portal;
 import me.jack.LD36.Level.Tile.Tile;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import uk.co.jdpatrick.JEngine.Sound.SoundEngine;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -45,10 +43,22 @@ public class InGameState extends BasicGameState {
 
     private HashMap<Rectangle, Portal> portals = new HashMap<>();
 
+    public static int score = 0;
+
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+
+        SoundEngine.getInstance().addSound("punch",new Sound("res/sound/punch.wav"));
+        SoundEngine.getInstance().addSound("tp",new Sound("res/sound/tp.wav"));
         Tile.init();
         Item.init();
+
+    }
+
+    @Override
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+        super.enter(container, game);
+        portals.clear();;
         overworld = (LevelOverworld) LevelGenerator.generateLevel(100, 100);
         underworld = (LevelUnderworld) LevelGenerator.generateUnderworld(100, 100);
 
@@ -58,6 +68,7 @@ public class InGameState extends BasicGameState {
         for (int i = 0; i != 100; i++) {
             attemptPlacement();
         }
+        score = 0;
     }
 
     Random r = new Random();
@@ -152,7 +163,7 @@ public class InGameState extends BasicGameState {
         } else if (showingShelter) {
             ShelterGUI.mouseClicked(button,x,y,getLevel());
         } else {
-            overworld.getPlayer().action(getLevel(), button);
+            overworld.getPlayer().action(getLevel(), button,this);
             HUD.mouseClick(button, x, y);
         }
     }

@@ -9,6 +9,7 @@ import me.jack.LD36.Inventory.Item.Tools.Weapon;
 import me.jack.LD36.Level.Level;
 import me.jack.LD36.Level.LevelOverworld;
 import me.jack.LD36.Level.LevelUnderworld;
+import me.jack.LD36.States.InGameState;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -16,6 +17,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
+import uk.co.jdpatrick.JEngine.Sound.SoundEngine;
 
 import java.util.Random;
 
@@ -30,13 +32,19 @@ public class EntityPlayer extends Mob {
 
     private float hunger = 200;
 
+    public float breath = 100f;
+
+    public boolean underWater = false;
+
     Image player = null;
+    Image swimming = null;
 
     public EntityPlayer(int x, int y) {
         super(x, y, 16, 16);
         setHealth(100);
         try {
             player = new Image("res/player.png");
+            swimming = new Image("res/swim.png");
         } catch (SlickException e) {
             e.printStackTrace();
         }
@@ -46,14 +54,31 @@ public class EntityPlayer extends Mob {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(player, getX(), getY());
+        if (underWater) {
+            g.drawImage(swimming, x, y);
+        } else {
+            g.drawImage(player, getX(), getY());
+        }
+
     }
 
     Random r = new Random();
 
     @Override
     public void update(Level level) {
+        if(hunger > 150) {
+            if(getHealth() < 100)
+            setHealth(getHealth() + 2);
+        }
         float hungerRate = 0.01f;
+        if (underWater) {
+            if (r.nextInt(5) == 0)
+                breath--;
+            if (breath <= 0) {
+                breath = 0;
+                setHealth(getHealth() - 1);
+            }
+        }
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             move(0, -4, level);
             facing = 0;
@@ -114,7 +139,7 @@ public class EntityPlayer extends Mob {
         return inventory;
     }
 
-    public void action(Level level, int button) {
+    public void action(Level level, int button, InGameState state) {
         if (button != 0) {
             if (getInventory().getStackInHand() == null) return;
             if (getInventory().getStackInHand().getItem() instanceof ItemBerry) {
@@ -124,6 +149,7 @@ public class EntityPlayer extends Mob {
                     getInventory().removeItemStack(getInventory().getItemInHand());
                 }
             }
+            if (getInventory().getStackInHand() == null) return;
             if (getInventory().getStackInHand().getItem() instanceof ItemRawPork) {
                 hunger += 20;
                 getInventory().getStackInHand().remove(1);
@@ -131,7 +157,7 @@ public class EntityPlayer extends Mob {
                     getInventory().removeItemStack(getInventory().getItemInHand());
                 }
             }
-
+            if (getInventory().getStackInHand() == null) return;
             if (getInventory().getStackInHand().getItem() instanceof ItemRawBeef) {
                 hunger += 20;
                 getInventory().getStackInHand().remove(1);
@@ -139,7 +165,7 @@ public class EntityPlayer extends Mob {
                     getInventory().removeItemStack(getInventory().getItemInHand());
                 }
             }
-
+            if (getInventory().getStackInHand() == null) return;
             if (getInventory().getStackInHand().getItem() instanceof ItemCookedBeef) {
                 hunger += 50;
                 getInventory().getStackInHand().remove(1);
@@ -147,7 +173,7 @@ public class EntityPlayer extends Mob {
                     getInventory().removeItemStack(getInventory().getItemInHand());
                 }
             }
-
+            if (getInventory().getStackInHand() == null) return;
             if (getInventory().getStackInHand().getItem() instanceof ItemCookedPork) {
                 hunger += 50;
                 getInventory().getStackInHand().remove(1);
@@ -224,12 +250,20 @@ public class EntityPlayer extends Mob {
             }
         }
         if (facing == 0) {
+            if (level.getTileAtTop(tX, tY - 1) != 0)
+            SoundEngine.getInstance().play("punch");
             level.damageTopTile(tX, tY - 1, damage);
         } else if (facing == 1) {
+            if (level.getTileAtTop(tX + 1, tY ) != 0)
+            SoundEngine.getInstance().play("punch");
             level.damageTopTile(tX + 1, tY, damage);
         } else if (facing == 2) {
+            if (level.getTileAtTop(tX, tY + 1) != 0)
+            SoundEngine.getInstance().play("punch");
             level.damageTopTile(tX, tY + 1, damage);
         } else if (facing == 3) {
+            if (level.getTileAtTop(tX - 1, tY ) != 0)
+            SoundEngine.getInstance().play("punch");
             level.damageTopTile(tX - 1, tY, damage);
         }
 
@@ -241,7 +275,7 @@ public class EntityPlayer extends Mob {
                 eDamage = w.getDamage();
             }
         }
-        level.hurt(getX(), getY(), 48, facing, eDamage);
+        level.hurt(getX(), getY(), 48, facing, eDamage, state);
 
 
     }

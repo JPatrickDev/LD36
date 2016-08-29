@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class HUD {
 
     static SpriteSheet icons = null;
-    static Image heart, halfHeart;
+    static Image heart, halfHeart,bg,pizza,bubble;
 
     public static HashMap<Rectangle, Integer> itemSlots = new HashMap<>();
 
@@ -48,13 +48,16 @@ public class HUD {
             try {
                 icons = new SpriteSheet("res/icons.png", 16, 16);
                 heart = icons.getSprite(0, 0);
+                pizza = icons.getSprite(0,1);
+                bubble = icons.getSprite(1,1);
                 halfHeart = icons.getSprite(1, 0);
+                bg = new Image("res/bg.png");
             } catch (SlickException e) {
                 e.printStackTrace();
             }
         }
         g.setColor(Color.black);
-        g.fillRect(0, 528, 800, 72);
+        g.drawImage(bg,0,528);
         g.setColor(Color.white);
 
         Inventory inventory = state.getPlayer().getInventory();
@@ -68,8 +71,8 @@ public class HUD {
             g.setColor(Color.white);
             if (stack != null) {
                 Image icon = stack.getItem().getIcon();
-                g.drawImage(icon, x, y);
-                g.drawString(stack.getStackSize() + "", x, y);
+                g.drawImage(icon, x + 8, y+2);
+                g.drawString(stack.getStackSize() + "", x + 10, y + 16);
             }
             x += 34;
         }
@@ -84,14 +87,14 @@ public class HUD {
             g.setColor(Color.white);
             if (stack != null) {
                 Image icon = stack.getItem().getIcon();
-                g.drawImage(icon, x, y);
-                g.drawString(stack.getStackSize() + "", x, y);
+                g.drawImage(icon, x + 8, y+2);
+                g.drawString(stack.getStackSize() + "", x + 10, y + 16);
             }
             x += 34;
         }
 
         if (state.getPlayer().getHealth() < 0) return;
-        int fullHearts = (int) Math.floor(state.getPlayer().getHealth() / 10);
+        int fullHearts = (int) Math.ceil(state.getPlayer().getHealth() / 10);
         x = 204;
         y = 528;
         for (int i = 0; i != fullHearts; i++) {
@@ -99,14 +102,34 @@ public class HUD {
             x += 16;
         }
 
+
+        int fullPizza = (int) Math.floor(state.getPlayer().getHunger() / 20);
         x = 204;
-        y = 550;
+        y = 528+16;
+        for (int i = 0; i != fullPizza; i++) {
+            g.drawImage(pizza, x, y);
+            x += 16;
+        }
+
+        if(state.getPlayer().underWater){
+            int fullBubbles = (int) Math.floor(state.getPlayer().breath / 10);
+            x = 204;
+            y = 528+32;
+            for (int i = 0; i != fullBubbles; i++) {
+                g.drawImage(bubble, x, y);
+                x += 16;
+            }
+        }
+
+        x = 524;
+        y = 528;
         g.drawString("Crafting", x, y);
         y += 25;
         g.drawString("Time: " + state.getLevel().getTime(), x, y);
-        y -= 25;
+        y+=25;
+        g.drawString("Score: " + state.score,x,y);
+        y -= 50;
         x += 72;
-        g.drawString("Hunger: " + state.getPlayer().getHunger(), x, y);
 
         if (mY > 528) {
             for (Rectangle r : itemSlots.keySet()) {
@@ -142,7 +165,7 @@ public class HUD {
         }
     }
 
-    static Rectangle craftingButton = new Rectangle(200, 550, 80, 20);
+    static Rectangle craftingButton = new Rectangle(524, 528, 80, 20);
 
     public static void mouseClick(int button, int x, int y) {
         if (button == 0) {

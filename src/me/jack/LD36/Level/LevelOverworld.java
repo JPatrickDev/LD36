@@ -8,6 +8,7 @@ import me.jack.LD36.States.InGameState;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
+import uk.co.jdpatrick.JEngine.Sound.SoundEngine;
 
 import java.util.Random;
 
@@ -78,6 +79,7 @@ public class LevelOverworld extends Level {
         }
         if (time > 120 * 1000) {
             time = 0;
+            parent.score+=100;
             System.out.println("Day over");
         }
 
@@ -113,8 +115,9 @@ public class LevelOverworld extends Level {
             if (r.intersects(player)) {
                 Portal p = parent.getPortals().get(r);
                 if (p.getWorld() == 0 && !getPlayer().tpCooldown) {
-                    getPlayer().setPos(p.gettX(), p.gettY());
+                    getPlayer().setPos(p.gettX() + 8, p.gettY() + 8);
                     parent.currentWorld = 1;
+                    SoundEngine.getInstance().play("tp");
                     getPlayer().cooldown(new Rectangle(p.gettX(), p.gettY(), 32, 32));
                 }
             }
